@@ -1,0 +1,17 @@
+NOTICE
+
+The files in this repository are modifications of The Witcher 3: Wild Hunt's
+scripts. Most of the lines in a modified script file are CD PROJEKT RED's own,
+copied as the game ships them, because the game's modding system works by
+replacing whole script files. The copyright in those lines belongs to
+CD PROJEKT S.A., and they are included here as modding the game requires and
+distributed non-commercially under CD PROJEKT RED's terms for user modifications.
+
+The author's contributions are the lines marked with the mod's name (as
+"// modName", or between "// modName START" and "// modName END"), the mods'
+own scripts, their menu definitions and their strings. Those are licensed under
+the MIT License in LICENSE. The license does not extend to CD PROJEKT RED's
+lines.
+
+The Witcher 3: Wild Hunt is a trademark of CD PROJEKT S.A. This repository is
+not affiliated with or endorsed by CD PROJEKT RED.

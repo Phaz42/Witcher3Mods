@@ -1,0 +1,8 @@
+# The mods' files are stored and checked out byte for byte, as the game and the release archives hold them.
+* -text
+*.md text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+LICENSE text eol=lf
+NOTICE text eol=lf
+*.w3strings binary

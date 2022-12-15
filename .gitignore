@@ -1,0 +1,5 @@
+# Release archives and generated strings never enter the repository; a release is its files.
+*.7z
+# Anchored with **: a pattern with a slash inside it is otherwise relative to this file's folder and
+# would match nothing under a mod's folder.
+**/W3Strings/output/
