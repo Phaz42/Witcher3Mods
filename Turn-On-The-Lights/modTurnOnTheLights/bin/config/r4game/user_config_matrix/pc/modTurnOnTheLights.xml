@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserConfig>
+		<Group id="modTurnOnTheLights" displayName="Mods.modTurnOnTheLights" >
+		<VisibleVars>
+			<Var id="mode"	displayName="Manual Mode"	displayType="TOGGLE"	visibilityCondition="hideAlways"/>
+			<Var id="range"	displayName="Range"			displayType="TOGGLE"	visibilityCondition="hideAlways"/>
+		</VisibleVars>
+		</Group>
+</UserConfig>
