@@ -1,9 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-16"?>
 <UserConfig>
-		<Group id="modTurnOnTheLights" displayName="Mods.modTurnOnTheLights" >
+	<Group id="modTurnOnTheLights" displayName="Mods.totl_mod_name">
 		<VisibleVars>
-			<Var id="mode"	displayName="Manual Mode"	displayType="TOGGLE"	visibilityCondition="hideAlways"/>
-			<Var id="range"	displayName="Range"			displayType="TOGGLE"	visibilityCondition="hideAlways"/>
+			<Var id="mode" displayName="totl_mode" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0" displayName="totl_mode_manual">
+						<Entry varId="mode" value="manual"/>
+					</Option>
+					<Option id="1" displayName="totl_mode_auto">
+						<Entry varId="mode" value="auto"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+			<Var id="range"	displayName="totl_range" displayType="SLIDER;10;50;4" />
+			<Var id="automodetarget" displayName="totl_automode_target" displayType="TOGGLE" />
 		</VisibleVars>
-		</Group>
+	</Group>
 </UserConfig>

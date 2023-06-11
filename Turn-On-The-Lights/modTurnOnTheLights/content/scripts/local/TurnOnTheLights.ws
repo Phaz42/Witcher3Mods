@@ -7,7 +7,8 @@ class TurnOnTheLights
 {
 	
 	private var	manualMode : bool;
-    private var maxRange : float;
+    private var maxRange : int;
+    private var autoModeTarget : bool;
 	private var	actionTimerRunning : bool;
 		default	actionTimerRunning = false;
 	private var	actionCount: int;
@@ -16,31 +17,68 @@ class TurnOnTheLights
 
     public function Init()
     {
-        LogChannel( 'modTurnOnTheLights', "Init" );
-        
-        configWrapper = theGame.GetInGameConfigWrapper();
+        var tempRange : int;
+        tempRange = -1;
 
-        if ( configWrapper.GetVarValue( 'modTurnOnTheLights', 'mode') == "manual" )
+        LogChannel( 'modTurnOnTheLights', "Init Start" );
+        configWrapper = theGame.GetInGameConfigWrapper();
+        LogConfig();
+
+        if ( configWrapper.GetVarValue( 'modTurnOnTheLights', 'mode') == "0" )
         {
+            LogChannel( 'modTurnOnTheLights', "Init: mode: manual" );
             manualMode = true;
         }
         else
         {
+            LogChannel( 'modTurnOnTheLights', "Init: mode: auto" );
             manualMode = false;
             thePlayer.AddTimer('TurnOnTheLightsAutoTimer', 0.1 );
-            configWrapper.SetVarValue( 'modTurnOnTheLights', 'mode', 'auto' );
+            configWrapper.SetVarValue( 'modTurnOnTheLights', 'mode', 1 );
         }
 
-        if ( configWrapper.GetVarValue( 'modTurnOnTheLights', 'range') )
+        if ( configWrapper.GetVarValue( 'modTurnOnTheLights', 'automodetarget' ) == "false" )
         {
-            maxRange = StringToInt(configWrapper.GetVarValue( 'modTurnOnTheLights', 'range'));
+            LogChannel( 'modTurnOnTheLights', "Init: automodetarget: false" );
+            autoModeTarget = false;
         }
         else
         {
-            maxRange = 20.0;
-            configWrapper.SetVarValue( 'modTurnOnTheLights', 'range', "20.0" );
+            LogChannel( 'modTurnOnTheLights', "Init: automodetarget: true" );
+            autoModeTarget = true;
+            configWrapper.SetVarValue( 'modTurnOnTheLights', 'automodetarget', true );
         }
+
+        tempRange = StringToInt(configWrapper.GetVarValue( 'modTurnOnTheLights', 'range'));
+        if ( tempRange >= 10 && tempRange <= 50 )
+        {
+            LogChannel( 'modTurnOnTheLights', "Init: range: defined" );
+            maxRange = tempRange;
+        }
+        else
+        {
+            LogChannel( 'modTurnOnTheLights', "Init: range: undefined" );
+            maxRange = 20;
+            configWrapper.SetVarValue( 'modTurnOnTheLights', 'range', 20 );
+        }
+
         theGame.SaveUserSettings();
+        LogConfig();
+        LogChannel( 'modTurnOnTheLights', "Init End" );
+    }
+
+    public function ReInit()
+	{
+        LogChannel( 'modTurnOnTheLights', "ReInit after closing Menu" );
+        thePlayer.RemoveTimer('TurnOnTheLightsAutoTimer');
+        Init();
+    }
+
+    private function LogConfig()
+    {
+        LogChannel( 'modTurnOnTheLights', "LogConfig: GetVarValue(mode): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'mode') );
+        LogChannel( 'modTurnOnTheLights', "LogConfig: GetVarValue(automodetarget): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'automodetarget') );
+        LogChannel( 'modTurnOnTheLights', "LogConfig: GetVarValue(range): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'range') );
     }
     
     public function GetEntities() : array<CGameplayEntity>
@@ -48,10 +86,11 @@ class TurnOnTheLights
 		var entities	: array<CGameplayEntity>;
 		var maxResults	: int;
 		
-		maxResults 	= 1000;
+		maxResults 	= 10000;
 
 		LogChannel( 'modTurnOnTheLights', "GetEntities: maxRange: " + maxRange );
-        FindGameplayEntitiesInRange( entities, thePlayer, maxRange, maxResults );
+        FindGameplayEntitiesInRange( entities, thePlayer, (float)maxRange, maxResults );
+        LogChannel( 'modTurnOnTheLights', "GetEntities: found " + IntToString(entities.Size()) + " entities" );
 
 		return entities;
 	}
@@ -63,16 +102,19 @@ class TurnOnTheLights
 
     private function HudMsg ( msg : string )
     {
+        LogChannel( 'modTurnOnTheLights', "HudMsg: " + msg );
         GetWitcherPlayer().DisplayHudMessage( msg );
     }
 
     private function ConsoleMsg ( msg : string )
     {
+        LogChannel( 'modTurnOnTheLights', "ConsoleMsg: " + msg );
         ((CR4ScriptedHud)theGame.GetHud()).HudConsoleMsg( msg );
     }
 
     private function ShowNotification ( msg : string )
     {
+        LogChannel( 'modTurnOnTheLights', "ShowNotification: " + msg );
         theGame.GetGuiManager().ShowNotification( msg );
     }
 	
@@ -84,7 +126,7 @@ class TurnOnTheLights
 			LogChannel( 'modTurnOnTheLights', "ToggleMode: Auto" );
             ShowNotification( "Turn On The Lights: Automatic Mode" );
             manualMode = false;
-            configWrapper.SetVarValue('modTurnOnTheLights', 'mode', 'auto');
+            configWrapper.SetVarValue('modTurnOnTheLights', 'mode', 1);
             theGame.SaveUserSettings();
 			thePlayer.AddTimer('TurnOnTheLightsAutoTimer', 0.1 );
 		}
@@ -95,7 +137,7 @@ class TurnOnTheLights
             ShowNotification( "Turn On The Lights: Manual Mode" );
 			thePlayer.RemoveTimer('TurnOnTheLightsAutoTimer');
 			manualMode = true;
-            configWrapper.SetVarValue('modTurnOnTheLights', 'mode', 'manual');
+            configWrapper.SetVarValue('modTurnOnTheLights', 'mode', 0);
             theGame.SaveUserSettings();
 		}
 	}
@@ -120,7 +162,7 @@ class TurnOnTheLights
 	public function AutoTimer()
 	{
 		LogChannel( 'modTurnOnTheLights', 'TurnOnTheLightsAutoTimer' );
-		LightsSwitch( GetEntities(), true );
+		LightsSwitch( GetEntities(), autoModeTarget );
 		thePlayer.AddTimer('TurnOnTheLightsAutoTimer', 2.0);
 	}
 
@@ -150,8 +192,8 @@ class TurnOnTheLights
 		var toggleLights : ToggleLights;
 
         LogChannel( 'modTurnOnTheLights', "TurnOnTheLightsActionTimer, actionCount: " + actionCount );
-		
-        if ( manualMode && actionCount == 2 )
+       
+       if ( manualMode && actionCount == 2 )
 		{ 
             toggleLights = new ToggleLights in theGame;
             toggleLights.Init();
@@ -172,37 +214,46 @@ class TurnOnTheLights
 
         if ( actionCount == 4 )
 		{ 
-            LogChannel( 'modTurnOnTheLights', "ActionTimer maxRange: " + maxRange );
+            LogChannel( 'modTurnOnTheLights', "ActionTimer maxRange before: " + maxRange );
             switch( maxRange )
             {
-                case 50.000000 :
+                case 50 :
                 {
                     LogChannel( 'modTurnOnTheLights', "ActionTimer case: 50" );
-                    maxRange = 10.0;
-                    configWrapper.SetVarValue( 'modTurnOnTheLights', 'range', "10.0" );
+                    maxRange = 10;
+                    configWrapper.SetVarValue( 'modTurnOnTheLights', 'range', 10 );
                     ShowNotification( "Turn On The Lights: Range 10m" );
                     break;
                 }
-                case 10.000000 :
+                case 10 :
                 {
                     LogChannel( 'modTurnOnTheLights', "ActionTimer case: 10" );
-                    maxRange = 20.0;
-                    configWrapper.SetVarValue( 'modTurnOnTheLights', 'range', "20.0" );
+                    maxRange = 20;
+                    configWrapper.SetVarValue( 'modTurnOnTheLights', 'range', 20 );
                     ShowNotification( "Turn On The Lights: Range 20m" );
                     break;
                 }
-                case 20.000000 :
+                case 20 :
                 {
                     LogChannel( 'modTurnOnTheLights', "ActionTimer case: 20" );
-                    maxRange = 50.0;
-                    configWrapper.SetVarValue( 'modTurnOnTheLights', 'range', "50.0" );
+                    maxRange = 50;
+                    configWrapper.SetVarValue( 'modTurnOnTheLights', 'range', 50 );
                     ShowNotification( "Turn On The Lights: Range 50m" );
                     break;
                 }
-                LogChannel( 'modTurnOnTheLights', "ActionTimer maxRange2: " + maxRange );
+                default :
+                {
+                    LogChannel( 'modTurnOnTheLights', "ActionTimer case: default" );
+                    maxRange = 20;
+                    configWrapper.SetVarValue( 'modTurnOnTheLights', 'range', 20 );
+                    ShowNotification( "Turn On The Lights: Range 20m" );
+                    break;
+                }
+                LogChannel( 'modTurnOnTheLights', "ActionTimer maxRange after: " + maxRange );
             }
             theGame.SaveUserSettings();
 		}
+
 		StopActionTimer();
 	}
 
@@ -243,7 +294,6 @@ state Active in ToggleLights
     event OnEnterState(prevStateName : name)
 	{
 		LogChannel( 'modTurnOnTheLights', 'ToggleLights EnterState' );
-        //turnOnTheLights = new TurnOnTheLights in this;
         turnOnTheLights = ((W3PlayerWitcher)thePlayer).turnOnTheLights;
         Toggle();
 	}
