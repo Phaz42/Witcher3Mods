@@ -1,0 +1,22 @@
+;meta[language=pl]
+; id|key(hex)|key(str)| text
+;
+2117278001|  |panel_Mods|Modyfikacje
+2117278002|  |panel_totl_mod_name|Turn On The Lights
+2117278003|  |option_totl_notification_auto|Tryb automatyczny
+2117278004|  |option_totl_notification_manual|Tryb ręczny
+2117278005|  |option_totl_notification_range|Zasięg
+;
+2117278010|  |option_totl_mode|Tryb
+2117278011|  |preset_value_totl_mode_auto|Automatyczny
+2117278012|  |preset_value_totl_mode_manual|Ręczny
+;
+2117278020|  |option_totl_range|Zasięg zapalania/gaszenia świateł
+;
+2117278030|  |option_totl_automode_target|Zapal lub zgaś światła w Trybie automatycznym
+;
+2117278040|  |option_totl_hideinteractions|Ukryj podpowiedź Podpal/Zgaś przy źródłach światła
+;
+2117278050|  |option_totl_useactionbutton|Aktywuj Przycisk Akcji
+;
+2117278060|  |option_totl_disableautomodeindaytime|Wyłącz Tryb automatyczny w ciągu dnia

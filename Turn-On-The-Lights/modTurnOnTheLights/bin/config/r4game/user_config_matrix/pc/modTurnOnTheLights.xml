@@ -14,6 +14,9 @@
 			</Var>
 			<Var id="range"	displayName="totl_range" displayType="SLIDER;10;50;4" />
 			<Var id="automodetarget" displayName="totl_automode_target" displayType="TOGGLE" />
+			<Var id="hideinteractions" displayName="totl_hideinteractions" displayType="TOGGLE" />
+			<Var id="useactionbutton" displayName="totl_useactionbutton" displayType="TOGGLE" />
+			<Var id="disableautomodeindaytime" displayName="totl_disableautomodeindaytime" displayType="TOGGLE" />
 		</VisibleVars>
 	</Group>
 </UserConfig>
