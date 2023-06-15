@@ -13,7 +13,7 @@
 ;
 2117278020|  |option_totl_range|Zasięg zapalania/gaszenia świateł
 ;
-2117278030|  |option_totl_automode_target|Zapal lub zgaś światła w Trybie automatycznym
+2117278030|  |option_totl_automode_target|Pożądany stan świateł w Trybie automatycznym
 ;
 2117278040|  |option_totl_hideinteractions|Ukryj podpowiedź Podpal/Zgaś przy źródłach światła
 ;

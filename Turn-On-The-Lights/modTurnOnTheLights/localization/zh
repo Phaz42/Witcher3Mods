@@ -1,22 +1,22 @@
 ;meta[language=zh]
 ; id|key(hex)|key(str)| text
 ;
-2117278001||panel_Mods|Mods
-2117278002||panel_totl_mod_name|Turn On The Lights
-2117278003||option_totl_notification_auto|Automatic Mode
-2117278004||option_totl_notification_manual|Manual Mode
-2117278005||option_totl_notification_range|Range
+2117278001||panel_Mods|模組
+2117278002||panel_totl_mod_name|
+2117278003||option_totl_notification_auto|自動模式
+2117278004||option_totl_notification_manual|手動模式
+2117278005||option_totl_notification_range|範圍
 ;
-2117278010||option_totl_mode|Mode
-2117278011||preset_value_totl_mode_auto|Automatic
-2117278012||preset_value_totl_mode_manual|Manual
+2117278010||option_totl_mode|模組選項
+2117278011||preset_value_totl_mode_auto|自動
+2117278012||preset_value_totl_mode_manual|手動
 ;
-2117278020||option_totl_range|Lights Range
+2117278020||option_totl_range|燈光範圍
 ;
-2117278030||option_totl_automode_target|Turn lights On or Off in Automatic Mode
+2117278030||option_totl_automode_target|自動模式下打開或關閉燈
 ;
-2117278040||option_totl_hideinteractions|Hide Ignite/Extinguish prompts on lights
+2117278040||option_totl_hideinteractions|隱藏燈上點燃跟熄滅提示
 ;
-2117278050||option_totl_useactionbutton|Enable Action Button
+2117278050||option_totl_useactionbutton|啟用模組
 ;
-2117278060||option_totl_disableautomodeindaytime|Disable Automatic Mode during Day Time
+2117278060||option_totl_disableautomodeindaytime|白天禁用自動模式
