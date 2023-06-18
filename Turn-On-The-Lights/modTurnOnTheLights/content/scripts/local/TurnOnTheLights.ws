@@ -294,7 +294,10 @@ class TurnOnTheLights
             thePlayer.RemoveTimer('TurnOnTheLightsAutoTimer');
             toggleLights = new ToggleLights in theGame;
             toggleLights.Init();
-            thePlayer.AddTimer('TurnOnTheLightsAutoTimer', 2.0 );
+            if (!manualMode)
+            {
+                thePlayer.AddTimer('TurnOnTheLightsAutoTimer', 2.0 );
+            }
 		}
 
         if ( actionCount == 3 )
