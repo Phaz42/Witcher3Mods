@@ -281,6 +281,20 @@ class TurnOnTheLights
 		return actionTimerRunning;
 	}
 
+    public function ToggleLights()
+	{
+		var toggleLights : ToggleLights;
+        
+        Log( 'ToggleLights' );
+        thePlayer.RemoveTimer('TurnOnTheLightsAutoTimer');
+        toggleLights = new ToggleLights in theGame;
+        toggleLights.Init();
+        if (!manualMode)
+        {
+            thePlayer.AddTimer('TurnOnTheLightsAutoTimer', 2.0 );
+        }
+	}
+
 	public function ActionTimer()
 	{
 		var toggleLights : ToggleLights;
@@ -291,13 +305,7 @@ class TurnOnTheLights
 		{ 
             Log( "TurnOnTheLightsActionTimer, start action for count 2" );
             StopActionTimer();
-            thePlayer.RemoveTimer('TurnOnTheLightsAutoTimer');
-            toggleLights = new ToggleLights in theGame;
-            toggleLights.Init();
-            if (!manualMode)
-            {
-                thePlayer.AddTimer('TurnOnTheLightsAutoTimer', 2.0 );
-            }
+            ToggleLights();
 		}
 
         if ( actionCount == 3 )
