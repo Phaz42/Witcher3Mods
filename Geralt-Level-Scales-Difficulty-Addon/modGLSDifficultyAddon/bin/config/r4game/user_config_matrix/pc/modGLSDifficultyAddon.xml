@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<UserConfig>
+	<Group id="modGLSDifficultyAddon" displayName="Mods.gameplay.gls_mod_name">
+		<VisibleVars>
+			<Var id="difficulty" displayName="gls_difficulty" displayType="SLIDER;0;15;15" />
+		</VisibleVars>
+	</Group>
+</UserConfig>

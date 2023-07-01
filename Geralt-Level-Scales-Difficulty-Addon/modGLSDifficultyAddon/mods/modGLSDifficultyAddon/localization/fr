@@ -1,0 +1,6 @@
+;meta[language=fr]
+; id|key(hex)|key(str)| text
+;
+2113961001||panel_Mods|Mods
+2113961002||panel_gls_mod_name|GLS Difficulty
+2113961003||option_gls_difficulty|Extra Difficulty (applies on NEXT combat!)
