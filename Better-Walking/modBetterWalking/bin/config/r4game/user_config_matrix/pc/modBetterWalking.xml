@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<UserConfig>
+	<Group id="modBetterWalking" displayName="Mods.gameplay.bw_mod_name">
+		<VisibleVars>
+			
+			<Var id="bw_feedback" displayName="bw_feedback" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0" displayName="bw_i_will">
+						<Entry varId="bw_feedback" value="0"/>
+					</Option>
+					<Option id="1" displayName="bw_thanks">
+						<Entry varId="bw_feedback" value="1"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+			<Var id="Separator" displayName="" displayType="SUBTLE_SEPARATOR"/>
+
+			<Var id="bw_hold_to_run" displayName="bw_hold_to_run" displayType="TOGGLE" />
+			<Var id="bw_hold_to_sprint" displayName="bw_hold_to_sprint" displayType="TOGGLE" />
+			<Var id="bw_l3_to_sprint" displayName="bw_l3_to_sprint" displayType="TOGGLE" />
+
+			<Var id="bw_double_tap_to_sprint" displayName="bw_double_tap_to_sprint" displayType="TOGGLE" />
+			<Var id="bw_double_tap_to_sprint_combat" displayName="bw_double_tap_to_sprint_combat" displayType="TOGGLE" />
+
+		</VisibleVars>
+	</Group>
+</UserConfig>

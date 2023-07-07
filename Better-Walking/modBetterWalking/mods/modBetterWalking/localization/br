@@ -1,0 +1,15 @@
+;meta[language=br]
+; id|key(hex)|key(str)| text
+;
+2118293001||panel_Mods|Mods
+2118293002||panel_bw_mod_name|Better Walking
+;
+2118293010||option_bw_feedback|Comments? Suggestions? Bugs? Let me know!
+2118293011||preset_value_bw_i_will|I will
+2118293012||preset_value_bw_thanks|Thanks!
+;
+2118293020||option_bw_hold_to_run|Keyboard/Controller: Hold to Run (instead of toggle)
+2118293021||option_bw_hold_to_sprint|Keyboard/Controller: Hold to Sprint (instead of toggle)
+2118293022||option_bw_l3_to_sprint|Controller: Use L3 to toggle sprint (hold not supported)
+2118293023||option_bw_double_tap_to_sprint|Controller: Use double tap A to toggle/hold sprint
+2118293024||option_bw_double_tap_to_sprint_combat|Controller: Use double tap A also in combat. Adds 0.2s delay on Roll.
