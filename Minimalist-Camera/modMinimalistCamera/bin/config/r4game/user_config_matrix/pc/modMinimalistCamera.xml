@@ -1,50 +1,76 @@
 <?xml version="1.0" encoding="UTF-16"?>
 <UserConfig>
     <Group id="modMinimalistCamera" displayName="Mods.camera.mc_mod_name">
-		<!-- <PresetsArray>
-			<Preset id="0" displayName="mc_preset_lc">
+		<PresetsArray>
+			<Preset id="0" displayName="mc_preset_close">
+				<Entry varId="Init"				value="true"/>
+				<Entry varId="mc_Laziness"		value="4"/>
+				<Entry varId="mc_Zoom"			value="4"/>
+				<Entry varId="mc_Height"		value="3"/>
+				<Entry varId="mc_Offset"		value="2"/>
+				<Entry varId="mc_SenseZoom"		value="4"/>
+				<Entry varId="mc_SenseHeight"	value="3"/>
+				<Entry varId="mc_SenseOffset"	value="2"/>
+				<Entry varId="mc_CombatZoom"	value="4"/>
+				<Entry varId="mc_CombatHeight"	value="3"/>
+				<Entry varId="mc_CombatOffset"	value="2"/>
+			</Preset>
+			<Preset id="1" displayName="mc_preset_medium">
 				<Entry varId="Init"				value="true"/>
 				<Entry varId="mc_Laziness"		value="3"/>
-				<Entry varId="mc_Zoom"			value="1.5"/>
-				<Entry varId="mc_Height"		value="0.3"/>
-				<Entry varId="mc_Offset"		value="0.0"/>
-				<Entry varId="mc_SenseZoom"		value="2.5"/>
-				<Entry varId="mc_SenseHeight"	value="0.3"/>
-				<Entry varId="mc_SenseOffset"	value="0.6"/>
-				<Entry varId="mc_CombatZoom"	value="2.0"/>
-				<Entry varId="mc_CombatHeight"	value="0.3"/>
-				<Entry varId="mc_CombatOffset"	value="0.0"/>
+				<Entry varId="mc_Zoom"			value="3"/>
+				<Entry varId="mc_Height"		value="3"/>
+				<Entry varId="mc_Offset"		value="3"/>
+				<Entry varId="mc_SenseZoom"		value="3"/>
+				<Entry varId="mc_SenseHeight"	value="3"/>
+				<Entry varId="mc_SenseOffset"	value="3"/>
+				<Entry varId="mc_CombatZoom"	value="3"/>
+				<Entry varId="mc_CombatHeight"	value="3"/>
+				<Entry varId="mc_CombatOffset"	value="3"/>
 			</Preset>
-			<Preset id="1" displayName="mc_preset_mc_and_mws">
+			<Preset id="2" displayName="mc_preset_far">
 				<Entry varId="Init"				value="true"/>
 				<Entry varId="mc_Laziness"		value="3"/>
-				<Entry varId="mc_Zoom"			value="1.5"/>
-				<Entry varId="mc_Height"		value="0.3"/>
-				<Entry varId="mc_Offset"		value="0.0"/>
-				<Entry varId="mc_SenseZoom"		value="1.5"/>
-				<Entry varId="mc_SenseHeight"	value="0.3"/>
-				<Entry varId="mc_SenseOffset"	value="0.0"/>
-				<Entry varId="mc_CombatZoom"	value="2.0"/>
-				<Entry varId="mc_CombatHeight"	value="0.3"/>
-				<Entry varId="mc_CombatOffset"	value="0.0"/>
+				<Entry varId="mc_Zoom"			value="2"/>
+				<Entry varId="mc_Height"		value="2"/>
+				<Entry varId="mc_Offset"		value="3"/>
+				<Entry varId="mc_SenseZoom"		value="2"/>
+				<Entry varId="mc_SenseHeight"	value="2"/>
+				<Entry varId="mc_SenseOffset"	value="3"/>
+				<Entry varId="mc_CombatZoom"	value="2"/>
+				<Entry varId="mc_CombatHeight"	value="2"/>
+				<Entry varId="mc_CombatOffset"	value="3"/>
 			</Preset>
-		</PresetsArray> -->
+			<Preset id="3" displayName="mc_preset_very_far">
+				<Entry varId="Init"				value="true"/>
+				<Entry varId="mc_Laziness"		value="2"/>
+				<Entry varId="mc_Zoom"			value="0"/>
+				<Entry varId="mc_Height"		value="1"/>
+				<Entry varId="mc_Offset"		value="3"/>
+				<Entry varId="mc_SenseZoom"		value="0"/>
+				<Entry varId="mc_SenseHeight"	value="1"/>
+				<Entry varId="mc_SenseOffset"	value="3"/>
+				<Entry varId="mc_CombatZoom"	value="0"/>
+				<Entry varId="mc_CombatHeight"	value="1"/>
+				<Entry varId="mc_CombatOffset"	value="3"/>
+			</Preset>
+		</PresetsArray>
         <VisibleVars>
             <Var id="mc_Laziness" 		displayName="mc_Laziness"		displayType="SLIDER;1;10;9" />
 
-            <Var id="mc_Zoom" 			displayName="mc_Zoom"			displayType="SLIDER;-3;3;60" visibilityCondition="hideAlways" />
-            <Var id="mc_Height" 		displayName="mc_Height"			displayType="SLIDER;-3;3;60" visibilityCondition="hideAlways" />
-            <Var id="mc_Offset" 		displayName="mc_Offset"			displayType="SLIDER;-3;3;60" visibilityCondition="hideAlways" />
+			<Var id="mc_Zoom" 			displayName="mc_Zoom"			displayType="SLIDER;-2;5;7"		visibilityCondition="hideAlways" />
+            <Var id="mc_Height" 		displayName="mc_Height"			displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
+            <Var id="mc_Offset" 		displayName="mc_Offset"			displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
 
-            <Var id="mc_SenseZoom" 		displayName="mc_SenseZoom"		displayType="SLIDER;-3;3;60" visibilityCondition="hideAlways" />
-            <Var id="mc_SenseHeight" 	displayName="mc_SenseHeight"	displayType="SLIDER;-3;3;60" visibilityCondition="hideAlways" />
-            <Var id="mc_SenseOffset" 	displayName="mc_SenseOffset"	displayType="SLIDER;-3;3;60" visibilityCondition="hideAlways" />
+            <Var id="mc_SenseZoom" 		displayName="mc_SenseZoom"		displayType="SLIDER;-2;5;7"		visibilityCondition="hideAlways" />
+            <Var id="mc_SenseHeight" 	displayName="mc_SenseHeight"	displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
+            <Var id="mc_SenseOffset" 	displayName="mc_SenseOffset"	displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
 
-            <Var id="mc_CombatZoom"		displayName="mc_CombatZoom"		displayType="SLIDER;-3;3;60" visibilityCondition="hideAlways" />
-            <Var id="mc_CombatHeight"	displayName="mc_CombatHeight"	displayType="SLIDER;-3;3;60" visibilityCondition="hideAlways" />
-            <Var id="mc_CombatOffset" 	displayName="mc_CombatOffset"	displayType="SLIDER;-3;3;60" visibilityCondition="hideAlways" />
+            <Var id="mc_CombatZoom"		displayName="mc_CombatZoom"		displayType="SLIDER;-2;5;7"		visibilityCondition="hideAlways" />
+            <Var id="mc_CombatHeight"	displayName="mc_CombatHeight"	displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
+            <Var id="mc_CombatOffset" 	displayName="mc_CombatOffset"	displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
 
-			<Var id="Init"				displayName=""					displayType="TOGGLE" visibilityCondition="hideAlways"/>
+			<Var id="Init"				displayName=""					displayType="TOGGLE"			visibilityCondition="hideAlways"/>
         </VisibleVars>
     </Group>
 </UserConfig>

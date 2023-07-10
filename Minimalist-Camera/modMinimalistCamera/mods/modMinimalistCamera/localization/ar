@@ -3,9 +3,11 @@
 ;
 2118357001||panel_Mods|Mods
 2118357002||panel_mc_mod_name|Minimalist Camera
-2118357003||preset_Mods_camera_mc_mod_name|Minimalist Camera (MC)
-2118357004||preset_value_mc_preset_lc|MC Default
-2118357005||preset_value_mc_preset_mc_and_mws|MC + MWS
+2118357003||preset_Mods_camera_mc_mod_name|<font color="#ffa445">Minimalist Camera</font>
+2118357004||preset_value_mc_preset_close|<font color="#45ff47">Close</font>
+2118357005||preset_value_mc_preset_medium|<font color="#a0ff45">Medium</font>
+2118357006||preset_value_mc_preset_far|<font color="#fdff45">Far</font>
+2118357007||preset_value_mc_preset_very_far|<font color="#ffa445">Very Far</font>
 ;
 2118357010||option_mc_Laziness|Camera Responsiveness
 ;
