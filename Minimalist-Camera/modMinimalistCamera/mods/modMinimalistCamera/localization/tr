@@ -1,0 +1,22 @@
+;meta[language=tr]
+; id|key(hex)|key(str)| text
+;
+2118357001||panel_Mods|Mods
+2118357002||panel_mc_mod_name|Minimalist Camera
+2118357003||preset_Mods_camera_mc_mod_name|Minimalist Camera (MC)
+2118357004||preset_value_mc_preset_lc|MC Default
+2118357005||preset_value_mc_preset_mc_and_mws|MC + MWS
+;
+2118357010||option_mc_Laziness|Camera Responsiveness
+;
+2118357020||option_mc_Zoom|Exploration: Camera Zoom
+2118357021||option_mc_Height|Exploration: Camera Height
+2118357022||option_mc_Offset|Exploration: Camera Offset
+;
+2118357030||option_mc_SenseZoom|Witcher Senses: Camera Zoom
+2118357031||option_mc_SenseHeight|Witcher Senses: Camera Height
+2118357032||option_mc_SenseOffset|Witcher Senses: Camera Offset
+;
+2118357040||option_mc_CombatZoom|Combat: Camera Zoom
+2118357041||option_mc_CombatHeight|Combat: Camera Height
+2118357042||option_mc_CombatOffset|Combat: Camera Offset
