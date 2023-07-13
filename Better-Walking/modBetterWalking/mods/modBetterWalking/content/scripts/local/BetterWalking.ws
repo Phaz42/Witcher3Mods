@@ -63,8 +63,8 @@ class BetterWalking extends CEntity
 				{
 					Log( "SprintPressed: Double tap 1st tap: Start Timer" );
 					StartSprintTimer();
-					// Don't proceed after 1st tap while sprinting or in combat
-					if ( thePlayer.GetIsSprintToggled() || IsInCombatState() ) return;
+					// Don't proceed after 1st tap while in combat
+					if ( IsInCombatState() ) return;
 				}
 			}
 
