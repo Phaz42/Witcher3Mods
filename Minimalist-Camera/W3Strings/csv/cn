@@ -1,0 +1,44 @@
+;meta[language=cleartext]
+; id|key(hex)|key(str)| text
+;
+2118357001||panel_Mods|Mods
+2118357002||panel_mc_mod_name|Minimalist Camera
+2118357003||preset_Mods_camera_mc_mod_name|<font color="#ffa445">Camera Range:</font>
+2118357004||preset_value_mc_preset_close|<font color="#45ff47">Close</font>
+2118357005||preset_value_mc_preset_medium|<font color="#a0ff45">Medium</font>
+2118357006||preset_value_mc_preset_far|<font color="#fdff45">Far</font>
+2118357007||preset_value_mc_preset_very_far|<font color="#ffa445">Very Far</font>
+2118357008||option_mc_InitVersion|Init Version (Do not change!)
+;
+2118357010||option_mc_Responsiveness|Camera Responsiveness
+2118357011||option_mc_DynamicZoom|Combat Dynamic Zoom (based on enemy count)
+2118357012||preset_value_mc_DynamicZoom_0|Off
+2118357013||preset_value_mc_DynamicZoom_1|Normal
+2118357014||preset_value_mc_DynamicZoom_2|High
+2118357015||option_mc_DodgeFx|Dodge/Roll Camera Effects
+2118357016||option_mc_SignFx|Sign Casting Camera Effects
+2118357017||option_mc_Zoom|Camera Zoom
+2118357018||option_mc_Height|Camera Height
+2118357019||option_mc_Offset|Camera Offset
+;
+2118357020||option_mc_CombatResponsiveness|Combat: Camera Responsiveness
+2118357021||option_mc_CombatZoom|Combat: Camera Zoom
+2118357022||option_mc_CombatHeight|Combat: Camera Height
+2118357023||option_mc_CombatOffset|Combat: Camera Offset
+;
+2118357030||option_mc_DodgeResponsiveness|Dodge: Camera Responsiveness
+2118357031||option_mc_DodgeZoom|Dodge: Camera Zoom
+2118357032||option_mc_DodgeHeight|Dodge: Camera Height
+2118357033||option_mc_DodgeOffset|Dodge: Camera Offset
+;
+2118357040||option_mc_SignsResponsiveness|Signs: Camera Responsiveness
+2118357041||option_mc_SignsZoom|Signs: Camera Zoom
+2118357042||option_mc_SignsHeight|Signs: Camera Height
+2118357043||option_mc_SignsOffset|Signs: Camera Offset
+;
+2118357090||option_mc_SenseZoom|Witcher Senses: Camera Zoom
+2118357091||option_mc_SenseHeight|Witcher Senses: Camera Height
+2118357092||option_mc_SenseOffset|Witcher Senses: Camera Offset
+;
+2118357100||option_mc_EnemyRange|Enemy Detection Range
+2118357101||option_mc_ZoomPerEnemy|Zoom Modifier per Enemy

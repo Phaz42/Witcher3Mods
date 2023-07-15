@@ -3,74 +3,152 @@
     <Group id="modMinimalistCamera" displayName="Mods.camera.mc_mod_name">
 		<PresetsArray>
 			<Preset id="0" displayName="mc_preset_close">
-				<Entry varId="Init"				value="true"/>
-				<Entry varId="mc_Laziness"		value="4"/>
-				<Entry varId="mc_Zoom"			value="4"/>
-				<Entry varId="mc_Height"		value="3"/>
-				<Entry varId="mc_Offset"		value="2"/>
-				<Entry varId="mc_SenseZoom"		value="4"/>
-				<Entry varId="mc_SenseHeight"	value="3"/>
-				<Entry varId="mc_SenseOffset"	value="2"/>
-				<Entry varId="mc_CombatZoom"	value="4"/>
-				<Entry varId="mc_CombatHeight"	value="3"/>
-				<Entry varId="mc_CombatOffset"	value="2"/>
+				<Entry varId="mc_InitVersion"			value="1"/>
+				<Entry varId="mc_Responsiveness"		value="6"/>
+				<Entry varId="mc_DynamicZoom"			value="2"/>
+				<Entry varId="mc_DodgeFx"				value="true"/>
+				<Entry varId="mc_SignFx"				value="true"/>
+				<Entry varId="mc_Zoom"					value="4"/>
+				<Entry varId="mc_Height"				value="4"/>
+				<Entry varId="mc_Offset"				value="2"/>
+				<Entry varId="mc_CombatResponsiveness"	value="7"/>
+				<Entry varId="mc_CombatZoom"			value="4"/>
+				<Entry varId="mc_CombatHeight"			value="2"/>
+				<Entry varId="mc_CombatOffset"			value="0"/>
+				<Entry varId="mc_DodgeResponsiveness"	value="3"/>
+				<Entry varId="mc_DodgeZoom"				value="0"/>
+				<Entry varId="mc_DodgeHeight"			value="2"/>
+				<Entry varId="mc_DodgeOffset"			value="0"/>
+				<Entry varId="mc_SignsResponsiveness"	value="10"/>
+				<Entry varId="mc_SignsZoom"				value="-3"/>
+				<Entry varId="mc_SignsHeight"			value="3"/>
+				<Entry varId="mc_SignsOffset"			value="-3"/>
+				<Entry varId="mc_SenseZoom"				value="4"/>
+				<Entry varId="mc_SenseHeight"			value="4"/>
+				<Entry varId="mc_SenseOffset"			value="2"/>
+				<Entry varId="mc_EnemyRange"			value="12"/>
+				<Entry varId="mc_ZoomPerEnemy"			value="0.8"/>
 			</Preset>
 			<Preset id="1" displayName="mc_preset_medium">
-				<Entry varId="Init"				value="true"/>
-				<Entry varId="mc_Laziness"		value="3"/>
-				<Entry varId="mc_Zoom"			value="3"/>
-				<Entry varId="mc_Height"		value="3"/>
-				<Entry varId="mc_Offset"		value="3"/>
-				<Entry varId="mc_SenseZoom"		value="3"/>
-				<Entry varId="mc_SenseHeight"	value="3"/>
-				<Entry varId="mc_SenseOffset"	value="3"/>
-				<Entry varId="mc_CombatZoom"	value="3"/>
-				<Entry varId="mc_CombatHeight"	value="3"/>
-				<Entry varId="mc_CombatOffset"	value="3"/>
+				<Entry varId="mc_InitVersion"			value="1"/>
+				<Entry varId="mc_Responsiveness"		value="4"/>
+				<Entry varId="mc_DynamicZoom"			value="2"/>
+				<Entry varId="mc_DodgeFx"				value="true"/>
+				<Entry varId="mc_SignFx"				value="true"/>
+				<Entry varId="mc_Zoom"					value="3"/>
+				<Entry varId="mc_Height"				value="2"/>
+				<Entry varId="mc_Offset"				value="3"/>
+				<Entry varId="mc_CombatResponsiveness"	value="7"/>
+				<Entry varId="mc_CombatZoom"			value="3"/>
+				<Entry varId="mc_CombatHeight"			value="2"/>
+				<Entry varId="mc_CombatOffset"			value="0"/>
+				<Entry varId="mc_DodgeResponsiveness"	value="3"/>
+				<Entry varId="mc_DodgeZoom"				value="0"/>
+				<Entry varId="mc_DodgeHeight"			value="2"/>
+				<Entry varId="mc_DodgeOffset"			value="0"/>
+				<Entry varId="mc_SignsResponsiveness"	value="10"/>
+				<Entry varId="mc_SignsZoom"				value="-3"/>
+				<Entry varId="mc_SignsHeight"			value="3"/>
+				<Entry varId="mc_SignsOffset"			value="-3"/>
+				<Entry varId="mc_SenseZoom"				value="3"/>
+				<Entry varId="mc_SenseHeight"			value="2"/>
+				<Entry varId="mc_SenseOffset"			value="3"/>
+				<Entry varId="mc_EnemyRange"			value="12"/>
+				<Entry varId="mc_ZoomPerEnemy"			value="0.8"/>
 			</Preset>
 			<Preset id="2" displayName="mc_preset_far">
-				<Entry varId="Init"				value="true"/>
-				<Entry varId="mc_Laziness"		value="3"/>
-				<Entry varId="mc_Zoom"			value="2"/>
-				<Entry varId="mc_Height"		value="2"/>
-				<Entry varId="mc_Offset"		value="3"/>
-				<Entry varId="mc_SenseZoom"		value="2"/>
-				<Entry varId="mc_SenseHeight"	value="2"/>
-				<Entry varId="mc_SenseOffset"	value="3"/>
-				<Entry varId="mc_CombatZoom"	value="2"/>
-				<Entry varId="mc_CombatHeight"	value="2"/>
-				<Entry varId="mc_CombatOffset"	value="3"/>
+				<Entry varId="mc_InitVersion"			value="1"/>
+				<Entry varId="mc_Responsiveness"		value="3"/>
+				<Entry varId="mc_DynamicZoom"			value="2"/>
+				<Entry varId="mc_DodgeFx"				value="true"/>
+				<Entry varId="mc_SignFx"				value="true"/>
+				<Entry varId="mc_Zoom"					value="2"/>
+				<Entry varId="mc_Height"				value="1"/>
+				<Entry varId="mc_Offset"				value="3"/>
+				<Entry varId="mc_CombatResponsiveness"	value="6"/>
+				<Entry varId="mc_CombatZoom"			value="2"/>
+				<Entry varId="mc_CombatHeight"			value="3"/>
+				<Entry varId="mc_CombatOffset"			value="0"/>
+				<Entry varId="mc_DodgeResponsiveness"	value="3"/>
+				<Entry varId="mc_DodgeZoom"				value="0"/>
+				<Entry varId="mc_DodgeHeight"			value="3"/>
+				<Entry varId="mc_DodgeOffset"			value="0"/>
+				<Entry varId="mc_SignsResponsiveness"	value="10"/>
+				<Entry varId="mc_SignsZoom"				value="-3"/>
+				<Entry varId="mc_SignsHeight"			value="3"/>
+				<Entry varId="mc_SignsOffset"			value="-3"/>
+				<Entry varId="mc_SenseZoom"				value="2"/>
+				<Entry varId="mc_SenseHeight"			value="1"/>
+				<Entry varId="mc_SenseOffset"			value="3"/>
+				<Entry varId="mc_EnemyRange"			value="12"/>
+				<Entry varId="mc_ZoomPerEnemy"			value="0.8"/>
 			</Preset>
 			<Preset id="3" displayName="mc_preset_very_far">
-				<Entry varId="Init"				value="true"/>
-				<Entry varId="mc_Laziness"		value="2"/>
-				<Entry varId="mc_Zoom"			value="0"/>
-				<Entry varId="mc_Height"		value="1"/>
-				<Entry varId="mc_Offset"		value="3"/>
-				<Entry varId="mc_SenseZoom"		value="0"/>
-				<Entry varId="mc_SenseHeight"	value="1"/>
-				<Entry varId="mc_SenseOffset"	value="3"/>
-				<Entry varId="mc_CombatZoom"	value="0"/>
-				<Entry varId="mc_CombatHeight"	value="1"/>
-				<Entry varId="mc_CombatOffset"	value="3"/>
+				<Entry varId="mc_InitVersion"			value="1"/>
+				<Entry varId="mc_Responsiveness"		value="2"/>
+				<Entry varId="mc_DynamicZoom"			value="2"/>
+				<Entry varId="mc_DodgeFx"				value="true"/>
+				<Entry varId="mc_SignFx"				value="true"/>
+				<Entry varId="mc_Zoom"					value="0"/>
+				<Entry varId="mc_Height"				value="3"/>
+				<Entry varId="mc_Offset"				value="2"/>
+				<Entry varId="mc_CombatResponsiveness"	value="6"/>
+				<Entry varId="mc_CombatZoom"			value="0"/>
+				<Entry varId="mc_CombatHeight"			value="6"/>
+				<Entry varId="mc_CombatOffset"			value="0"/>
+				<Entry varId="mc_DodgeResponsiveness"	value="4"/>
+				<Entry varId="mc_DodgeZoom"				value="-2"/>
+				<Entry varId="mc_DodgeHeight"			value="6"/>
+				<Entry varId="mc_DodgeOffset"			value="0"/>
+				<Entry varId="mc_SignsResponsiveness"	value="10"/>
+				<Entry varId="mc_SignsZoom"				value="-3"/>
+				<Entry varId="mc_SignsHeight"			value="3"/>
+				<Entry varId="mc_SignsOffset"			value="-3"/>
+				<Entry varId="mc_SenseZoom"				value="0"/>
+				<Entry varId="mc_SenseHeight"			value="3"/>
+				<Entry varId="mc_SenseOffset"			value="2"/>
+				<Entry varId="mc_EnemyRange"			value="12"/>
+				<Entry varId="mc_ZoomPerEnemy"			value="0.8"/>
 			</Preset>
 		</PresetsArray>
         <VisibleVars>
-            <Var id="mc_Laziness" 		displayName="mc_Laziness"		displayType="SLIDER;1;10;9" />
+            <Var id="mc_Responsiveness" 		displayName="mc_Responsiveness"			displayType="SLIDER;1;10;9" />
+			<Var id="mc_DynamicZoom"			displayName="mc_DynamicZoom"			displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0" 				displayName="mc_DynamicZoom_0"><Entry varId="mc_DynamicZoom" value="0"/></Option>
+					<Option id="1" 				displayName="mc_DynamicZoom_1"><Entry varId="mc_DynamicZoom" value="1"/></Option>
+					<Option id="2" 				displayName="mc_DynamicZoom_2"><Entry varId="mc_DynamicZoom" value="2"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="mc_DodgeFx"				displayName="mc_DodgeFx"				displayType="TOGGLE" />
+			<Var id="mc_SignFx"					displayName="mc_SignFx"					displayType="TOGGLE" />
 
-			<Var id="mc_Zoom" 			displayName="mc_Zoom"			displayType="SLIDER;-2;5;7"		visibilityCondition="hideAlways" />
-            <Var id="mc_Height" 		displayName="mc_Height"			displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
-            <Var id="mc_Offset" 		displayName="mc_Offset"			displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
+			<Var id="mc_Zoom" 					displayName="mc_Zoom"					displayType="SLIDER;-2;5;7"		visibilityCondition="hideAlways" />
+            <Var id="mc_Height" 				displayName="mc_Height"					displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
+            <Var id="mc_Offset" 				displayName="mc_Offset"					displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
 
-            <Var id="mc_SenseZoom" 		displayName="mc_SenseZoom"		displayType="SLIDER;-2;5;7"		visibilityCondition="hideAlways" />
-            <Var id="mc_SenseHeight" 	displayName="mc_SenseHeight"	displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
-            <Var id="mc_SenseOffset" 	displayName="mc_SenseOffset"	displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
+			<Var id="mc_CombatResponsiveness"	displayName="mc_CombatResponsiveness"	displayType="SLIDER;1;10;9"		visibilityCondition="hideAlways" />
+			<Var id="mc_CombatZoom"				displayName="mc_CombatZoom"				displayType="SLIDER;-2;5;7"		visibilityCondition="hideAlways" />
+            <Var id="mc_CombatHeight"			displayName="mc_CombatHeight"			displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
+            <Var id="mc_CombatOffset" 			displayName="mc_CombatOffset"			displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
 
-            <Var id="mc_CombatZoom"		displayName="mc_CombatZoom"		displayType="SLIDER;-2;5;7"		visibilityCondition="hideAlways" />
-            <Var id="mc_CombatHeight"	displayName="mc_CombatHeight"	displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
-            <Var id="mc_CombatOffset" 	displayName="mc_CombatOffset"	displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
+			<Var id="mc_DodgeResponsiveness"	displayName="mc_DodgeResponsiveness"	displayType="SLIDER;1;10;9"		visibilityCondition="hideAlways" />
+			<Var id="mc_DodgeZoom"				displayName="mc_DodgeZoom"				displayType="SLIDER;-2;5;7"		visibilityCondition="hideAlways" />
+            <Var id="mc_DodgeHeight"			displayName="mc_DodgeHeight"			displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
+			<Var id="mc_DodgeOffset" 			displayName="mc_DodgeOffset"			displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
 
-			<Var id="Init"				displayName=""					displayType="TOGGLE"			visibilityCondition="hideAlways"/>
+            <Var id="mc_SignsResponsiveness"	displayName="mc_SignsResponsiveness"	displayType="SLIDER;1;10;9"		visibilityCondition="hideAlways" />
+			<Var id="mc_SignsZoom"				displayName="mc_SignsZoom"				displayType="SLIDER;-5;5;10"	visibilityCondition="hideAlways" />
+            <Var id="mc_SignsHeight"			displayName="mc_SignsHeight"			displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
+            <Var id="mc_SignsOffset" 			displayName="mc_SignsOffset"			displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
+
+            <Var id="mc_SenseZoom" 				displayName="mc_SenseZoom"				displayType="SLIDER;-2;5;7"		visibilityCondition="hideAlways" />
+            <Var id="mc_SenseHeight" 			displayName="mc_SenseHeight"			displayType="SLIDER;0;6;6"		visibilityCondition="hideAlways" />
+            <Var id="mc_SenseOffset" 			displayName="mc_SenseOffset"			displayType="SLIDER;-6;6;12"	visibilityCondition="hideAlways" />
+
+			<Var id="mc_EnemyRange"				displayName="mc_EnemyRange"				displayType="SLIDER;1;30;29"	visibilityCondition="hideAlways" />
+			<Var id="mc_ZoomPerEnemy"			displayName="mc_ZoomPerEnemy"			displayType="SLIDER;0;2;20"		visibilityCondition="hideAlways" />
+			<Var id="mc_InitVersion"			displayName="mc_InitVersion"			displayType="SLIDER;0;100;100"	visibilityCondition="hideAlways" />
         </VisibleVars>
     </Group>
 </UserConfig>
