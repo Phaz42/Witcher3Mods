@@ -1,0 +1,22 @@
+;meta[language=ru]
+; id|key(hex)|key(str)| text
+;
+2117278001||panel_Mods|Модификации
+2117278002||panel_totl_mod_name|Зажечь огни
+2117278003||option_totl_notification_auto|Автоматический режим
+2117278004||option_totl_notification_manual|Ручной режим
+2117278005||option_totl_notification_range|Диапазон
+;
+2117278010||option_totl_mode|Режим работы
+2117278011||preset_value_totl_mode_auto|Автоматический
+2117278012||preset_value_totl_mode_manual|Ручной
+;
+2117278020||option_totl_range|Расстояние включения \ выключения освещения (огней)
+;
+2117278030||option_totl_automode_target|Включение и выключение освещения в автоматическом режиме
+;
+2117278040||option_totl_hideinteractions|Скрыть подсказки включения / отключения на источниках света (лампы, костры, факелы и т.п.)
+;
+2117278050||option_totl_useactionbutton|Включить кнопку действия
+;
+2117278060||option_totl_disableautomodeindaytime|Отключить автоматический режим в дневное время суток

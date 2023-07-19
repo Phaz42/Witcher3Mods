@@ -1,0 +1,22 @@
+;meta[language=tr]
+; id|key(hex)|key(str)| text
+;
+2117278001||panel_Mods|Mods
+2117278002||panel_totl_mod_name|Turn On The Lights
+2117278003||option_totl_notification_auto|Otomatik Mod
+2117278004||option_totl_notification_manual|Manuel Mod
+2117278005||option_totl_notification_range|Menzil
+;
+2117278010||option_totl_mode|Mod
+2117278011||preset_value_totl_mode_auto|Otomatik
+2117278012||preset_value_totl_mode_manual|Manuel
+;
+2117278020||option_totl_range|Işıkların Menzili
+;
+2117278030||option_totl_automode_target|Otomatik Modda Işıkları Aç ya da Kapat
+;
+2117278040||option_totl_hideinteractions|Işıklardaki Yak/Söndür işaretlerini gizle
+;
+2117278050||option_totl_useactionbutton|Aksiyon Butonunu Etkinleştir
+;
+2117278060||option_totl_disableautomodeindaytime|Gündüz Vakti Otomatik Modu Devre Dışı Bırak

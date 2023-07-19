@@ -1,0 +1,22 @@
+;meta[language=en]
+; id|key(hex)|key(str)| text
+;
+2117278001||panel_Mods|Mods
+2117278002||panel_totl_mod_name|Turn On The Lights
+2117278003||option_totl_notification_auto|Automatic Mode
+2117278004||option_totl_notification_manual|Manual Mode
+2117278005||option_totl_notification_range|Range
+;
+2117278010||option_totl_mode|Mode
+2117278011||preset_value_totl_mode_auto|Automatic
+2117278012||preset_value_totl_mode_manual|Manual
+;
+2117278020||option_totl_range|Lights Range
+;
+2117278030||option_totl_automode_target|Turn lights On or Off in Automatic Mode
+;
+2117278040||option_totl_hideinteractions|Hide Ignite/Extinguish prompts on lights
+;
+2117278050||option_totl_useactionbutton|Enable Action Button
+;
+2117278060||option_totl_disableautomodeindaytime|Disable Automatic Mode during Day Time

@@ -1,9 +1,7 @@
-Check which languages are supported on the Mod page on Nexus (under Posts tab in the
-FAQ section of the stickied post at the top): https://www.nexusmods.com/witcher3/mods/7278?tab=posts&BH=0
-
+Check which languages are supported on the Mod page on Nexus.
 
 If your language is not (fully) translated yet, you will see English text instead. If you want to help translate,
-please report in this forum thread: https://www.nexusmods.com/witcher3/mods/7278/?tab=forum&topic_id=12955146
+please let me know so we can work together to add your language to the mod. Don't upload custom translated mods please.
 
 
 How to translate?
