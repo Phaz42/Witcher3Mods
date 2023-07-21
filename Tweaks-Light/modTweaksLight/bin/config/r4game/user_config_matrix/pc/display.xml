@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<UserConfig>
+
+	<Group id="Display" displayName="video.display" tags="refreshEngineWithTexturesReload;graphics">
+		<VisibleVars>
+			<!-- Display - Output Monitor -->
+			<Var id="Virtual_OutputMonitor" displayName="monitor" displayType="OPTIONS" tags="buffered;RefreshOutputMonitor;refreshViewport;nonLocalized;customNames">
+				<OptionsArray>
+					<ListingFunction name="ListAvailableMonitorCount"/>
+				</OptionsArray>
+			</Var>
+
+			<!-- Display Mode - Fullscreen Mode -->
+			<Var id="Virtual_FullScreenMode" displayName="fullscreenmode" displayType="OPTIONS" tags="buffered;RefreshOutputMonitor;refreshViewport">
+				<OptionsArray>
+					<Option id="0" displayName="windowed">
+						<Entry overrideGroup="Viewport" varId="FullScreenMode" value="0"/>
+					</Option>
+					<Option id="1" displayName="borderless">
+						<Entry overrideGroup="Viewport" varId="FullScreenMode" value="1"/>
+					</Option>
+					<Option id="2" displayName="fullscreen">
+						<Entry overrideGroup="Viewport" varId="FullScreenMode" value="2"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+			
+			<!-- VSync -->
+			<Var overrideGroup="Viewport" id="VSync" displayName="vsync" displayType="TOGGLE" tags="buffered;disableIfDLSSG"/>
+			
+			<!-- Resolution -->
+			<Var id="Resolution" displayName="resolution" displayType="OPTIONS" tags="buffered;RefreshOutputMonitor;refreshViewport;nonLocalized;customNames">
+				<OptionsArray>
+					<ListingFunction name="ListResolutions"/>
+				</OptionsArray>
+			</Var>
+
+			<!-- Maximum Frames Per Second. TODO: More granular slider? Higher Limit? -->
+			<Var id="FPSLimit" displayName="framerate_limit" displayType="OPTIONS" tags="buffered;refreshViewport;disableIfDLSSG">
+				<OptionsArray>
+					<Option id="0" displayName="framerate_limit_unlimited">
+						<Entry overrideGroup="Engine" varId="LimitFPS" value="0"/>
+					</Option>
+					<Option id="1" displayName="framerate_limit_30">
+						<Entry overrideGroup="Engine" varId="LimitFPS" value="30"/>
+					</Option>
+					<Option id="2" displayName="framerate_limit_60">
+						<Entry overrideGroup="Engine" varId="LimitFPS" value="60"/>
+					</Option>
+					<Option id="3" displayName="framerate_limit_75">
+						<Entry overrideGroup="Engine" varId="LimitFPS" value="75"/>
+					</Option>
+					<Option id="4" displayName="framerate_limit_90">
+						<Entry overrideGroup="Engine" varId="LimitFPS" value="90"/>
+					</Option>
+					<Option id="5" displayName="framerate_limit_120">
+						<Entry overrideGroup="Engine" varId="LimitFPS" value="120"/>
+					</Option>
+					<Option id="6" displayName="framerate_limit_144">
+						<Entry overrideGroup="Engine" varId="LimitFPS" value="144"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+			<Var id="MovieFramerate" displayName="framerate_limit_movie" displayType="OPTIONS" tags="buffered;refreshViewport;disableIfDLSSG">
+				<OptionsArray>
+					<Option id="0" displayName="framerate_limit_unlimited">
+						<Entry overrideGroup="Visuals" varId="MovieFramerate" value="0"/>
+					</Option>
+					<Option id="1" displayName="framerate_limit_30">
+						<Entry overrideGroup="Visuals" varId="MovieFramerate" value="30"/>
+					</Option>
+					<Option id="2" displayName="framerate_limit_60">
+						<Entry overrideGroup="Visuals" varId="MovieFramerate" value="60"/>
+					</Option>
+					<Option id="3" displayName="framerate_limit_75">
+						<Entry overrideGroup="Visuals" varId="MovieFramerate" value="75"/>
+					</Option>
+					<Option id="4" displayName="framerate_limit_90">
+						<Entry overrideGroup="Visuals" varId="MovieFramerate" value="90"/>
+					</Option>
+					<Option id="5" displayName="framerate_limit_120">
+						<Entry overrideGroup="Visuals" varId="MovieFramerate" value="120"/>
+					</Option>
+					<Option id="6" displayName="framerate_limit_144">
+						<Entry overrideGroup="Visuals" varId="MovieFramerate" value="144"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+
+			<Var id="Separator" displayName="" displayType="SUBTLE_SEPARATOR"/>
+
+			<!-- DLSSG, DLSS Frame Generation -->
+			<Var overrideGroup="PostProcess" id="Virtual_DLSSG" displayName="dlss_frame_generation" displayType="OPTIONS" tags="customNames;enableIfDLSSGSupported">
+				<OptionsArray>
+					<Option id="0" displayName="panel_mainmenu_option_value_off">
+						<Entry overrideGroup="PostProcess" varId="DLSSGMode" value="0"/>
+					</Option>
+					<Option id="1" displayName="panel_mainmenu_option_value_on">
+						<Entry overrideGroup="PostProcess" varId="DLSSGMode" value="1"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+
+			<!-- NVIVIA Reflex Low Latency -->
+			<Var overrideGroup="Viewport" id="Virtual_Reflex" displayName="nvidia_reflex_low_latency" displayType="OPTIONS" tags="customNames;enableIfReflexSupported;disableIfDLSSGAndSet1">
+				<OptionsArray>
+					<Option id="0" displayName="panel_mainmenu_option_value_off">
+						<Entry overrideGroup="Viewport" varId="ReflexMode" value="0"/>
+					</Option>
+					<Option id="1" displayName="panel_mainmenu_option_value_on">
+						<Entry overrideGroup="Viewport" varId="ReflexMode" value="1"/>
+					</Option>
+					<Option id="2" displayName="option_nvidia_reflex_boost">
+						<Entry overrideGroup="Viewport" varId="ReflexMode" value="2"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+
+			<!-- Unsure why this is in Graphics settings? -->
+            <Var overrideGroup="Rendering" id="HardwareCursor" displayName="hardware_cursor" displayType="TOGGLE"/>
+		</VisibleVars>
+	</Group>
+
+</UserConfig>

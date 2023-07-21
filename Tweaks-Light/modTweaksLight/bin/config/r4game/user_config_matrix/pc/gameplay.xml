@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<UserConfig>
+	<Group id="Gameplay" displayName="gameplay">
+		<VisibleVars>
+			<Var overrideGroup="General"  id="DBGConsoleOn" displayName="dbg_console" displayType="TOGGLE"/>
+			<Var id="Separator" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var overrideGroup="Save"  id="ShowCompatWarning" displayName="show_compat_warning" displayType="TOGGLE"/>
+			<Var overrideGroup="LoadingScreen/Debug"  id="DisableVideos" displayName="disable_loading_videos" displayType="TOGGLE"/>
+			<Var overrideGroup="LoadingScreen/TCR"  id="ShowProgress" displayName="show_progress" displayType="TOGGLE"/>
+			<Var overrideGroup="Visuals" id="InventoryFixedLuminance" displayName="geralt_brightness_in_inventory" displayType="SLIDER;0.01;1;100"/>
+			<Var overrideGroup="Visuals" id="InventoryBgColorScaleR" displayName="geralt_inventory_aura_red" displayType="SLIDER;0.001;1;1000"/>
+			<Var overrideGroup="Visuals" id="InventoryBgColorScaleG" displayName="geralt_inventory_aura_green" displayType="SLIDER;0.001;1;1000"/>
+			<Var overrideGroup="Visuals" id="InventoryBgColorScaleB" displayName="geralt_inventory_aura_blue" displayType="SLIDER;0.001;1;1000"/>
+			<Var id="Separator" displayName="" displayType="SUBTLE_SEPARATOR"/>
+			<Var id="HudTutorialEnabled" displayName="HudTutorialEnabled" displayType="TOGGLE"/>
+			<Var id="AutomaticFinishersEnabled" displayName="AutoFinishersEnabled" displayType="TOGGLE"/>
+			<Var id="DisableAutomaticSwordSheathe" displayName="menu_auto_sword_sheathe" displayType="TOGGLE"/>
+			<Var id="AutoApplyBladeOils" displayName="auto_apply_blade_oils" displayType="TOGGLE"/>
+            <Var id="ColorblindFocusMode" displayName="witcher_senses_colorblind" displayType="TOGGLE" visibilityCondition="mainMenu"/>
+            <Var id="MotionSicknessFocusMode" displayName="witcher_senses_motion_sickness" displayType="TOGGLE"/>
+            <Var id="EnableUberMovement" displayName="menu_movement_response" displayType="OPTIONS" tags="customNames;customDisplayName">
+				<OptionsArray>
+					<Option id="0" displayName="menu_movement_standard">
+						<Entry varId="EnableUberMovement" value="0"/>
+					</Option>
+					<Option id="1" displayName="menu_movement_alternative">
+						<Entry varId="EnableUberMovement" value="1"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+            <Var id="EnableAlternateSignCasting" displayName="menu_alternate_sign_casting" displayType="OPTIONS" tags="customNames;customDisplayName">
+				<OptionsArray>
+					<Option id="0" displayName="menu_alternate_sign_casting_standard">
+						<Entry varId="EnableAlternateSignCasting" value="0"/>
+					</Option>
+					<Option id="1" displayName="menu_alternate_sign_casting_alternative">
+						<Entry varId="EnableAlternateSignCasting" value="1"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+            <Var id="SoftLockCameraAssist" displayName="SoftLockCameraAssist" displayType="TOGGLE"/>
+			<Var id="EnableAlternateExplorationCamera" displayName="option_ExplorationCameraPreset" displayType="OPTIONS" tags="customNames;customDisplayName">
+				<OptionsArray>
+					<Option id="0" displayName="menu_Default">
+						<Entry varId="EnableAlternateExplorationCamera" value="0"/>
+					</Option>
+					<Option id="1" displayName="menu_Close">
+						<Entry varId="EnableAlternateExplorationCamera" value="1"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+			<Var id="EnableAlternateCombatCamera" displayName="option_CombatCameraPreset" displayType="OPTIONS" tags="customNames;customDisplayName">
+				<OptionsArray>
+					<Option id="0" displayName="menu_Default">
+						<Entry varId="EnableAlternateCombatCamera" value="0"/>
+					</Option>
+					<Option id="1" displayName="menu_Close">
+						<Entry varId="EnableAlternateCombatCamera" value="1"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+			<Var id="EnableAlternateHorseCamera" displayName="option_HorseCameraPreset" displayType="OPTIONS" tags="customNames;customDisplayName">
+				<OptionsArray>
+					<Option id="0" displayName="menu_Default">
+						<Entry varId="EnableAlternateHorseCamera" value="0"/>
+					</Option>
+					<Option id="1" displayName="menu_Close">
+						<Entry varId="EnableAlternateHorseCamera" value="1"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+			<Var id="AutoCameraCenter" displayName="AutoCameraCenter" displayType="TOGGLE"/>
+            <Var id="AutosaveTimeInterval" displayName="AutosaveTimeInterval" displayType="SLIDER;3;15;12"/>
+			<Var id="EnemyUpscaling" displayName="EnemyUpscaling" displayType="TOGGLE"/>
+			<Var id="ConsentTelemetry" displayName="menu_consent_on_telemetry" displayType="TOGGLE"  tags="customDisplayName"/>
+			<Var id="CrossProgression" displayName="ui_gog_cloud_saves_title" displayType="TOGGLE" tags="customDisplayName"/>
+		</VisibleVars>
+	</Group>
+    <Group id="Controls" displayName="option_controllerhelp">
+        <VisibleVars>
+			<Var overrideGroup="Input" id="UIMouseSensitivity" displayName="ui_mouse_sensitivity" displayType="SLIDER;0.1;4.0;78"/>
+            <Var overrideGroup="Input" id="MouseSensitivity" displayName="mouse_sensitivity" displayType="SLIDER;0.1;4.0;78"/>
+            <Var overrideGroup="Input" id="InvertCameraXOnMouse" displayName="camera_input_reverse_x_axis_mouse" displayType="TOGGLE"/>
+			<Var overrideGroup="Input" id="InvertCameraYOnMouse" displayName="camera_input_reverse_y_axis_mouse" displayType="TOGGLE"/>
+			<Var overrideGroup="Input" id="InvertCameraX" displayName="camera_input_reverse_x_axis_xb1" displayType="TOGGLE"/>
+			<Var overrideGroup="Input" id="InvertCameraY" displayName="camera_input_reverse_y_axis_xb1" displayType="TOGGLE"/>
+			<Var overrideGroup="Input" id="InvertLockOption" displayName="camera_input_reverse_lock_targeting" displayType="TOGGLE"/>
+			<Var id="LeftStickSprint" displayName="menu_LeftStickSprint" displayType="TOGGLE"/>
+            <Var id="LeftStickSensitivity" displayName="LeftStickSensitivity" displayType="SLIDER;0.5;1;50" visibilityCondition="hideAlways"/>
+            <Var overrideGroup="Input" id="RightStickCameraSensitivity" displayName="RightStickCameraSensitivity" displayType="SLIDER;0.5;1.5;98"/>
+			<Var overrideGroup="Input" id="RightStickAimSensitivity" displayName="RightStickAimSensitivity" displayType="SLIDER;0.5;1.5;98"/>
+            <Var overrideGroup="Input" id="PadVibrationEnabled" displayName="pad_vibrations" displayType="TOGGLE"/>
+            <Var overrideGroup="Input" id="AdaptiveTriggersEnabled" displayName="adaptive_triggers" displayType="TOGGLE"/>
+			<Var overrideGroup="Input" id="AdaptiveTriggersAmount" displayName="adaptive_triggers_amount" displayType="SLIDER;0;10;10"/>
+            <Var id="SwapAcceptCancel" displayName="swap_accept_cancel" displayType="TOGGLE"/>
+			<Var id="AlternativeRadialMenuInputMode" displayName="alternative_radial_input_mode" displayType="TOGGLE"/>
+        </VisibleVars>
+    </Group>
+</UserConfig>

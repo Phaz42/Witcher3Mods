@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<UserConfig>
+	<Group id="Hud" displayName="video.hudelements">
+		<PresetsArray>
+			<Preset id="0" displayName="default">
+				<Entry varId="HudVisibility" 			value="true"/>
+				<Entry varId="HudSize" 	 	 			value="0"/>
+				<Entry varId="ConsoleModule" 	 		value="true"/>
+				<Entry varId="Minimap2Module" 			value="true"/>
+				<Entry varId="MinimapRotation" 		 	value="true"/>
+				<Entry varId="MinimapFocusClues" 	 	value="false"/>
+				<Entry varId="MinimapTracksWaypoints" 	value="true"/>
+				<Entry varId="MiminapPoiQuestionMarks" 	value="true"/>
+				<Entry varId="MinimapPoiCompletedIcons" value="true"/>
+				<Entry varId="OnelinersModule" 			value="true"/>
+				<Entry varId="QuestsModule" 			value="true"/>
+				<Entry varId="WolfMedalion" 			value="true"/>
+				<Entry varId="BuffsModule" 				value="true"/>
+				<Entry varId="OxygenBarModule" 			value="true"/>
+				<Entry varId="MessageModule" 			value="true"/>
+				<Entry varId="ControlsFeedbackModule" 	value="true"/>
+				<Entry varId="DamagedItemsModule" 		value="true"/>
+				<Entry varId="ItemInfoModule" 			value="true"/>
+				<Entry varId="TimeLapseModule" 			value="true"/>
+				<Entry varId="BossFocusModule" 			value="true"/>
+				<Entry varId="EnemyFocusModule" 		value="true"/>
+				<Entry varId="EnemyHitEffects" 			value="false"/>
+				<Entry varId="NPCNames" 				value="true"/>
+				<Entry varId="BoatHealthModule" 		value="true"/>
+				<Entry varId="CompanionModule" 			value="true"/>
+				<Entry varId="HorsePanicBarModule" 		value="true"/>
+				<Entry varId="HorseStaminaBarModule" 	value="true"/>
+				<Entry varId="MinimapDuringFocusCombat" 	value="false"/>
+				<Entry varId="ObjectiveDuringFocusCombat" 	value="false"/>
+				<Entry varId="SubtitleScale" 	value="0"/>
+				<Entry varId="DialogChoiceScale" 	value="0"/>
+				<Entry varId="OnelinerScale" 	value="0"/>
+			</Preset>
+		</PresetsArray>
+		<VisibleVars>
+            <Var id="HudVisibility" displayName="hudvisibility" displayType="TOGGLE"/>
+			<Var id="HudSize" displayName="hudsize" displayType="OPTIONS">
+				<OptionsArray>
+					<Option id="0" displayName="small">
+						<Entry varId="HudSize" value="0"/>
+					</Option>
+					<Option id="1" displayName="big">
+						<Entry varId="HudSize" value="1"/>
+					</Option>
+				</OptionsArray>
+			</Var>
+			<Var id="MinimapDuringFocusCombat" displayName="MinimapDuringFocusCombat" displayType="TOGGLE"/>
+			<Var id="ObjectiveDuringFocusCombat" displayName="ObjectiveDuringFocusCombat" displayType="TOGGLE"/>
+			<Var id="SubtitleScale" displayName="subtitle_font_scale" displayType="SLIDER;-5;10;15"/>
+			<Var id="DialogChoiceScale" displayName="choice_font_scale" displayType="SLIDER;-5;10;15"/>
+			<Var id="OnelinerScale" displayName="oneliner_font_scale" displayType="SLIDER;-5;10;15"/>
+			<Var overrideGroup="Rendering" id="WidescreenCutscene" displayName="widesceen_cutscene_use_cachets" displayType="TOGGLE"/>
+            <Var id="ConsoleModule" displayName="ConsoleLog" displayType="TOGGLE"/>
+            <Var id="Minimap2Module" displayName="Minimap" displayType="TOGGLE"/>
+            <Var id="MinimapRotation" displayName="MinimapRotation" displayType="TOGGLE"/>
+            <Var id="MinimapFocusClues" displayName="MinimapFocusClues" displayType="TOGGLE"/>
+			<Var id="MinimapTracksWaypoints" displayName="MinimapHintWaypoints" displayType="TOGGLE"/>
+			<Var id="MiminapPoiQuestionMarks" displayName="MiminapPoiQuestionMarks" displayType="TOGGLE"/>
+			<Var id="MinimapPoiCompletedIcons" displayName="MinimapPoiCompletedIcons" displayType="TOGGLE"/>
+            <Var id="OnelinersModule" displayName="NPCChatter" displayType="TOGGLE"/>
+            <Var id="QuestsModule" displayName="ActiveQuests" displayType="TOGGLE"/>
+            <Var id="WolfMedalion" displayName="WolfMedalion" displayType="TOGGLE"/>
+            <Var id="BuffsModule" displayName="CurrentBuffs" displayType="TOGGLE"/>
+            <Var id="OxygenBarModule" displayName="OxygenBar" displayType="TOGGLE"/>
+            <Var id="MessageModule" displayName="InfoMessages" displayType="TOGGLE"/>
+            <Var id="ControlsFeedbackModule" displayName="ControlHints" displayType="TOGGLE"/>
+            <Var id="DamagedItemsModule" displayName="DamagedItems" displayType="TOGGLE"/>
+            <Var id="ItemInfoModule" displayName="AdditionalEquipment" displayType="TOGGLE"/>
+            <Var id="TimeLapseModule" displayName="TimeZone" displayType="TOGGLE"/>
+            <Var id="BossFocusModule" displayName="BossHealth" displayType="TOGGLE"/>
+            <Var id="EnemyFocusModule" displayName="EnemyHealthBar" displayType="TOGGLE"/>
+            <Var id="EnemyHitEffects" displayName="critical_hit_texts" displayType="TOGGLE"/>
+            <Var id="NPCNames" displayName="npc_names" displayType="TOGGLE"/>
+            <Var id="BoatHealthModule" displayName="BoatHealth" displayType="TOGGLE"/>
+            <Var id="CompanionModule" displayName="CompanionPortrait" displayType="TOGGLE"/>
+			<Var id="HorsePanicBarModule" displayName="HorseMorale" displayType="TOGGLE"/>
+			<Var id="HorseStaminaBarModule" displayName="HorseStamina" displayType="TOGGLE"/>
+			<!--<Var id="JournalUpdateModule" displayName="UpdateSection" displayType="TOGGLE"/>-->
+		</VisibleVars>
+	</Group>
+</UserConfig>
