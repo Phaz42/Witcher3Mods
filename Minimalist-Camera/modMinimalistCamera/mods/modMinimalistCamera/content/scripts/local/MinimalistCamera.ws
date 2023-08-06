@@ -24,6 +24,11 @@ class MinimalistCamera
 	private var EnemyRange, ZoomPerEnemy, CurrZoomPerEnemy, DynamicZoom : float;
 	private var DodgeFx, SignFx : bool;
 
+	private var cameraDistanceResetInProgress : bool;
+		default cameraDistanceResetInProgress = false;
+	private var cameraDistanceResetProgressCounter : int;
+		default cameraDistanceResetProgressCounter = 0;
+
 
 	// Initialization
 
@@ -94,6 +99,8 @@ class MinimalistCamera
 		var hostilesInRangeArray, enemiesInRangeArray, visibleEnemiesInRangeArray : array<CActor>;
 		var hostilesInRange, enemiesInRange, visibleEnemiesInRange, actualEnemiesInRange : int;
 
+		ResetCameraDistance(false);
+
 		CurrResponsiveness = CombatResponsiveness;
 		CurrZoom = CombatZoom;
 		CurrHeight = CombatHeight;
@@ -163,6 +170,27 @@ class MinimalistCamera
 
 		if ( thePlayer.GetCurrentlyCastSign() == ST_Axii )
 			CurrZoom = SignsZoom + 2;
+	}
+
+	public function ResetCameraDistance( startReset : bool )
+	{
+		if ( cameraDistanceResetInProgress) cameraDistanceResetProgressCounter += 1;
+		if ( startReset && !cameraDistanceResetInProgress)
+		{
+			// Start Reset
+			Log( "ResetCameraDistance: Start Reset" );
+			cameraDistanceResetInProgress = true;
+			cameraDistanceResetProgressCounter = 0;
+			thePlayer.HardLockToTarget( true );
+		}
+		else if ( !startReset && cameraDistanceResetInProgress && cameraDistanceResetProgressCounter > 1 )
+		{
+			// Stop Reset
+			Log( "ResetCameraDistance: Stop Reset" );
+			cameraDistanceResetInProgress = false;
+			cameraDistanceResetProgressCounter = 0;
+			thePlayer.HardLockToTarget( false );
+		}
 	}
 
 	public function LogIfChanged( description : string, oldVal : string, newVal : string )
