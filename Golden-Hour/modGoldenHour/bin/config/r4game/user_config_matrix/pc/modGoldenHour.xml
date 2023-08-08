@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<UserConfig>
+	<Group id="modGoldenHour" displayName="Mods.visuals_and_graphics.gh_mod_name">
+
+		<PresetsArray>
+			<Preset id="0" displayName="gh_preset_default">
+				<Entry varId="gh_InitVersion"					value="4"/>
+				<Entry varId="gh_mod_enabled"					value="true"/>
+				<Entry varId="gh_startstop_notifications"		value="false"/>
+				<Entry varId="gh_enable_photomode_cutscenes"	value="true"/>
+				<Entry varId="gh_end_meditation"				value="0"/>
+
+				<Entry varId="gh_morning_multiplier"			value="7"/>
+				<Entry varId="gh_evening_multiplier"			value="5"/>
+				<Entry varId="gh_goldenhour_weather_type"		value="1"/>
+				<Entry varId="gh_swws_goldenhour_weather_type"	value="0"/>
+
+				<Entry varId="gh_day_multiplier"				value="2"/>
+				<Entry varId="gh_day_weather_type"				value="0"/>
+				<Entry varId="gh_swws_day_weather_type"			value="0"/>
+
+				<Entry varId="gh_night_multiplier"				value="1"/>
+				<Entry varId="gh_night_weather_type"			value="0"/>
+				<Entry varId="gh_swws_night_weather_type"		value="0"/>
+			</Preset>
+			<Preset id="1" displayName="gh_preset_vanilla">
+				<Entry varId="gh_InitVersion"					value="4"/>
+				<Entry varId="gh_mod_enabled"					value="true"/>
+				<Entry varId="gh_startstop_notifications"		value="false"/>
+				<Entry varId="gh_enable_photomode_cutscenes"	value="false"/>
+				<Entry varId="gh_end_meditation"				value="3"/>
+
+				<Entry varId="gh_morning_multiplier"			value="3"/>
+				<Entry varId="gh_evening_multiplier"			value="3"/>
+				<Entry varId="gh_goldenhour_weather_type"		value="0"/>
+				<Entry varId="gh_swws_goldenhour_weather_type"	value="0"/>
+
+				<Entry varId="gh_day_multiplier"				value="3"/>
+				<Entry varId="gh_day_weather_type"				value="0"/>
+				<Entry varId="gh_swws_day_weather_type"			value="0"/>
+
+				<Entry varId="gh_night_multiplier"				value="3"/>
+				<Entry varId="gh_night_weather_type"			value="0"/>
+				<Entry varId="gh_swws_night_weather_type"		value="0"/>
+			</Preset>
+		</PresetsArray>
+
+		<VisibleVars>
+
+			<!-- Global Settings -->
+			<Var id="gh_InitVersion"				displayName="gh_InitVersion"				displayType="SLIDER;0;100;100"	visibilityCondition="hideAlways" />
+			<Var id="gh_mod_enabled"				displayName="gh_mod_enabled"				displayType="TOGGLE" />
+			<Var id="gh_enable_photomode_cutscenes"	displayName="gh_enable_photomode_cutscenes"	displayType="TOGGLE" />
+			<Var id="Separator"						displayName=""								displayType="SUBTLE_SEPARATOR"/>
+
+			<!-- Golden Hour -->
+			<Var id="gh_morning_multiplier" displayName="gh_morning_multiplier" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_multiplier_02"><Entry varId="gh_morning_multiplier" value="0" /></Option>
+					<Option id="1"  displayName="gh_multiplier_05"><Entry varId="gh_morning_multiplier" value="1" /></Option>
+					<Option id="2"  displayName="gh_multiplier_07"><Entry varId="gh_morning_multiplier" value="2" /></Option>
+					<Option id="3"  displayName="gh_multiplier_10"><Entry varId="gh_morning_multiplier" value="3" /></Option>
+					<Option id="4"  displayName="gh_multiplier_15"><Entry varId="gh_morning_multiplier" value="4" /></Option>
+					<Option id="5"  displayName="gh_multiplier_20"><Entry varId="gh_morning_multiplier" value="5" /></Option>
+					<Option id="6"  displayName="gh_multiplier_25"><Entry varId="gh_morning_multiplier" value="6" /></Option>
+					<Option id="7"  displayName="gh_multiplier_30"><Entry varId="gh_morning_multiplier" value="7" /></Option>
+					<Option id="8"  displayName="gh_multiplier_35"><Entry varId="gh_morning_multiplier" value="8" /></Option>
+					<Option id="9"  displayName="gh_multiplier_40"><Entry varId="gh_morning_multiplier" value="9" /></Option>
+					<Option id="10" displayName="gh_multiplier_45"><Entry varId="gh_morning_multiplier" value="10"/></Option>
+					<Option id="11" displayName="gh_multiplier_50"><Entry varId="gh_morning_multiplier" value="11"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="gh_evening_multiplier" displayName="gh_evening_multiplier" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_multiplier_02"><Entry varId="gh_evening_multiplier" value="0" /></Option>
+					<Option id="1"  displayName="gh_multiplier_05"><Entry varId="gh_evening_multiplier" value="1" /></Option>
+					<Option id="2"  displayName="gh_multiplier_07"><Entry varId="gh_evening_multiplier" value="2" /></Option>
+					<Option id="3"  displayName="gh_multiplier_10"><Entry varId="gh_evening_multiplier" value="3" /></Option>
+					<Option id="4"  displayName="gh_multiplier_15"><Entry varId="gh_evening_multiplier" value="4" /></Option>
+					<Option id="5"  displayName="gh_multiplier_20"><Entry varId="gh_evening_multiplier" value="5" /></Option>
+					<Option id="6"  displayName="gh_multiplier_25"><Entry varId="gh_evening_multiplier" value="6" /></Option>
+					<Option id="7"  displayName="gh_multiplier_30"><Entry varId="gh_evening_multiplier" value="7" /></Option>
+					<Option id="8"  displayName="gh_multiplier_35"><Entry varId="gh_evening_multiplier" value="8" /></Option>
+					<Option id="9"  displayName="gh_multiplier_40"><Entry varId="gh_evening_multiplier" value="9" /></Option>
+					<Option id="10" displayName="gh_multiplier_45"><Entry varId="gh_evening_multiplier" value="10"/></Option>
+					<Option id="11" displayName="gh_multiplier_50"><Entry varId="gh_evening_multiplier" value="11"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="gh_goldenhour_weather_type" displayName="gh_goldenhour_weather_type" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_wt_unchanged"><Entry varId="gh_goldenhour_weather_type" value="Unchanged"/></Option>
+					<Option id="1"  displayName="gh_wt_clear"><Entry varId="gh_goldenhour_weather_type" value="Clear"/></Option>
+					<Option id="2"  displayName="gh_wt_lightclouds"><Entry varId="gh_goldenhour_weather_type" value="LightClouds"/></Option>
+					<Option id="3"  displayName="gh_wt_midclouds"><Entry varId="gh_goldenhour_weather_type" value="MidClouds"/></Option>
+					<Option id="4"  displayName="gh_wt_midcloudsdark"><Entry varId="gh_goldenhour_weather_type" value="MidCloudsDark"/></Option>
+					<Option id="5"  displayName="gh_wt_heavyclouds"><Entry varId="gh_goldenhour_weather_type" value="HeavyClouds"/></Option>
+					<Option id="6"  displayName="gh_wt_heavycloudsdark"><Entry varId="gh_goldenhour_weather_type" value="HeavyCloudsDark"/></Option>
+					<Option id="7"  displayName="gh_wt_rainstorm"><Entry varId="gh_goldenhour_weather_type" value="RainStorm"/></Option>
+					<Option id="8"  displayName="gh_wt_snow"><Entry varId="gh_goldenhour_weather_type" value="Snow"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="gh_swws_goldenhour_weather_type" displayName="gh_swws_goldenhour_weather_type" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_swws_wt_unchanged"><Entry varId="gh_swws_goldenhour_weather_type" value="Unchanged"/></Option>
+					<Option id="1"  displayName="gh_swws_wt_clear"><Entry varId="gh_swws_goldenhour_weather_type" value="clear"/></Option>
+					<Option id="2"  displayName="gh_swws_wt_fog1"><Entry varId="gh_swws_goldenhour_weather_type" value="fog1"/></Option>
+					<Option id="3"  displayName="gh_swws_wt_fog2"><Entry varId="gh_swws_goldenhour_weather_type" value="fog2"/></Option>
+					<Option id="4"  displayName="gh_swws_wt_flurry1"><Entry varId="gh_swws_goldenhour_weather_type" value="flurry1"/></Option>
+					<Option id="5"  displayName="gh_swws_wt_flurry2"><Entry varId="gh_swws_goldenhour_weather_type" value="flurry2"/></Option>
+					<Option id="6"  displayName="gh_swws_wt_flurry3"><Entry varId="gh_swws_goldenhour_weather_type" value="flurry3"/></Option>
+					<Option id="7"  displayName="gh_swws_wt_flurry4"><Entry varId="gh_swws_goldenhour_weather_type" value="flurry4"/></Option>
+					<Option id="8"  displayName="gh_swws_wt_flurry5"><Entry varId="gh_swws_goldenhour_weather_type" value="flurry5"/></Option>
+					<Option id="9"  displayName="gh_swws_wt_snow1"><Entry varId="gh_swws_goldenhour_weather_type" value="snow1"/></Option>
+					<Option id="10" displayName="gh_swws_wt_snow2"><Entry varId="gh_swws_goldenhour_weather_type" value="snow2"/></Option>
+					<Option id="11" displayName="gh_swws_wt_snow3"><Entry varId="gh_swws_goldenhour_weather_type" value="snow3"/></Option>
+					<Option id="12" displayName="gh_swws_wt_snow4"><Entry varId="gh_swws_goldenhour_weather_type" value="snow4"/></Option>
+					<Option id="13" displayName="gh_swws_wt_snow5"><Entry varId="gh_swws_goldenhour_weather_type" value="snow5"/></Option>
+					<Option id="14" displayName="gh_swws_wt_snow6"><Entry varId="gh_swws_goldenhour_weather_type" value="snow6"/></Option>
+					<Option id="15" displayName="gh_swws_wt_blizzard"><Entry varId="gh_swws_goldenhour_weather_type" value="blizzard"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="gh_end_meditation"				displayName="gh_end_meditation"				displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_end_meditation_morning">	<Entry varId="gh_end_meditation" value="0" /></Option>
+					<Option id="1"  displayName="gh_end_meditation_evening">	<Entry varId="gh_end_meditation" value="1" /></Option>
+					<Option id="2"  displayName="gh_end_meditation_both">		<Entry varId="gh_end_meditation" value="2" /></Option>
+					<Option id="3"  displayName="gh_end_meditation_never">		<Entry varId="gh_end_meditation" value="3" /></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="gh_startstop_notifications" displayName="gh_startstop_notifications" displayType="TOGGLE" />
+			<Var id="Separator" displayName="" displayType="SUBTLE_SEPARATOR"/>
+
+			<!-- Rest of Day -->
+			<Var id="gh_day_multiplier" displayName="gh_day_multiplier" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_multiplier_02"><Entry varId="gh_day_multiplier" value="0" /></Option>
+					<Option id="1"  displayName="gh_multiplier_05"><Entry varId="gh_day_multiplier" value="1" /></Option>
+					<Option id="2"  displayName="gh_multiplier_07"><Entry varId="gh_day_multiplier" value="2" /></Option>
+					<Option id="3"  displayName="gh_multiplier_10"><Entry varId="gh_day_multiplier" value="3" /></Option>
+					<Option id="4"  displayName="gh_multiplier_15"><Entry varId="gh_day_multiplier" value="4" /></Option>
+					<Option id="5"  displayName="gh_multiplier_20"><Entry varId="gh_day_multiplier" value="5" /></Option>
+					<Option id="6"  displayName="gh_multiplier_25"><Entry varId="gh_day_multiplier" value="6" /></Option>
+					<Option id="7"  displayName="gh_multiplier_30"><Entry varId="gh_day_multiplier" value="7" /></Option>
+					<Option id="8"  displayName="gh_multiplier_35"><Entry varId="gh_day_multiplier" value="8" /></Option>
+					<Option id="9"  displayName="gh_multiplier_40"><Entry varId="gh_day_multiplier" value="9" /></Option>
+					<Option id="10" displayName="gh_multiplier_45"><Entry varId="gh_day_multiplier" value="10"/></Option>
+					<Option id="11" displayName="gh_multiplier_50"><Entry varId="gh_day_multiplier" value="11"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="gh_day_weather_type" displayName="gh_day_weather_type" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_wt_unchanged"><Entry varId="gh_day_weather_type" value="Unchanged"/></Option>
+					<Option id="1"  displayName="gh_wt_clear"><Entry varId="gh_day_weather_type" value="Clear"/></Option>
+					<Option id="2"  displayName="gh_wt_lightclouds"><Entry varId="gh_day_weather_type" value="LightClouds"/></Option>
+					<Option id="3"  displayName="gh_wt_midclouds"><Entry varId="gh_day_weather_type" value="MidClouds"/></Option>
+					<Option id="4"  displayName="gh_wt_midcloudsdark"><Entry varId="gh_day_weather_type" value="MidCloudsDark"/></Option>
+					<Option id="5"  displayName="gh_wt_heavyclouds"><Entry varId="gh_day_weather_type" value="HeavyClouds"/></Option>
+					<Option id="6"  displayName="gh_wt_heavycloudsdark"><Entry varId="gh_day_weather_type" value="HeavyCloudsDark"/></Option>
+					<Option id="7"  displayName="gh_wt_rainstorm"><Entry varId="gh_day_weather_type" value="RainStorm"/></Option>
+					<Option id="8"  displayName="gh_wt_snow"><Entry varId="gh_day_weather_type" value="Snow"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="gh_swws_day_weather_type" displayName="gh_swws_day_weather_type" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_swws_wt_unchanged"><Entry varId="gh_swws_day_weather_type" value="Unchanged"/></Option>
+					<Option id="1"  displayName="gh_swws_wt_clear"><Entry varId="gh_swws_day_weather_type" value="clear"/></Option>
+					<Option id="2"  displayName="gh_swws_wt_fog1"><Entry varId="gh_swws_day_weather_type" value="fog1"/></Option>
+					<Option id="3"  displayName="gh_swws_wt_fog2"><Entry varId="gh_swws_day_weather_type" value="fog2"/></Option>
+					<Option id="4"  displayName="gh_swws_wt_flurry1"><Entry varId="gh_swws_day_weather_type" value="flurry1"/></Option>
+					<Option id="5"  displayName="gh_swws_wt_flurry2"><Entry varId="gh_swws_day_weather_type" value="flurry2"/></Option>
+					<Option id="6"  displayName="gh_swws_wt_flurry3"><Entry varId="gh_swws_day_weather_type" value="flurry3"/></Option>
+					<Option id="7"  displayName="gh_swws_wt_flurry4"><Entry varId="gh_swws_day_weather_type" value="flurry4"/></Option>
+					<Option id="8"  displayName="gh_swws_wt_flurry5"><Entry varId="gh_swws_day_weather_type" value="flurry5"/></Option>
+					<Option id="9"  displayName="gh_swws_wt_snow1"><Entry varId="gh_swws_day_weather_type" value="snow1"/></Option>
+					<Option id="10" displayName="gh_swws_wt_snow2"><Entry varId="gh_swws_day_weather_type" value="snow2"/></Option>
+					<Option id="11" displayName="gh_swws_wt_snow3"><Entry varId="gh_swws_day_weather_type" value="snow3"/></Option>
+					<Option id="12" displayName="gh_swws_wt_snow4"><Entry varId="gh_swws_day_weather_type" value="snow4"/></Option>
+					<Option id="13" displayName="gh_swws_wt_snow5"><Entry varId="gh_swws_day_weather_type" value="snow5"/></Option>
+					<Option id="14" displayName="gh_swws_wt_snow6"><Entry varId="gh_swws_day_weather_type" value="snow6"/></Option>
+					<Option id="15" displayName="gh_swws_wt_blizzard"><Entry varId="gh_swws_day_weather_type" value="blizzard"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="Separator" displayName="" displayType="SUBTLE_SEPARATOR"/>
+
+			<!-- Night -->
+			<Var id="gh_night_multiplier" displayName="gh_night_multiplier" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_multiplier_02"><Entry varId="gh_night_multiplier" value="0"/></Option>
+					<Option id="1"  displayName="gh_multiplier_05"><Entry varId="gh_night_multiplier" value="1"/></Option>
+					<Option id="2"  displayName="gh_multiplier_07"><Entry varId="gh_night_multiplier" value="2"/></Option>
+					<Option id="3"  displayName="gh_multiplier_10"><Entry varId="gh_night_multiplier" value="3"/></Option>
+					<Option id="4"  displayName="gh_multiplier_15"><Entry varId="gh_night_multiplier" value="4"/></Option>
+					<Option id="5"  displayName="gh_multiplier_20"><Entry varId="gh_night_multiplier" value="5"/></Option>
+					<Option id="6"  displayName="gh_multiplier_25"><Entry varId="gh_night_multiplier" value="6"/></Option>
+					<Option id="7"  displayName="gh_multiplier_30"><Entry varId="gh_night_multiplier" value="7"/></Option>
+					<Option id="8"  displayName="gh_multiplier_35"><Entry varId="gh_night_multiplier" value="8"/></Option>
+					<Option id="9"  displayName="gh_multiplier_40"><Entry varId="gh_night_multiplier" value="9"/></Option>
+					<Option id="10" displayName="gh_multiplier_45"><Entry varId="gh_night_multiplier" value="10"/></Option>
+					<Option id="11" displayName="gh_multiplier_50"><Entry varId="gh_night_multiplier" value="11"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="gh_night_weather_type" displayName="gh_night_weather_type" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_wt_unchanged"><Entry varId="gh_night_weather_type" value="Unchanged"/></Option>
+					<Option id="1"  displayName="gh_wt_clear"><Entry varId="gh_night_weather_type" value="Clear"/></Option>
+					<Option id="2"  displayName="gh_wt_lightclouds"><Entry varId="gh_night_weather_type" value="LightClouds"/></Option>
+					<Option id="3"  displayName="gh_wt_midclouds"><Entry varId="gh_night_weather_type" value="MidClouds"/></Option>
+					<Option id="4"  displayName="gh_wt_midcloudsdark"><Entry varId="gh_night_weather_type" value="MidCloudsDark"/></Option>
+					<Option id="5"  displayName="gh_wt_heavyclouds"><Entry varId="gh_night_weather_type" value="HeavyClouds"/></Option>
+					<Option id="6"  displayName="gh_wt_heavycloudsdark"><Entry varId="gh_night_weather_type" value="HeavyCloudsDark"/></Option>
+					<Option id="7"  displayName="gh_wt_rainstorm"><Entry varId="gh_night_weather_type" value="RainStorm"/></Option>
+					<Option id="8"  displayName="gh_wt_snow"><Entry varId="gh_night_weather_type" value="Snow"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="gh_swws_night_weather_type" displayName="gh_swws_night_weather_type" displayType="OPTIONS" >
+				<OptionsArray>
+					<Option id="0"  displayName="gh_swws_wt_unchanged"><Entry varId="gh_swws_night_weather_type" value="Unchanged"/></Option>
+					<Option id="1"  displayName="gh_swws_wt_clear"><Entry varId="gh_swws_night_weather_type" value="clear"/></Option>
+					<Option id="2"  displayName="gh_swws_wt_fog1"><Entry varId="gh_swws_night_weather_type" value="fog1"/></Option>
+					<Option id="3"  displayName="gh_swws_wt_fog2"><Entry varId="gh_swws_night_weather_type" value="fog2"/></Option>
+					<Option id="4"  displayName="gh_swws_wt_flurry1"><Entry varId="gh_swws_night_weather_type" value="flurry1"/></Option>
+					<Option id="5"  displayName="gh_swws_wt_flurry2"><Entry varId="gh_swws_night_weather_type" value="flurry2"/></Option>
+					<Option id="6"  displayName="gh_swws_wt_flurry3"><Entry varId="gh_swws_night_weather_type" value="flurry3"/></Option>
+					<Option id="7"  displayName="gh_swws_wt_flurry4"><Entry varId="gh_swws_night_weather_type" value="flurry4"/></Option>
+					<Option id="8"  displayName="gh_swws_wt_flurry5"><Entry varId="gh_swws_night_weather_type" value="flurry5"/></Option>
+					<Option id="9"  displayName="gh_swws_wt_snow1"><Entry varId="gh_swws_night_weather_type" value="snow1"/></Option>
+					<Option id="10" displayName="gh_swws_wt_snow2"><Entry varId="gh_swws_night_weather_type" value="snow2"/></Option>
+					<Option id="11" displayName="gh_swws_wt_snow3"><Entry varId="gh_swws_night_weather_type" value="snow3"/></Option>
+					<Option id="12" displayName="gh_swws_wt_snow4"><Entry varId="gh_swws_night_weather_type" value="snow4"/></Option>
+					<Option id="13" displayName="gh_swws_wt_snow5"><Entry varId="gh_swws_night_weather_type" value="snow5"/></Option>
+					<Option id="14" displayName="gh_swws_wt_snow6"><Entry varId="gh_swws_night_weather_type" value="snow6"/></Option>
+					<Option id="15" displayName="gh_swws_wt_blizzard"><Entry varId="gh_swws_night_weather_type" value="blizzard"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="Separator" displayName="" displayType="SUBTLE_SEPARATOR"/>
+
+		</VisibleVars>
+	</Group>
+</UserConfig>

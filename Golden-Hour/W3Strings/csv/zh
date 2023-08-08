@@ -1,0 +1,73 @@
+;meta[language=zh]
+; id|key(hex)|key(str)| text
+;
+2118429001||panel_Mods|Mods
+2118429002||panel_gh_mod_name|Golden Hour
+;
+2118429003||preset_Mods_visuals_and_graphics_gh_mod_name|<font color="#ffa445">Golden Hour</font>
+2118429004||preset_value_gh_preset_default|<font color="#ffa445">Default</font>
+2118429005||preset_value_gh_preset_vanilla|Vanilla
+;
+2118429006||option_gh_mod_enabled|Mod Enabled
+2118429007||option_gh_enable_photomode_cutscenes|Allow Photo Mode in cutscenes
+2118429008||option_gh_InitVersion|Init Version
+;
+2118429010||preset_value_gh_multiplier_02|x0.25
+2118429011||preset_value_gh_multiplier_05|x0.5
+2118429012||preset_value_gh_multiplier_07|x0.75
+2118429013||preset_value_gh_multiplier_10|x1
+2118429014||preset_value_gh_multiplier_15|x1.5
+2118429015||preset_value_gh_multiplier_20|x2
+2118429016||preset_value_gh_multiplier_25|x2.5
+2118429017||preset_value_gh_multiplier_30|x3
+2118429018||preset_value_gh_multiplier_35|x3.5
+2118429019||preset_value_gh_multiplier_40|x4
+2118429020||preset_value_gh_multiplier_45|x4.5
+2118429021||preset_value_gh_multiplier_50|x5
+;
+2118429030||preset_value_gh_wt_unchanged|Unchanged
+2118429031||preset_value_gh_wt_clear|Clear
+2118429032||preset_value_gh_wt_lightclouds|Light Clouds
+2118429033||preset_value_gh_wt_midclouds|Medium Clouds
+2118429034||preset_value_gh_wt_midcloudsdark|Dark Medium Clouds
+2118429035||preset_value_gh_wt_heavyclouds|Heavy Clouds
+2118429036||preset_value_gh_wt_heavycloudsdark|Dark Heavy Clouds with Rain
+2118429037||preset_value_gh_wt_rainstorm|Rain Storm
+2118429038||preset_value_gh_wt_snow|Snow/Blizzard
+;
+2118429040||preset_value_gh_swws_wt_unchanged|Same as above
+2118429041||preset_value_gh_swws_wt_clear|SWWS Clear
+2118429042||preset_value_gh_swws_wt_fog1|SWWS Fog 1
+2118429043||preset_value_gh_swws_wt_fog2|SWWS Fog 2
+2118429044||preset_value_gh_swws_wt_flurry1|SWWS Flurry 1
+2118429045||preset_value_gh_swws_wt_flurry2|SWWS Flurry 2
+2118429046||preset_value_gh_swws_wt_flurry3|SWWS Flurry 3
+2118429047||preset_value_gh_swws_wt_flurry4|SWWS Flurry 4
+2118429048||preset_value_gh_swws_wt_flurry5|SWWS Flurry 5
+2118429049||preset_value_gh_swws_wt_snow1|SWWS Snow 1
+2118429050||preset_value_gh_swws_wt_snow2|SWWS Snow 2
+2118429051||preset_value_gh_swws_wt_snow3|SWWS Snow 3
+2118429052||preset_value_gh_swws_wt_snow4|SWWS Snow 4
+2118429053||preset_value_gh_swws_wt_snow5|SWWS Snow 5
+2118429054||preset_value_gh_swws_wt_snow6|SWWS Snow 6
+2118429055||preset_value_gh_swws_wt_blizzard|SWWS Blizzard
+;
+2118429060||option_gh_morning_multiplier|Golden Hour (Morning): Real Time Multiplier
+2118429061||option_gh_evening_multiplier|Golden Hour (Evening): Real Time Multiplier
+2118429062||option_gh_goldenhour_weather_type|Golden Hour: Weather Type
+2118429063||option_gh_swws_goldenhour_weather_type|Golden Hour: Skellige specific weather (requires MOD SWWS!)
+2118429064||option_gh_startstop_notifications|Golden Hour: Show Start/Stop Notifications
+;
+2118429070||option_gh_day_multiplier|Rest of Day: Real Time Multiplier
+2118429071||option_gh_day_weather_type|Rest of Day: Weather Type
+2118429072||option_gh_swws_day_weather_type|Rest of Day: Skellige specific weather (requires MOD SWWS!)
+;
+2118429080||option_gh_night_multiplier|Night: Real Time Multiplier
+2118429081||option_gh_night_weather_type|Night: Weather Type
+2118429082||option_gh_swws_night_weather_type|Night: Skellige specific weather (requires MOD SWWS!)
+;
+2118429090||option_gh_end_meditation|End Meditation when Golden Hour starts
+2118429091||preset_value_gh_end_meditation_morning|In the Morning (recommended)
+2118429092||preset_value_gh_end_meditation_evening|In the Evening
+2118429093||preset_value_gh_end_meditation_both|Both
+2118429094||preset_value_gh_end_meditation_never|Never
