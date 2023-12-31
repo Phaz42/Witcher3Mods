@@ -41,6 +41,7 @@ class BetterWalking extends CEntity
 		Log( "SprintPressed" );
 		if ( !initComplete ) Init();
 		if ( walkToggleHeld ) return;
+		if ( HasLootInteraction() ) return;
 		if ( IsPressed  ( action ) ) sprintHeld = true;
 		if ( IsReleased ( action ) ) sprintHeld = false;
 
@@ -241,6 +242,20 @@ class BetterWalking extends CEntity
 	public function GetIsSprintTimerRunning() : bool
 	{
 		return isSprintTimerRunning;
+	}
+
+	public function HasLootInteraction() : bool
+	{
+		var interactionTarget 	: CInteractionComponent;
+		var isInteractionALoot 	: bool;
+
+		Log( "HasLootInteraction" );
+		interactionTarget = theGame.GetInteractionsManager().GetActiveInteraction();
+		Log( "HasLootInteraction: Current interaction: " + interactionTarget.GetName() );
+		isInteractionALoot = interactionTarget && ( interactionTarget.GetName() == "Loot" || interactionTarget.GetName() == "Container" || interactionTarget.GetName() == "Take" || interactionTarget.GetName() == "GatherHerbs" );
+
+		Log( "HasLootInteraction: Return: " + isInteractionALoot );
+		return isInteractionALoot;
 	}
 
 	public function Log( msg : string )
