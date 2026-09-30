@@ -2,7 +2,7 @@
 ; id|key(hex)|key(str)| text
 ;
 2117278001||panel_Mods|模組
-2117278002||panel_totl_mod_name|
+2117278002||panel_totl_mod_name|Turn On The Lights
 2117278003||option_totl_notification_auto|自動模式
 2117278004||option_totl_notification_manual|手動模式
 2117278005||option_totl_notification_range|範圍

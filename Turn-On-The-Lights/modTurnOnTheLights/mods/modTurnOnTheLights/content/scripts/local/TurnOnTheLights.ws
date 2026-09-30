@@ -19,6 +19,8 @@ class TurnOnTheLights
 
     public var configWrapper: CInGameConfigWrapper;
     public var hideInteractions : bool;
+    // 5.0.0: holds the running toggle, so the engine cannot collect it while it sleeps (on 5.00b it never woke up)
+    private var toggleLightsJob : ToggleLights;
 
     public function Init()
     {
@@ -232,6 +234,7 @@ class TurnOnTheLights
 
         // Check Weather
         currentWeather = GetWeatherConditionName();
+        Log( "currentWeather: " + NameToString( currentWeather ) );
         if ( currentWeather == 'WT_Heavy_Clouds_Dark' || currentWeather == 'WT_Rain_Storm')
         {
             Log( "return true, it's bad weather" );
@@ -288,6 +291,7 @@ class TurnOnTheLights
         Log( 'ToggleLights' );
         thePlayer.RemoveTimer('TurnOnTheLightsAutoTimer');
         toggleLights = new ToggleLights in theGame;
+        toggleLightsJob = toggleLights;
         toggleLights.Init();
         if (!manualMode)
         {
