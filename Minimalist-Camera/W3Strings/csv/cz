@@ -3,7 +3,7 @@
 ;
 2118357001||panel_Mods|Mods
 2118357002||panel_mc_mod_name|Minimalist Camera
-2118357003||preset_Mods_camera_mc_mod_name|<font color="#ffa445">Camera Range:</font>
+2118357003||preset_Mods_mc_mod_name|<font color="#ffa445">Camera Range:</font>
 2118357004||preset_value_mc_preset_close|<font color="#45ff47">Close</font>
 2118357005||preset_value_mc_preset_medium|<font color="#a0ff45">Medium</font>
 2118357006||preset_value_mc_preset_far|<font color="#fdff45">Far</font>

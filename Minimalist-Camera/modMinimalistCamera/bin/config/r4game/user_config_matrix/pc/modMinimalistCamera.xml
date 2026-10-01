@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-16"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <UserConfig>
-    <Group id="modMinimalistCamera" displayName="Mods.camera.mc_mod_name">
+    <Group id="modMinimalistCamera" displayName="Mods.mc_mod_name">
 		<PresetsArray>
 			<Preset id="0" displayName="mc_preset_close">
 				<Entry varId="mc_InitVersion"			value="1"/>
