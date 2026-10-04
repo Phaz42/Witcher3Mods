@@ -149,7 +149,6 @@ state Exploration in W3HorseComponent
 		
 		
 		theInput.RegisterListener( this, 'OnHorseKick', 'HorseKick' );
-		theInput.RegisterListener( this, 'OnHorseKickHold', 'EnablePhotoMode_Step1' ); // modAlternateHorseControls
 
 		theGame.GetGuiManager().EnableHudHoldIndicator(IK_Pad_B_CIRCLE, IK_None, "panel_input_action_horsedismount", 0.4, 'HorseDismount');
 	}
@@ -166,8 +165,8 @@ state Exploration in W3HorseComponent
 		
 		
 		theInput.UnregisterListener( this, 'HorseKick' );
-		theInput.UnregisterListener( this, 'EnablePhotoMode_Step1' ); // modAlternateHorseControls
-		kickHoldPressed = false; // modAlternateHorseControls
+		if( freeLookActive ) thePlayer.SetAutoCameraCenter( theGame.GetInGameConfigWrapper().GetVarValue( 'Gameplay', 'AutoCameraCenter' ) ); // modAlternateHorseControls
+		freeLookActive = false; // modAlternateHorseControls
 		
 		theGame.GetGuiManager().DisableHudHoldIndicator();
 	}
@@ -176,8 +175,8 @@ state Exploration in W3HorseComponent
 	private var mountingEnded, canDoKickAnim, wantsToKick : bool;	
 	private var mountingAnimationTime : float;
 	private var kickTimer : float;
-	private var kickHoldPressed : bool; // modAlternateHorseControls
 	private var kickHoldTime : float; // modAlternateHorseControls
+	private var freeLookActive : bool; // modAlternateHorseControls
 	
 	event OnHorseKick( action : SInputAction )
 	{
@@ -186,6 +185,12 @@ state Exploration in W3HorseComponent
 			canDoKickAnim = true; // modAlternateHorseControls
 			if( canDoKickAnim && !dismountRequest && theInput.GetActionValue('EnablePhotoMode_Step2') == 0.f )
 			{
+				// modAlternateHorseControls START
+				// 5.00b's photo mode sets this flag on opening and only a kick clears it, discarding that kick: the
+				// first rear after any photo mode was lost. Cleared at each new request; one pending as photo mode
+				// opens is older than the flag, and is still cancelled.
+				thePlayer.SetPhotoModeHorseKick( false );
+				// modAlternateHorseControls END
 				wantsToKick = true;
 				kickTimer = 0.1f;
 			}
@@ -204,25 +209,6 @@ state Exploration in W3HorseComponent
 			
 		wantsToKick = false;
 	}
-
-	// modAlternateHorseControls START
-	// Rearing on the gamepad: hold L3 for 0.3 s. 5.00b binds HorseKick to that hold, freeing a tap of L3 for its
-	// saddle interactions, but its own binding line never reaches input.settings. L3 still sends EnablePhotoMode_Step1,
-	// so the hold is timed here and in OnTick. L3+R3 stays photo mode: the kick fires only with R3 up, and photo mode
-	// cancels a pending kick itself.
-	event OnHorseKickHold( action : SInputAction )
-	{
-		if( IsPressed( action ) )
-		{
-			kickHoldPressed = true;
-			kickHoldTime = 0.f;
-		}
-		else if( IsReleased( action ) )
-		{
-			kickHoldPressed = false;
-		}
-	}
-	// modAlternateHorseControls END
 	
 	
 	
@@ -315,18 +301,52 @@ state Exploration in W3HorseComponent
 			}			
 		}
 		// modAlternateHorseControls START
-		if( kickHoldPressed )
+		// Rearing on the gamepad: hold L3 for 0.3 s. 5.00b binds HorseKick to that hold, freeing a tap of L3 for its
+		// saddle interactions, but its own binding line never reaches input.settings; L3 still sends EnablePhotoMode_Step1.
+		// Its value is read here, never listened to: an action has one listener, and taking this one from photo mode
+		// left L3+R3 dead until a reload. With R3 down as well it is photo mode: no kick until L3 is let go. Nor is a
+		// hold timed while photo mode is open; a hold carried out of it needs letting go first.
+		if( theInput.GetContext() == GetPhotomodeContextName() )
 		{
-			kickHoldTime += dt;
-			if( kickHoldTime >= 0.3f )
+			kickHoldTime = -1.f;
+		}
+		else if( theInput.GetActionValue( 'EnablePhotoMode_Step1' ) > 0.f )
+		{
+			if( theInput.GetActionValue( 'EnablePhotoMode_Step2' ) > 0.f )
 			{
-				kickHoldPressed = false;
-				if( theInput.GetActionValue( 'EnablePhotoMode_Step1' ) > 0.f && theInput.GetActionValue( 'EnablePhotoMode_Step2' ) == 0.f && !dismountRequest )
+				kickHoldTime = -1.f;
+			}
+			else if( kickHoldTime >= 0.f )
+			{
+				kickHoldTime += dt;
+				if( kickHoldTime >= 0.3f )
 				{
-					wantsToKick = true;
-					kickTimer = 0.1f;
+					kickHoldTime = -1.f;
+					if( !dismountRequest )
+					{
+						thePlayer.SetPhotoModeHorseKick( false );
+						wantsToKick = true;
+						kickTimer = 0.1f;
+					}
 				}
 			}
+		}
+		else
+		{
+			kickHoldTime = 0.f;
+		}
+		// Free camera look (Ctrl, with mouse steering): the game's "camera auto-centre" would turn the camera
+		// back behind the horse whenever the mouse is still, so it is held off while Ctrl is held.
+		if( !AhcOption( 'ahc_DisableMouseSteering' ) && AhcOption( 'ahc_FreeCameraLook' ) && theInput.LastUsedPCInput()
+			&& theInput.GetActionValue( 'WalkToggle' ) > 0.f )
+		{
+			thePlayer.SetAutoCameraCenter( false );
+			freeLookActive = true;
+		}
+		else if( freeLookActive )
+		{
+			thePlayer.SetAutoCameraCenter( theGame.GetInGameConfigWrapper().GetVarValue( 'Gameplay', 'AutoCameraCenter' ) );
+			freeLookActive = false;
 		}
 		// modAlternateHorseControls END
 		if(kickTimer >= 0.f) kickTimer -= dt;
@@ -783,7 +803,7 @@ state Exploration in W3HorseComponent
 		var dir, rot : float;
 		var inputMagnitude : float;
 		var predInfo : SPredictionInfo;
-		var braking, accelerating : bool; // modAlternateHorseControls
+		var braking, accelerating, mouseSteering : bool; // modAlternateHorseControls
 		var prevDir	: float;
 		var steeringCorrection : bool;
 		var stickInput : bool;
@@ -800,14 +820,17 @@ state Exploration in W3HorseComponent
 		}
 
 		// modAlternateHorseControls START
-		if( fb >= ACCELERATE_THRESHOLD )
+		if( fb >= ACCELERATE_THRESHOLD && AhcOption( 'ahc_ForwardActsAsSprint' ) )
 		{
 			accelerating = true;
-			if ( theGame.GetEngineTimeAsSeconds() > accelerateTimestamp + 0.45 )
+			if ( theGame.GetEngineTimeAsSeconds() > accelerateTimestamp + 0.3 )
 			{
 				if ( theGame.GetEngineTimeAsSeconds() - accelerateTimestamp < 0.8 && currSpeed != CANTER_SPEED )
 				{
-					destSpeed = GALLOP_SPEED;
+					if ( triedDoubleTap && AhcOption( 'ahc_DoubleTapHoldSprintToCanter' ) )
+						CanterPressed();
+					else if( AhcOption( 'ahc_HoldSprintToGallop' ) )
+						destSpeed = GALLOP_SPEED;
 				}
 				else if ( false )
 				{
@@ -845,6 +868,19 @@ state Exploration in W3HorseComponent
 				if( !isReversing && ( currSpeed > WALK_SPEED || destSpeed == MIN_SPEED )) PlayVoicesetSlowerHorse(); // modAlternateHorseControls
 				brakeTimestamp = theGame.GetEngineTimeAsSeconds();
 			}
+		}
+		// Mouse steering, with "Disable Mouse Horse Steering" off, on mouse and keyboard, while moving: the horse
+		// keeps going with no key held, so the camera steers it as if W were held. A/D keep vanilla's
+		// camera-relative meaning; S only brakes, above, and never means "towards the camera". Holding the
+		// walk-toggle key (Ctrl), which the horse no longer uses, is free camera look when that option is on.
+		mouseSteering = !AhcOption( 'ahc_DisableMouseSteering' ) && theInput.LastUsedPCInput() && currSpeed > MIN_SPEED
+			&& !( AhcOption( 'ahc_FreeCameraLook' ) && theInput.GetActionValue( 'WalkToggle' ) > 0.f );
+		if( mouseSteering )
+		{
+			if( fb < 0.f )
+				fb = 0.f;
+			if( !lr && !fb )
+				fb = 1.f;
 		}
 		// modAlternateHorseControls END
 		if( lr || fb )
@@ -893,7 +929,7 @@ state Exploration in W3HorseComponent
 		{
 			inputMagnitude = VecLength2D( inputVec );
 	
-			if( steeringCorrection || true ) // modAlternateHorseControls
+			if( steeringCorrection || !mouseSteering ) // modAlternateHorseControls
 			{
 				
 			}
@@ -917,7 +953,11 @@ state Exploration in W3HorseComponent
 				dir = 0.f;
 			
 			// modAlternateHorseControls START
-			if ( lr || fb )
+			if( mouseSteering )
+			{
+				dir = AngleNormalize180( dir ) / 180.f;
+			}
+			else if ( lr || fb )
 			{
 				if( fb > ( BRAKE_THRESHOLD * 3 ) )
 				{
@@ -1307,7 +1347,7 @@ state Exploration in W3HorseComponent
 			{
 				if( theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "false" )
 					dirModifier = 1.5;
-				followRoad = true;
+				followRoad = AhcOption( 'ahc_RoadFollowingWalkTrot' );
 				maxAngleForAdjustingDir = 90.0;
 			}
 			else
@@ -1360,7 +1400,7 @@ state Exploration in W3HorseComponent
 		}
 		else
 		{
-			if( currSpeed > SLOW_SPEED ) // modAlternateHorseControls
+			if( currSpeed > TROT_SPEED || ( currSpeed > SLOW_SPEED && AhcOption( 'ahc_RoadFollowingWalkTrot' ) ) ) // modAlternateHorseControls
 			{
 				isFollowingRoad = true; 
 			}
@@ -3076,6 +3116,8 @@ state Exploration in W3HorseComponent
 	// modAlternateHorseControls START
 	event OnForwardPress( action : SInputAction )
 	{
+		if( !AhcOption( 'ahc_ForwardActsAsSprint' ) )
+			return false;
 		if( IsPressed( action ) )
 		{
 			LogChannel( 'modAlternateHorseControls', "OnForwardPress: Pressed" );
@@ -3164,7 +3206,7 @@ state Exploration in W3HorseComponent
 				else
 				{
 					LogChannel( 'modAlternateHorseControls', "OnSpeedHold: GO" );
-					if ( !triedDoubleTap )
+					if ( !( triedDoubleTap && AhcOption( 'ahc_DoubleTapHoldSprintToCanter' ) ) && AhcOption( 'ahc_HoldSprintToGallop' ) )
 					{
 						LogChannel( 'modAlternateHorseControls', "OnSpeedHold: SINGLE tap" );
 						// modAlternateHorseControls END
@@ -3173,7 +3215,7 @@ state Exploration in W3HorseComponent
 				SpursKick();
 						// modAlternateHorseControls START
 					}
-					else
+					else if ( triedDoubleTap && AhcOption( 'ahc_DoubleTapHoldSprintToCanter' ) )
 					{
 						LogChannel( 'modAlternateHorseControls', "OnSpeedHold: DOUBLE tap" );
 						CanterPressed();

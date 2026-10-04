@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<UserConfig>
+	<Group id="modAlternateHorseControls" displayName="Mods.ahc_mod_name">
+		<PresetsArray>
+			<Preset id="0" displayName="ahc_preset_mod_defaults">
+				<Entry varId="ahc_InitVersion" value="1"/>
+				<Entry varId="ahc_ForwardActsAsSprint" value="true"/>
+				<Entry varId="ahc_HoldSprintToGallop" value="true"/>
+				<Entry varId="ahc_DoubleTapHoldSprintToCanter" value="true"/>
+				<Entry varId="ahc_DisableMouseSteering" value="true"/>
+				<Entry varId="ahc_RoadFollowingWalkTrot" value="true"/>
+				<Entry varId="ahc_FreeCameraLook" value="true"/>
+			</Preset>
+		</PresetsArray>
+		<VisibleVars>
+			<Var id="ahc_ForwardActsAsSprint" displayName="ahc_ForwardActsAsSprint" displayType="TOGGLE" />
+			<Var id="ahc_HoldSprintToGallop" displayName="ahc_HoldSprintToGallop" displayType="TOGGLE" />
+			<Var id="ahc_DoubleTapHoldSprintToCanter" displayName="ahc_DoubleTapHoldSprintToCanter" displayType="TOGGLE" />
+			<Var id="ahc_DisableMouseSteering" displayName="ahc_DisableMouseSteering" displayType="TOGGLE" />
+			<Var id="ahc_RoadFollowingWalkTrot" displayName="ahc_RoadFollowingWalkTrot" displayType="TOGGLE" />
+			<Var id="ahc_FreeCameraLook" displayName="ahc_FreeCameraLook" displayType="TOGGLE" />
+			<Var id="ahc_InitVersion" displayName="ahc_InitVersion" displayType="SLIDER;0;100;100" visibilityCondition="hideAlways" />
+		</VisibleVars>
+	</Group>
+</UserConfig>
