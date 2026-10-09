@@ -21,20 +21,31 @@ function AhcOption( varId : name ) : bool
 	wrappedMethod();
 }
 
+// Each version of the defaults is written once: 1 - the six options of 5.0.1; 2 - horse whistling (5.0.2); 3 - road
+// following, now toggled while riding (AhcRoadFollowing.ws): the option on, the toggle off - its walk-and-trot option
+// is gone (5.1.0). A player coming from an earlier version keeps his choices and gets each new default.
 function AhcSetDefaults()
 {
 	var config : CInGameConfigWrapper;
+	var initVersion : int;
 
 	config = theGame.GetInGameConfigWrapper();
-	if( StringToInt( config.GetVarValue( 'modAlternateHorseControls', 'ahc_InitVersion' ) ) >= 1 )
+	initVersion = StringToInt( config.GetVarValue( 'modAlternateHorseControls', 'ahc_InitVersion' ) );
+	if( initVersion >= 3 )
 		return;
 
-	config.SetVarValue( 'modAlternateHorseControls', 'ahc_ForwardActsAsSprint', "true" );
-	config.SetVarValue( 'modAlternateHorseControls', 'ahc_HoldSprintToGallop', "true" );
-	config.SetVarValue( 'modAlternateHorseControls', 'ahc_DoubleTapHoldSprintToCanter', "true" );
-	config.SetVarValue( 'modAlternateHorseControls', 'ahc_DisableMouseSteering', "true" );
-	config.SetVarValue( 'modAlternateHorseControls', 'ahc_RoadFollowingWalkTrot', "true" );
-	config.SetVarValue( 'modAlternateHorseControls', 'ahc_FreeCameraLook', "true" );
-	config.SetVarValue( 'modAlternateHorseControls', 'ahc_InitVersion', "1" );
+	if( initVersion < 1 )
+	{
+		config.SetVarValue( 'modAlternateHorseControls', 'ahc_ForwardActsAsSprint', "true" );
+		config.SetVarValue( 'modAlternateHorseControls', 'ahc_HoldSprintToGallop', "true" );
+		config.SetVarValue( 'modAlternateHorseControls', 'ahc_DoubleTapHoldSprintToCanter', "true" );
+		config.SetVarValue( 'modAlternateHorseControls', 'ahc_DisableMouseSteering', "true" );
+		config.SetVarValue( 'modAlternateHorseControls', 'ahc_FreeCameraLook', "true" );
+	}
+	if( initVersion < 2 )
+		config.SetVarValue( 'modAlternateHorseControls', 'ahc_WhistleFollow', "true" );
+	config.SetVarValue( 'modAlternateHorseControls', 'ahc_RoadFollowingToggle', "true" );
+	config.SetVarValue( 'modAlternateHorseControls', 'ahc_RoadFollowing', "false" );
+	config.SetVarValue( 'modAlternateHorseControls', 'ahc_InitVersion', "3" );
 	theGame.SaveUserSettings();
 }

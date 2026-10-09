@@ -900,6 +900,19 @@ state Exploration in W3HorseComponent
 			inputVecInWS = inputVec;
 		}
 		
+		// modAlternateHorseControls START
+		// The road-following toggle (AhcRoadFollowing.ws): a single press acts once its double-press window has passed;
+		// switched off, the horse leaves a road she is following at once (a custom spot stays vanilla's, as it marks
+		// canter and gallop as following without a road).
+		AhcRoadTogglePoll();
+		if( isFollowingRoad && !AhcRoadFollowing() && !parent.IsInCustomSpot() )
+		{
+			isFollowingRoad = false;
+			mac = ((CActor)parent.GetEntity()).GetMovingAgentComponent();
+			mac.ResetRoadFollowing();
+		}
+		// modAlternateHorseControls END
+
 		if( ShouldApplyCorrection( lr, fb ) )
 		{
 			steeringCorrection = ApplyCorrection( inputVecInWS, dir, lr, fb );
@@ -1347,7 +1360,7 @@ state Exploration in W3HorseComponent
 			{
 				if( theGame.GetInGameConfigWrapper().GetVarValue('NewHorseControls', 'UseNewControls') == "false" )
 					dirModifier = 1.5;
-				followRoad = AhcOption( 'ahc_RoadFollowingWalkTrot' );
+				followRoad = true;
 				maxAngleForAdjustingDir = 90.0;
 			}
 			else
@@ -1371,6 +1384,11 @@ state Exploration in W3HorseComponent
 		{
 			followRoad = false;
 		}
+
+		// modAlternateHorseControls START
+		if( !AhcRoadFollowing() )
+			followRoad = false;
+		// modAlternateHorseControls END
 
 		if( followRoad && !thePlayer.GetIsHorseRacing() && roadFollowBlock == 0.0 )
 		{
@@ -1400,7 +1418,7 @@ state Exploration in W3HorseComponent
 		}
 		else
 		{
-			if( currSpeed > TROT_SPEED || ( currSpeed > SLOW_SPEED && AhcOption( 'ahc_RoadFollowingWalkTrot' ) ) ) // modAlternateHorseControls
+			if( currSpeed > TROT_SPEED || ( currSpeed > SLOW_SPEED && AhcRoadFollowing() ) ) // modAlternateHorseControls
 			{
 				isFollowingRoad = true; 
 			}

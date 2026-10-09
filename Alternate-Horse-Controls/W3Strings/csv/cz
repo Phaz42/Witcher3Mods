@@ -6,10 +6,11 @@
 2118192003||preset_Mods_ahc_mod_name|<font color="#ffa445">Alternate Horse Controls</font>
 2118192004||preset_value_ahc_preset_mod_defaults|<font color="#ffa445">Load Defaults</font>
 ;
-2118192010||option_ahc_ForwardActsAsSprint|Forward acts as Sprint button
-2118192011||option_ahc_HoldSprintToGallop|Hold Sprint (shortly) to Gallop
-2118192012||option_ahc_DoubleTapHoldSprintToCanter|Double Tap and Hold Sprint (shortly) to Canter
+2118192010||option_ahc_ForwardActsAsSprint|Forward acts as <font color="#ffa445">[Sprint]</font> button (Shift / A)
+2118192011||option_ahc_HoldSprintToGallop|Briefly Hold <font color="#ffa445">[Sprint]</font> button to Gallop (Shift / A)
+2118192012||option_ahc_DoubleTapHoldSprintToCanter|Double Tap and Briefly Hold <font color="#ffa445">[Sprint]</font> button to Canter (Shift / A)
 2118192013||option_ahc_DisableMouseSteering|Disable Mouse Horse Steering
-2118192014||option_ahc_RoadFollowingWalkTrot|Road Following also at Walk and Trot speed
-2118192015||option_ahc_FreeCameraLook|Hold Control for Free Camera Look (while Mouse Steering)
+2118192018||option_ahc_RoadFollowingToggle|Toggle Road Following with <font color="#ffa445">[Track Quest]</font> button (V / R3)
+2118192015||option_ahc_FreeCameraLook|Hold <font color="#ffa445">[Walk]</font> button for Free Camera Look while Mouse Steering (Ctrl)
+2118192017||option_ahc_WhistleFollow|<font color="#ffa445">[Call Horse]</font> (whistle) button toggles following until mounted
 2118192016||option_ahc_InitVersion|Init Version (Do not change!)
