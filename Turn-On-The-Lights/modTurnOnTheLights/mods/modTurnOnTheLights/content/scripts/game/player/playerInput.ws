@@ -2502,7 +2502,7 @@ class CPlayerInput
 	
 	event OnCbtCiriDodge( action : SInputAction )
 	{
-		if ( theInput.LastUsedGamepad() && IsPressed( action ) )
+		if ( thePlayer.isHoldDodgeToSprintEnabled && theInput.LastUsedGamepad() && IsPressed( action ) )
 		{
 			if ( thePlayer.GetIsSprintToggled() )	
 				thePlayer.SetSprintToggle( false );
@@ -2514,27 +2514,38 @@ class CPlayerInput
 		{
 			if ( theInput.LastUsedGamepad() )
 			{
-				if ( !(!thePlayer.IsInsideInteraction() && IsReleased(action)) )
+				if ( thePlayer.isHoldDodgeToSprintEnabled )
+				{
+					if ( !(!thePlayer.IsInsideInteraction() && IsReleased(action)) )
+					{
+						return false;
+					}
+
+					if ( IsReleased( action ) )
+					{
+						thePlayer.RemoveTimer( 'HoldDodgeToSprintTimer' );
+
+						if ( thePlayer.GetIsSprintToggled() )
+						{
+							thePlayer.SetSprintToggle( false );
+							dodgePressedTime = -1.f;
+							return false;
+						}
+						else if ( dodgePressedTime + 0.2f < theGame.GetEngineTimeAsSeconds() )
+						{
+							dodgePressedTime = -1.f;
+							return false;
+						}
+					}
+				}
+				else if ( IsReleased( action ) )
 				{
 					return false;
 				}
-
-				if ( IsReleased( action ) )
-				{
-					thePlayer.RemoveTimer( 'HoldDodgeToSprintTimer' );
-
-					if ( thePlayer.GetIsSprintToggled() )
-					{
-						thePlayer.SetSprintToggle( false );
-						dodgePressedTime = -1.f;
-						return false;
-					}
-					else if ( dodgePressedTime + 0.2f < theGame.GetEngineTimeAsSeconds() )
-					{
-						dodgePressedTime = -1.f;
-						return false;
-					}
-				}
+			}
+			else if ( IsReleased( action ) )
+			{
+				return false;
 			}
 
 			if ( thePlayer.IsInCombatAction() && thePlayer.GetCombatAction() == EBAT_Ciri_SpecialAttack && thePlayer.GetBehaviorVariable( 'isCompletingSpecialAttack' ) <= 0 )
@@ -2571,7 +2582,7 @@ class CPlayerInput
 	
 	event OnCbtCiriDash( action : SInputAction )
 	{
-		if ( theInput.LastUsedGamepad() && IsPressed( action ) )
+		if ( thePlayer.isHoldDodgeToSprintEnabled && theInput.LastUsedGamepad() && IsPressed( action ) )
 		{
 			
 			if ( thePlayer.GetIsSprintToggled() )	
@@ -2584,27 +2595,38 @@ class CPlayerInput
 		{
 			if ( theInput.LastUsedGamepad() )
 			{
-				if ( !( !thePlayer.IsInsideInteraction() && IsReleased(action)) )
+				if ( thePlayer.isHoldDodgeToSprintEnabled )
+				{
+					if ( !( !thePlayer.IsInsideInteraction() && IsReleased(action)) )
+					{
+						return false;
+					}
+
+					if ( IsReleased( action ) )
+					{
+						thePlayer.RemoveTimer( 'HoldRollToSprintTimer' );
+
+						if ( thePlayer.GetIsSprintToggled() )
+						{
+							thePlayer.SetSprintToggle( false );
+							rollPressedTime = -1.f;
+							return false;
+						}
+						else if ( rollPressedTime + 0.2f < theGame.GetEngineTimeAsSeconds() )
+						{
+							rollPressedTime = -1.f;
+							return false;
+						}
+					}
+				}
+				else if ( IsReleased( action ) )
 				{
 					return false;
 				}
-
-				if ( IsReleased( action ) )
-				{
-					thePlayer.RemoveTimer( 'HoldRollToSprintTimer' );
-
-					if ( thePlayer.GetIsSprintToggled() )
-					{
-						thePlayer.SetSprintToggle( false );
-						rollPressedTime = -1.f;
-						return false;
-					}
-					else if ( rollPressedTime + 0.2f < theGame.GetEngineTimeAsSeconds() )
-					{
-						rollPressedTime = -1.f;
-						return false;
-					}
-				}
+			}
+			else if ( IsReleased( action ) )
+			{
+				return false;
 			}
 			
 			if ( thePlayer.IsInCombatAction() && thePlayer.GetCombatAction() == EBAT_Ciri_SpecialAttack && thePlayer.GetBehaviorVariable( 'isCompletingSpecialAttack' ) <= 0 )
@@ -2671,20 +2693,29 @@ class CPlayerInput
 				else
 				
 				{
-					if ( thePlayer.GetIsSprintToggled() )	
-						thePlayer.SetSprintToggle( false );
 
-					thePlayer.AddTimer( 'HoldDodgeToSprintTimer', 0.2f, true );
-					dodgePressedTime = theGame.GetEngineTimeAsSeconds();
+
+					if ( !thePlayer.isHoldDodgeToSprintEnabled )
+					{
+
+						thePlayer.EvadePressed( EBAT_Dodge );
+					}
+					else
+					{
+						if ( thePlayer.GetIsSprintToggled() )	
+							thePlayer.SetSprintToggle( false );
+
+						thePlayer.AddTimer( 'HoldDodgeToSprintTimer', 0.2f, true );
+						dodgePressedTime = theGame.GetEngineTimeAsSeconds();
+					}
 				}
 			}
-			else if ( IsReleased( action ) )
+			else if ( IsReleased( action ) && thePlayer.isHoldDodgeToSprintEnabled )
 			{
 				thePlayer.RemoveTimer( 'HoldDodgeToSprintTimer' );
 
 				if ( thePlayer.GetIsSprintToggled() )
 					thePlayer.SetSprintToggle( false );
-					
 				else if ( dodgePressedTime + 0.2f >= theGame.GetEngineTimeAsSeconds() )
 				{
 					thePlayer.EvadePressed( EBAT_Dodge );
@@ -2725,20 +2756,27 @@ class CPlayerInput
 				
 				else
 				{
-					if ( thePlayer.GetIsSprintToggled() )	
-						thePlayer.SetSprintToggle( false );
+					if ( !thePlayer.isHoldDodgeToSprintEnabled )
+					{
 
-					thePlayer.AddTimer( 'HoldRollToSprintTimer', 0.2f, true );
-					rollPressedTime = theGame.GetEngineTimeAsSeconds();
+						thePlayer.EvadePressed( EBAT_Roll );
+					}
+					else
+					{
+						if ( thePlayer.GetIsSprintToggled() )	
+							thePlayer.SetSprintToggle( false );
+
+						thePlayer.AddTimer( 'HoldRollToSprintTimer', 0.2f, true );
+						rollPressedTime = theGame.GetEngineTimeAsSeconds();
+					}
 				}
 			}
-			else if ( IsReleased( action ) )
+			else if ( IsReleased( action ) && thePlayer.isHoldDodgeToSprintEnabled )
 			{
 				thePlayer.RemoveTimer( 'HoldRollToSprintTimer' );
 
 				if ( thePlayer.GetIsSprintToggled() )
 					thePlayer.SetSprintToggle( false );
-					
 				else if ( rollPressedTime + 0.2f >= theGame.GetEngineTimeAsSeconds() )
 				{
 					thePlayer.EvadePressed( EBAT_Roll );
