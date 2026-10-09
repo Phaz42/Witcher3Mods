@@ -730,7 +730,7 @@ statemachine abstract import class CR4Player extends CPlayer
 			GetWitcherPlayer().UnequipItemFromSlot(EES_Quickslot2,true);
 		}
 		
-		shouldAutoApplyOils = theGame.GetInGameConfigWrapper().GetVarValue('Gameplay', 'AutoApplyBladeOils' ) == "true";
+		shouldAutoApplyOils = theGame.GetInGameConfigWrapper().GetVarValue('Accessibility', 'AutoApplyBladeOils' ) == "true";
 
 		lastUsedSign = ST_None;
 
@@ -5742,6 +5742,10 @@ statemachine abstract import class CR4Player extends CPlayer
 				return false;
 			}
 			if( IsInAir() )
+			{
+				return false;
+			}
+			if( IsGuarded() )
 			{
 				return false;
 			}
@@ -16445,6 +16449,12 @@ statemachine abstract import class CR4Player extends CPlayer
 	public function SetMovementTargetingKeyboard( en : bool )
 	{
 		isMovementTargetingKeyboardEnabled = en;
+	}
+
+	public var isHoldDodgeToSprintEnabled : bool;
+	public function SetHoldDodgeToSprint( en : bool )
+	{
+		isHoldDodgeToSprintEnabled = en;
 	}
 
 	public var isModernTargetLockEnabled : bool;
