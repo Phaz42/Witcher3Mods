@@ -730,7 +730,7 @@ statemachine abstract import class CR4Player extends CPlayer
 			GetWitcherPlayer().UnequipItemFromSlot(EES_Quickslot2,true);
 		}
 		
-		shouldAutoApplyOils = theGame.GetInGameConfigWrapper().GetVarValue('Gameplay', 'AutoApplyBladeOils' ) == "true";
+		shouldAutoApplyOils = theGame.GetInGameConfigWrapper().GetVarValue('Accessibility', 'AutoApplyBladeOils' ) == "true";
 
 		lastUsedSign = ST_None;
 
@@ -5712,6 +5712,10 @@ statemachine abstract import class CR4Player extends CPlayer
 				return false;
 			}
 			if( IsInAir() )
+			{
+				return false;
+			}
+			if( IsGuarded() )
 			{
 				return false;
 			}
@@ -14123,6 +14127,7 @@ statemachine abstract import class CR4Player extends CPlayer
 				break;
 			case PATR_CallHorse:
 				theGame.OnSpawnPlayerHorse();
+				BtStartTorchRestore(); // modBetterTorchesNextGen
 				break;
 			default:
 				if ( currentlyUsedItemL )
@@ -14139,6 +14144,38 @@ statemachine abstract import class CR4Player extends CPlayer
 		currentlyEquipedItemL = GetInvalidUniqueId();
 	}
 	
+	// modBetterTorchesNextGen START
+	// The torch back in hand after a whistle: vanilla puts it away to whistle and leaves it there. Item use is blocked
+	// while the whistle plays - measured lifting between 2.07 and 2.33 s - and a refused take is silent, so the torch is
+	// tried every tenth of a second from 2.0 to 2.5 s after the whistle, until it is back. Not if Geralt has meanwhile
+	// mounted, boarded, gone swimming or taken something else. The action to restore is set as the use key sets it,
+	// which also clears the whistle's own (PATR_CallHorse), left set by vanilla.
+	private var btTorchRestoreStart : float;
+
+	function BtStartTorchRestore()
+	{
+		btTorchRestoreStart = theGame.GetEngineTimeAsSeconds();
+		AddTimer( 'BtRestoreTorchTimer', 0.1, true );
+	}
+
+	timer function BtRestoreTorchTimer( dt : float, id : int )
+	{
+		var waited : float;
+
+		waited = theGame.GetEngineTimeAsSeconds() - btTorchRestoreStart;
+		if( IsUsingVehicle() || IsSwimming() || IsHoldingItemInLHand() || waited > 2.5 )
+		{
+			RemoveTimer( 'BtRestoreTorchTimer' );
+			return;
+		}
+		if( waited < 2.0 || isUsableItemBlocked || !IsActionAllowed( EIAB_UsableItem ) )
+			return;
+		SetPlayerActionToRestore( PATR_Default );
+		if( OnUseSelectedItem() )
+			RemoveTimer( 'BtRestoreTorchTimer' );
+	}
+	// modBetterTorchesNextGen END
+
 	function GetUsableItemLtransitionAllowed () : bool
 	{
 		return isUsableItemLtransitionAllowed;
@@ -16415,6 +16452,12 @@ statemachine abstract import class CR4Player extends CPlayer
 	public function SetMovementTargetingKeyboard( en : bool )
 	{
 		isMovementTargetingKeyboardEnabled = en;
+	}
+
+	public var isHoldDodgeToSprintEnabled : bool;
+	public function SetHoldDodgeToSprint( en : bool )
+	{
+		isHoldDodgeToSprintEnabled = en;
 	}
 
 	public var isModernTargetLockEnabled : bool;
