@@ -24,11 +24,11 @@ class TurnOnTheLights
 
     public function Init()
     {
-        var tempRange : int;
-
         Log( "Init Start" );
         configWrapper = theGame.GetInGameConfigWrapper();
         LogConfig();
+        // 5.1.1: any option still blank gets its default first, by the function the options menu calls too
+        TotlSetDefaults();
 
         // Mode
         if ( configWrapper.GetVarValue( 'modTurnOnTheLights', 'mode') == "0" )
@@ -41,7 +41,6 @@ class TurnOnTheLights
             Log( "Init: mode: auto" );
             manualMode = false;
             thePlayer.AddTimer('TurnOnTheLightsAutoTimer', 0.1 );
-            configWrapper.SetVarValue( 'modTurnOnTheLights', 'mode', 1 );
         }
 
         // Automatic Mode Target
@@ -54,23 +53,11 @@ class TurnOnTheLights
         {
             Log( "Init: automodetarget: true" );
             autoModeTarget = true;
-            configWrapper.SetVarValue( 'modTurnOnTheLights', 'automodetarget', true );
         }
 
         // Range
-        tempRange = -1;
-        tempRange = StringToInt(configWrapper.GetVarValue( 'modTurnOnTheLights', 'range'));
-        if ( tempRange >= 10 && tempRange <= 50 )
-        {
-            Log( "Init: range: defined" );
-            maxRange = tempRange;
-        }
-        else
-        {
-            Log( "Init: range: undefined" );
-            maxRange = 20;
-            configWrapper.SetVarValue( 'modTurnOnTheLights', 'range', 20 );
-        }
+        maxRange = StringToInt(configWrapper.GetVarValue( 'modTurnOnTheLights', 'range'));
+        Log( "Init: range: " + maxRange );
 
         // Hide Interactions
         if ( configWrapper.GetVarValue( 'modTurnOnTheLights', 'hideinteractions' ) == "false" )
@@ -82,7 +69,6 @@ class TurnOnTheLights
         {
             Log( "Init: hideinteractions: true" );
             hideInteractions = true;
-            configWrapper.SetVarValue( 'modTurnOnTheLights', 'hideinteractions', true );
         }
 
         // Action Button
@@ -95,7 +81,6 @@ class TurnOnTheLights
         {
             Log( "Init: useactionbutton: true" );
             useActionButton = true;
-            configWrapper.SetVarValue( 'modTurnOnTheLights', 'useactionbutton', true );
         }
 
         // Disable Auto Mode during day
@@ -108,10 +93,8 @@ class TurnOnTheLights
         {
             Log( "Init: disableautomodeindaytime: false" );
             disableAutoModeInDaytime = false;
-            configWrapper.SetVarValue( 'modTurnOnTheLights', 'disableautomodeindaytime', false );
         }
 
-        theGame.SaveUserSettings();
         LogConfig();
         Log( "Init End" );
     }
@@ -128,9 +111,9 @@ class TurnOnTheLights
         Log( "LogConfig: GetVarValue(mode): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'mode') );
         Log( "LogConfig: GetVarValue(automodetarget): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'automodetarget') );
         Log( "LogConfig: GetVarValue(range): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'range') );
-        Log( "LogConfig: GetVarValue(automodetarget): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'hideinteractions') );
-        Log( "LogConfig: GetVarValue(automodetarget): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'useactionbutton') );
-        Log( "LogConfig: GetVarValue(automodetarget): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'disableautomodeindaytime') );
+        Log( "LogConfig: GetVarValue(hideinteractions): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'hideinteractions') );
+        Log( "LogConfig: GetVarValue(useactionbutton): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'useactionbutton') );
+        Log( "LogConfig: GetVarValue(disableautomodeindaytime): " + configWrapper.GetVarValue( 'modTurnOnTheLights', 'disableautomodeindaytime') );
     }
     
     public function GetEntities() : array<CGameplayEntity>
@@ -140,9 +123,7 @@ class TurnOnTheLights
 		
 		maxResults 	= 10000;
 
-		Log( "GetEntities: maxRange: " + maxRange );
         FindGameplayEntitiesInRange( entities, thePlayer, (float)maxRange, maxResults );
-        Log( "GetEntities: found " + IntToString(entities.Size()) + " entities" );
 
 		return entities;
 	}
@@ -206,8 +187,6 @@ class TurnOnTheLights
 		var i: int;
 		var gameLightComp	: CGameplayLightComponent;
 
-		Log( "LightsSwitch: " + switchOn );
-		
 		for ( i = 0; i < entities.Size(); i += 1 )
 		{
 			gameLightComp = GetGameLightComps( entities[i] );
@@ -223,39 +202,30 @@ class TurnOnTheLights
         var currentHour : int;
         var currentWeather : name;
 
-        Log( "IsAutoModeAllowed" );
-		
         // Check Interior
         if ( thePlayer.IsInInterior() )
         {
-            Log( "return true, we're inside" );
             return true;
         }
 
         // Check Weather
         currentWeather = GetWeatherConditionName();
-        Log( "currentWeather: " + NameToString( currentWeather ) );
         if ( currentWeather == 'WT_Heavy_Clouds_Dark' || currentWeather == 'WT_Rain_Storm')
         {
-            Log( "return true, it's bad weather" );
             return true;
         }
 
         currentHour = GameTimeHours(theGame.GetGameTime());
-        Log( "currentHour: " + currentHour );
         if ( disableAutoModeInDaytime && currentHour >= 7 && currentHour <= 16 )
         {
-            Log( "return false, its daytime" );
             return false;
         }
 
-        Log( "return true" );
         return true;
     }
 
 	public function AutoTimer()
 	{       
-        Log( 'TurnOnTheLightsAutoTimer' );
 		if (IsAutoModeAllowed())
         {
             LightsSwitch( GetEntities(), autoModeTarget );
@@ -470,5 +440,183 @@ state Active in ToggleLights
             thePlayer.OnUseSelectedItem( );
             restoreItemLAtEnd = false;
         }
+    }
+}
+
+// 5.1.1: the default of every option still blank, written so that the options menu shows the defaults
+// before any save is loaded; called when the options menu opens, and by every Init
+function TotlSetDefaults()
+{
+    var config : CInGameConfigWrapper;
+    var range : int;
+    var changed : bool;
+
+    config = theGame.GetInGameConfigWrapper();
+    if ( config.GetVarValue( 'modTurnOnTheLights', 'mode' ) != "0" && config.GetVarValue( 'modTurnOnTheLights', 'mode' ) != "1" )
+    {
+        config.SetVarValue( 'modTurnOnTheLights', 'mode', 1 );
+        changed = true;
+    }
+    range = StringToInt( config.GetVarValue( 'modTurnOnTheLights', 'range' ) );
+    if ( range < 10 || range > 50 )
+    {
+        config.SetVarValue( 'modTurnOnTheLights', 'range', 20 );
+        changed = true;
+    }
+    if ( TotlIsBlank( config.GetVarValue( 'modTurnOnTheLights', 'automodetarget' ) ) )
+    {
+        config.SetVarValue( 'modTurnOnTheLights', 'automodetarget', true );
+        changed = true;
+    }
+    if ( TotlIsBlank( config.GetVarValue( 'modTurnOnTheLights', 'hideinteractions' ) ) )
+    {
+        config.SetVarValue( 'modTurnOnTheLights', 'hideinteractions', true );
+        changed = true;
+    }
+    if ( TotlIsBlank( config.GetVarValue( 'modTurnOnTheLights', 'useactionbutton' ) ) )
+    {
+        config.SetVarValue( 'modTurnOnTheLights', 'useactionbutton', true );
+        changed = true;
+    }
+    if ( TotlIsBlank( config.GetVarValue( 'modTurnOnTheLights', 'disableautomodeindaytime' ) ) )
+    {
+        config.SetVarValue( 'modTurnOnTheLights', 'disableautomodeindaytime', false );
+        changed = true;
+    }
+    if ( changed )
+    {
+        LogChannel( 'modTurnOnTheLights', "TotlSetDefaults: defaults written" );
+        theGame.SaveUserSettings();
+    }
+}
+
+function TotlIsBlank( value : string ) : bool
+{
+    return value != "true" && value != "false";
+}
+
+@wrapMethod( CR4IngameMenu ) function OnConfigUI()
+{
+    TotlSetDefaults();
+    wrappedMethod();
+}
+
+// 5.1.1: the mod's object, its creation and its three timers on Geralt and on Ciri, as annotations instead of
+// overrides of playerWitcher.ws and ciri.ws, so no merge with other mods' copies of those files is needed;
+// the object is created after the game's own OnSpawned and any other mod's
+
+@addField( W3PlayerWitcher )
+public var turnOnTheLights : TurnOnTheLights;
+
+@wrapMethod( W3PlayerWitcher ) function OnSpawned( spawnData : SEntitySpawnData )
+{
+    wrappedMethod( spawnData );
+    turnOnTheLights = new TurnOnTheLights in this;
+    AddTimer( 'TurnOnTheLightsInitTimer', 3.0 );
+}
+
+@addMethod( W3PlayerWitcher ) timer function TurnOnTheLightsInitTimer( dt : float, id : int )
+{
+    turnOnTheLights.Init();
+}
+
+@addMethod( W3PlayerWitcher ) timer function TurnOnTheLightsAutoTimer( dt : float, id : int )
+{
+    turnOnTheLights.AutoTimer();
+}
+
+@addMethod( W3PlayerWitcher ) timer function TurnOnTheLightsActionTimer( dt : float, id : int )
+{
+    turnOnTheLights.ActionTimer();
+}
+
+@addField( W3ReplacerCiri )
+public var turnOnTheLights : TurnOnTheLights;
+
+@wrapMethod( W3ReplacerCiri ) function OnSpawned( spawnData : SEntitySpawnData )
+{
+    wrappedMethod( spawnData );
+    turnOnTheLights = new TurnOnTheLights in this;
+    AddTimer( 'TurnOnTheLightsInitTimer', 3.0 );
+}
+
+@addMethod( W3ReplacerCiri ) timer function TurnOnTheLightsInitTimer( dt : float, id : int )
+{
+    turnOnTheLights.Init();
+}
+
+@addMethod( W3ReplacerCiri ) timer function TurnOnTheLightsAutoTimer( dt : float, id : int )
+{
+    turnOnTheLights.AutoTimer();
+}
+
+@addMethod( W3ReplacerCiri ) timer function TurnOnTheLightsActionTimer( dt : float, id : int )
+{
+    turnOnTheLights.ActionTimer();
+}
+
+// 5.1.1: the binding, the action button's taps, the settings read again when the menu closes, and the hidden
+// prompts, as annotations instead of overrides of playerInput.ws, commonIngameMenu.ws and interactionsManager.ws,
+// so the mod needs no merge with any other mod
+
+// the TotLToggleLights binding, registered after the game's own listeners
+@wrapMethod( CPlayerInput ) function Initialize( isFromLoad : bool, optional previousInput : CPlayerInput )
+{
+    wrappedMethod( isFromLoad, previousInput );
+    theInput.RegisterListener( this, 'OnTotLToggleLights', 'TotLToggleLights' );
+}
+
+@addMethod( CPlayerInput ) event OnTotLToggleLights( action : SInputAction )
+{
+    LogChannel( 'modTurnOnTheLights', "OnTotLToggleLights" );
+    GetWitcherPlayer().turnOnTheLights.ToggleLights();
+}
+
+// the action button's taps, counted before the game's own handling: the walk/run toggle on the keyboard
+@wrapMethod( CPlayerInput ) function OnCommWalkToggle( action : SInputAction )
+{
+    LogChannel( 'modTurnOnTheLights', "OnCommWalkToggle" );
+    if ( !theInput.LastUsedGamepad() && IsReleased( action ) )
+    {
+        LogChannel( 'modTurnOnTheLights', "OnCommWalkToggle: IsReleased" );
+        ((W3PlayerWitcher)thePlayer).turnOnTheLights.ProcessInput();
+    }
+    return wrappedMethod( action );
+}
+
+// ... and sign casting on a controller, with the game's alternate sign casting
+@wrapMethod( CPlayerInput ) function OnCastSign( action : SInputAction )
+{
+    LogChannel( 'modTurnOnTheLights', "OnCastSign" );
+    if ( altSignCasting && theInput.LastUsedGamepad() && IsReleased( action ) )
+    {
+        LogChannel( 'modTurnOnTheLights', "OnCastSign: IsReleased" );
+        ((W3PlayerWitcher)thePlayer).turnOnTheLights.ProcessInput();
+    }
+    return wrappedMethod( action );
+}
+
+// the settings read again whenever the in-game menu closes
+@wrapMethod( CR4CommonIngameMenu ) function OnClosingMenu()
+{
+    if ( thePlayer.IsCiri() )
+    {
+        ((W3ReplacerCiri)thePlayer).turnOnTheLights.ReInit();
+    }
+    else
+    {
+        GetWitcherPlayer().turnOnTheLights.ReInit();
+    }
+    return wrappedMethod();
+}
+
+// the Ignite and Extinguish prompts hidden, added to the game's blocked actions
+@wrapMethod( CInteractionsManager ) function GetBlockedActions( out blockedActions : array< string > )
+{
+    wrappedMethod( blockedActions );
+    if ( GetWitcherPlayer().turnOnTheLights.hideInteractions )
+    {
+        blockedActions.PushBack( "Ignite" );
+        blockedActions.PushBack( "Extinguish" );
     }
 }
