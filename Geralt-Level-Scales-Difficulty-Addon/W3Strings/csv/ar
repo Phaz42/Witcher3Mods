@@ -1,0 +1,9 @@
+;meta[language=ar]
+; id|key(hex)|key(str)| text
+;
+2118326001||panel_Mods|Mods
+2118326002||panel_gls_mod_name|GLS Difficulty
+2118326004||option_gls_level_penalty|Geralt Level Penalty
+2118326005||option_gls_full_penalty|Keep Penalty against Low-Level Enemies
+2118326006||gls_level_penalty_help|How many levels below the enemies' level Geralt is scaled to when a fight starts: gear, vitality, attack power and sign intensity. At -10 against level 25 enemies, Geralt fights as level 15. Skills, mutations and potions are not affected. Geralt can't be scaled below level 1.
+2118326007||gls_full_penalty_help|Geralt can't be scaled below level 1, so against low-level enemies your penalty can't be applied in full. Turn this on to keep it: the missing levels are applied as damage instead. Geralt's weapons and signs do less damage, and enemies hit harder.

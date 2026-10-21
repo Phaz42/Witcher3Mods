@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-16"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <UserConfig>
-	<Group id="modGLSDifficultyAddon" displayName="Mods.gameplay.gls_mod_name">
+	<Group id="modGLSDifficultyAddon" displayName="Mods.gls_mod_name">
 		<VisibleVars>
-			<Var id="difficulty" displayName="gls_difficulty" displayType="SLIDER;0;15;15" />
+			<Var id="glsLevelPenalty" displayName="gls_level_penalty" displayType="SLIDER;-30;0;15" />
+			<Var id="glsFullPenalty" displayName="gls_full_penalty" displayType="TOGGLE" />
 		</VisibleVars>
 	</Group>
 </UserConfig>
