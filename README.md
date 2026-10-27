@@ -27,6 +27,7 @@ This repository holds source only, no downloads. The mods themselves, with their
 | [Remember to Sheathe](https://www.nexusmods.com/witcher3/mods/8331) | `Remember-To-Sheathe` | Helps forgetful Geralt to remember to sheathe his sword after combat. |
 | [Turn On The Lights](https://www.nexusmods.com/witcher3/mods/7278) | `Turn-On-The-Lights` | Automatically or manually turn lights around Geralt/Ciri ON or OFF. |
 | [Tweaks Light (Lite)](https://www.nexusmods.com/witcher3/mods/8388) | `Tweaks-Light` | Tweak your graphics settings in much more detail! |
+| [Werewolf Regeneration Fix](https://www.nexusmods.com/witcher3/mods/15192) | `Werewolf-Regeneration-Fix` | Fixes a Remaster bug: on the higher difficulties, every werewolf howl adds +60 health regeneration per second, for good. Saves repaired too. |
 
 ## How the files are made
 
