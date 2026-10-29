@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<UserConfig>
+	<Group id="modMinimalistWitcherSenses" displayName="Mods.mws_mod_name">
+		<PresetsArray>
+			<Preset id="0" displayName="mws_preset_vanilla">
+				<Entry varId="mws_InitVersion" value="2"/>
+				<Entry varId="mws_HighlightStyle" value="1"/>
+				<Entry varId="mws_KeepCameraStill" value="false"/>
+				<Entry varId="mws_RemoveSounds" value="false"/>
+				<Entry varId="mws_KeepAmbientSound" value="false"/>
+				<Entry varId="mws_RemoveRemainsHighlight" value="false"/>
+				<Entry varId="mws_RemoveSoundCircles" value="false"/>
+				<Entry varId="mws_AllowJumpSprint" value="false"/>
+				<Entry varId="mws_MarkerSize" value="2"/>
+				<Entry varId="mws_TrailDotSize" value="0"/>
+				<Entry varId="mws_RedContainers" value="0"/>
+				<Entry varId="mws_InstantHighlights" value="false"/>
+				<Entry varId="mws_RemoveEdgeDimming" value="false"/>
+			</Preset>
+			<Preset id="1" displayName="mws_preset_minimalist">
+				<Entry varId="mws_InitVersion" value="2"/>
+				<Entry varId="mws_HighlightStyle" value="0"/>
+				<Entry varId="mws_KeepCameraStill" value="true"/>
+				<Entry varId="mws_RemoveSounds" value="true"/>
+				<Entry varId="mws_KeepAmbientSound" value="true"/>
+				<Entry varId="mws_RemoveRemainsHighlight" value="true"/>
+				<Entry varId="mws_RemoveSoundCircles" value="false"/>
+				<Entry varId="mws_AllowJumpSprint" value="true"/>
+				<Entry varId="mws_MarkerSize" value="2"/>
+				<Entry varId="mws_TrailDotSize" value="0"/>
+				<Entry varId="mws_RedContainers" value="0"/>
+				<Entry varId="mws_InstantHighlights" value="true"/>
+				<Entry varId="mws_RemoveEdgeDimming" value="true"/>
+			</Preset>
+		</PresetsArray>
+		<VisibleVars>
+			<Var id="mws_HighlightStyle" displayName="mws_HighlightStyle" displayType="OPTIONS">
+				<OptionsArray>
+					<Option id="0" displayName="mws_HighlightStyle_0"><Entry varId="mws_HighlightStyle" value="0"/></Option>
+					<Option id="1" displayName="mws_HighlightStyle_1"><Entry varId="mws_HighlightStyle" value="1"/></Option>
+					<Option id="2" displayName="mws_HighlightStyle_2"><Entry varId="mws_HighlightStyle" value="2"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="mws_FocusToggle" displayName="mws_FocusToggle" displayType="TOGGLE" />
+			<Var id="mws_KeepCameraStill" displayName="mws_KeepCameraStill" displayType="TOGGLE" />
+			<Var id="mws_RemoveSounds" displayName="mws_RemoveSounds" displayType="TOGGLE" />
+			<Var id="mws_KeepAmbientSound" displayName="mws_KeepAmbientSound" displayType="TOGGLE" />
+			<Var id="mws_RemoveRemainsHighlight" displayName="mws_RemoveRemainsHighlight" displayType="TOGGLE" />
+			<Var id="mws_RemoveSoundCircles" displayName="mws_RemoveSoundCircles" displayType="TOGGLE" />
+			<Var id="mws_AllowJumpSprint" displayName="mws_AllowJumpSprint" displayType="TOGGLE" />
+			<Var id="mws_SectionMarkers" displayName="mws_SectionMarkers" displayType="SEPARATOR" />
+			<Var id="mws_MarkerSize" displayName="mws_MarkerSize" displayType="OPTIONS" tags="indent">
+				<OptionsArray>
+					<Option id="0" displayName="mws_MarkerSize_0"><Entry varId="mws_MarkerSize" value="0"/></Option>
+					<Option id="1" displayName="mws_MarkerSize_1"><Entry varId="mws_MarkerSize" value="1"/></Option>
+					<Option id="2" displayName="mws_MarkerSize_2"><Entry varId="mws_MarkerSize" value="2"/></Option>
+					<Option id="3" displayName="mws_MarkerSize_3"><Entry varId="mws_MarkerSize" value="3"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="mws_TrailDotSize" displayName="mws_TrailDotSize" displayType="OPTIONS" tags="indent">
+				<OptionsArray>
+					<Option id="0" displayName="mws_TrailDotSize_0"><Entry varId="mws_TrailDotSize" value="0"/></Option>
+					<Option id="1" displayName="mws_TrailDotSize_1"><Entry varId="mws_TrailDotSize" value="1"/></Option>
+					<Option id="2" displayName="mws_TrailDotSize_2"><Entry varId="mws_TrailDotSize" value="2"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="mws_RedContainers" displayName="mws_RedContainers" displayType="OPTIONS" tags="indent">
+				<OptionsArray>
+					<Option id="0" displayName="mws_RedContainers_0"><Entry varId="mws_RedContainers" value="0"/></Option>
+					<Option id="1" displayName="mws_RedContainers_1"><Entry varId="mws_RedContainers" value="1"/></Option>
+				</OptionsArray>
+			</Var>
+			<Var id="mws_SectionGlow" displayName="mws_SectionGlow" displayType="SEPARATOR" />
+			<Var id="mws_InstantHighlights" displayName="mws_InstantHighlights" displayType="TOGGLE" tags="indent" />
+			<Var id="mws_RemoveEdgeDimming" displayName="mws_RemoveEdgeDimming" displayType="TOGGLE" tags="indent" />
+			<Var id="mws_InitVersion" displayName="mws_InitVersion" displayType="SLIDER;0;100;100" visibilityCondition="hideAlways" />
+		</VisibleVars>
+	</Group>
+</UserConfig>

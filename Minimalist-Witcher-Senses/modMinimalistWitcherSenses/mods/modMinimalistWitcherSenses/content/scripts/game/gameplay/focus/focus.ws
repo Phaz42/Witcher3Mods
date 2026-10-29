@@ -163,7 +163,6 @@ import class CFocusModeController extends IGameSystem
 	{
 		lastDarkPlaceCheck = DARK_PLACE_CHECK_INTERVAL;
 	
-		SetFadeParameters( 10.0, 30.0f, 16.0f, 0.5f ); // modMinimalistWitcherSenses
 		if ( !ActivateFastFocus( true ) )
 		{
 			ActivateInternal();
@@ -229,16 +228,16 @@ import class CFocusModeController extends IGameSystem
 		
 		SetActive( true );
 		EnableVisuals( true );
-		//EnableExtendedVisuals( true, effectFadeTime ); // modMinimalistWitcherSenses
+		EnableExtendedVisuals( true, effectFadeTime );
 		
-		//thePlayer.BlockAction( EIAB_Jump, 'focus' ); // modMinimalistWitcherSenses
+		thePlayer.BlockAction( EIAB_Jump, 'focus' );
 		theTelemetry.LogWithName( TE_HERO_FOCUS_ON );
 	
 		
 		if ( theGame.GetEngineTimeAsSeconds() - activationSoundTimer > activationSoundInterval )
 		{
 			activationSoundTimer = theGame.GetEngineTimeAsSeconds();
-			//theSound.SoundEvent( 'expl_focus_start' ); // modMinimalistWitcherSenses
+			if ( !MwsRemoveSounds() ) theSound.SoundEvent( 'expl_focus_start' ); // modMinimalistWitcherSenses
 		}
 		
 		
@@ -275,7 +274,6 @@ import class CFocusModeController extends IGameSystem
 		
 		var minimapModule : CR4HudModuleMinimap2;
 		var objectiveModule : CR4HudModuleQuests;
-		SetFadeParameters( 10.0, 30.0f, 16.0f, 0.5f ); // modMinimalistWitcherSenses
 		
 
 		ActivateFastFocus( false );
@@ -338,13 +336,13 @@ import class CFocusModeController extends IGameSystem
 
 		thePlayer.UnblockAction( EIAB_Jump, 'focus' );
 		theTelemetry.LogWithName( TE_HERO_FOCUS_OFF );
-		//theSound.SoundEvent( 'expl_focus_stop' ); // modMinimalistWitcherSenses
+		if ( !MwsRemoveSounds() ) theSound.SoundEvent( 'expl_focus_stop' ); // modMinimalistWitcherSenses
 		
 		
 		if ( theGame.GetEngineTimeAsSeconds() - activationSoundTimer > activationSoundInterval )
 		{
 			activationSoundTimer = theGame.GetEngineTimeAsSeconds();
-			//theSound.SoundEvent( 'expl_focus_stop_sfx' ); // modMinimalistWitcherSenses
+			if ( !MwsRemoveSounds() ) theSound.SoundEvent( 'expl_focus_stop_sfx' ); // modMinimalistWitcherSenses
 		}		
 		
 		hud = ( CR4ScriptedHud )theGame.GetHud();
@@ -417,7 +415,7 @@ import class CFocusModeController extends IGameSystem
 	event OnGameStarted()
 	{
 		Init();
-		SetFadeParameters( 10.0, 30.0f, 16.0f, 0.5f ); // modMinimalistWitcherSenses
+		SetFadeParameters( 10.0, 30.0f, 16.0f, 40.0f );
 	}
 	
 	event OnGameEnded()
@@ -477,7 +475,7 @@ import class CFocusModeController extends IGameSystem
 					}
 				}
 				
-				if( theSound.GetCurrentGameState() != desiredAudioState && false ) // modMinimalistWitcherSenses
+				if( theSound.GetCurrentGameState() != desiredAudioState && !MwsKeepAmbientSound() ) // modMinimalistWitcherSenses
 				{
 					theSound.EnterGameState( desiredAudioState );
 				}

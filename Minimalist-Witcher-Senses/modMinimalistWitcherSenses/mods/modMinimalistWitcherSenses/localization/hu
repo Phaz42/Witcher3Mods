@@ -1,0 +1,49 @@
+;meta[language=hu]
+; id|key(hex)|key(str)| text
+;
+2118358001||panel_Mods|Mods
+2118358002||panel_mws_mod_name|Minimalist Witcher Senses
+2118358003||preset_Mods_mws_mod_name|Preset:
+2118358004||preset_value_mws_preset_vanilla|Game Default
+2118358005||preset_value_mws_preset_minimalist|Mod Default
+2118358006||option_mws_InitVersion|Init Version (Do not change!)
+2118358007||option_mws_KeepCameraStill|Remove Camera Zoom
+2118358008||option_mws_RemoveEdgeDimming|Remove Screen Edge Dimming
+2118358009||option_mws_RemoveSounds|Remove Start and Stop Sounds
+2118358010||option_mws_KeepAmbientSound|Remove Muffled Sound
+2118358011||option_mws_InstantHighlights|Remove Highlight Delay
+2118358012||option_mws_HighlightStyle|Highlight Style
+2118358013||preset_value_mws_HighlightStyle_0|Markers
+2118358014||preset_value_mws_HighlightStyle_1|Glow
+2118358015||preset_value_mws_HighlightStyle_2|None
+2118358016||option_mws_RemoveRemainsHighlight|Remove Sparkles from Corpses
+2118358017||option_mws_AllowJumpSprint|Allow Jump and Sprint
+2118358018||option_mws_RemoveSoundCircles|Remove Sound Circles
+2118358019||mws_KeepCameraStill_help|Witcher Senses no longer move the camera: no zoom and no shift.
+2118358020||mws_RemoveEdgeDimming_help|No darkened, desaturated edges around the screen while Witcher Senses are on. This only matters with Highlight Style: Glow. With Highlight Style: Markers or None the edges are never dimmed.
+2118358021||mws_RemoveSounds_help|No sound when Witcher Senses start and stop.
+2118358022||mws_KeepAmbientSound_help|The world keeps its normal sound while Witcher Senses are on.
+2118358023||mws_InstantHighlights_help|The game's highlights appear and disappear at once, instead of after a delay.
+2118358024||mws_HighlightStyle_help|Markers: small markers over herbs, containers, doors, clues, trails, corpses and hostile creatures, hidden behind walls and fading with distance.<br>Glow: the game's glowing highlights.<br>None: no highlights at all, which makes clues hard to find.
+2118358025||mws_RemoveRemainsHighlight_help|No sparkle over lootable corpses while Witcher Senses are on.
+2118358026||mws_AllowJumpSprint_help|Jumping and sprinting stay possible while Witcher Senses are on.
+2118358027||mws_RemoveSoundCircles_help|No gray and red circles around the creatures Witcher Senses let you hear.
+2118358028||option_mws_RedContainers|Red Owned Containers
+2118358029||preset_value_mws_RedContainers_0|Only When a Guard Is in Reach
+2118358030||preset_value_mws_RedContainers_1|Always
+2118358031||mws_RedContainers_help|A container that belongs to someone gets a red marker, because taking from it is stealing.<br>Only When a Guard Is in Reach: only while a guard is close enough to notice.<br>Always: every owned container.
+2118358039||option_mws_FocusToggle|Toggle Witcher Senses (Instead of Hold)
+2118358040||mws_FocusToggle_help|Press once to turn Witcher Senses on and again to turn them off. This is the same setting as in the game's Accessibility options.
+2118358041||option_mws_MarkerSize|Marker Size
+2118358042||preset_value_mws_MarkerSize_0|Very Small
+2118358043||preset_value_mws_MarkerSize_1|Small
+2118358044||preset_value_mws_MarkerSize_2|Normal
+2118358045||preset_value_mws_MarkerSize_3|Large
+2118358046||mws_MarkerSize_help|Makes all markers smaller or larger.
+2118358047||option_mws_TrailDotSize|Trail Dot Size
+2118358048||preset_value_mws_TrailDotSize_0|Normal
+2118358049||preset_value_mws_TrailDotSize_1|Large
+2118358050||preset_value_mws_TrailDotSize_2|Very Large
+2118358051||mws_TrailDotSize_help|The size of the red dots along trails, on top of Marker Size. Normal keeps them small, so following a trail takes some looking.
+2118358052||option_mws_SectionMarkers|Only for Highlight Style: Markers   
+2118358053||option_mws_SectionGlow|Only for Highlight Style: Glow   
