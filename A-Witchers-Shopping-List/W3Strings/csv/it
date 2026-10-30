@@ -1,0 +1,7 @@
+;meta[language=it]
+; id|key(hex)|key(str)| text
+;
+2115291001||panel_Mods|Mods
+2115291002||panel_wsl_mod_name|A Witcher's Shopping List
+2115291003||option_wsl_threshold|Show Count When Fewer Than
+2115291004||wsl_threshold_help|At a merchant, every alchemy ingredient and crafting material Geralt has fewer of than this number shows Geralt's own count in red, before the merchant's.<br>When you buy one of them, the amount suggested is just enough to bring Geralt up to this number.

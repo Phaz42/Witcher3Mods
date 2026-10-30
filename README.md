@@ -13,6 +13,7 @@ This repository holds source only, no downloads. The mods themselves, with their
 
 | Mod | Folder | What it does |
 |---|---|---|
+| [A Witcher's Shopping List](https://www.nexusmods.com/witcher3/mods/15291) | `A-Witchers-Shopping-List` | At a merchant, see at a glance which ingredients you're low on: your count, in red, beside the merchant's. Buying suggests just enough to restock. |
 | [Alternate Horse Controls](https://www.nexusmods.com/witcher3/mods/8192) | `Alternate-Horse-Controls` | An alternative, more immersive, way to control your horse, with a full options menu that lets you toggle mod features on/off. |
 | [Better Torches Next-Gen](https://www.nexusmods.com/witcher3/mods/7186) | `Better-Torches-Next-Gen` | Ride your horse, cast signs, heavy attack, sail, block, parry and climb while holding a torch. |
 | [Better Walking](https://www.nexusmods.com/witcher3/mods/8293) | `Better-Walking` | Walk, Run and Sprint, lock to each speed and switch speeds more easily. Both on Controller and Keyboard. |
@@ -36,7 +37,7 @@ A mod changes the game's scripts in one of two ways, or both:
 - **Overrides**: a copy of a whole game script file, with the mod's changes marked: an added line ends in `// modName`, an added block sits between `// modName START` and `// modName END`, a disabled line is commented out in place, and a changed line is replaced in place, marked. Lines not marked are the game's own, byte for byte, so that a script merger sees exactly the mod's edits. Mods that override the same file need merging.
 - **Annotations**: the mod's own script, under `content/scripts/local/`, which adds fields and methods to the game's classes and wraps the game's methods (`@addField`, `@addMethod`, `@wrapMethod`) instead of copying their files. It holds none of the game's code and needs no merging: it works next to other mods in any load order.
 
-Turn On The Lights (since 5.1.1), Geralt Level Scales - Difficulty Add-on (since 5.1.0) and Werewolf Regeneration Fix use annotations only; Alternate Horse Controls uses both; the others ship overrides, some with an own script beside them. See NOTICE for what overrides mean for the files' ownership, and LICENSE for the terms of the author's own work.
+Turn On The Lights (since 5.1.1), Geralt Level Scales - Difficulty Add-on (since 5.1.0), Werewolf Regeneration Fix and A Witcher's Shopping List use annotations only; Alternate Horse Controls uses both; the others ship overrides, some with an own script beside them. See NOTICE for what overrides mean for the files' ownership, and LICENSE for the terms of the author's own work.
 
 Each version is built against the game version named in its release notes. A version of an overriding mod for a newer game is produced by laying the previous version's marked edits onto the newer game's scripts; nothing is edited by hand that a merge can do. An annotation-only mod has no such step: it needs a change only where a game update changes the methods it hooks into.
 

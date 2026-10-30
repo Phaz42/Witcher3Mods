@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<UserConfig>
+	<Group id="modWitchersShoppingList" displayName="Mods.wsl_mod_name">
+		<VisibleVars>
+			<Var id="wslThreshold" displayName="wsl_threshold" displayType="SLIDER;1;20;19" />
+		</VisibleVars>
+	</Group>
+</UserConfig>
