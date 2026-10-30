@@ -267,11 +267,14 @@ function MwsCopyFocusToggle( fromGroup : name, fromVar : name, toGroup : name, t
 	return result;
 }
 
-// The help notes: while one of the mod's options is selected, its help in the game's notification popup, which stays
-// until it is replaced (-1) and is cleared with an empty message (0), as Geralt Level Scales - Difficulty Add-on does.
-// The game names only the option, so the options' ids are the mod's own.
+// The help notes: while one of the mod's options is selected, its help in the banner under the option list, the one
+// the game's Accessibility page uses for its preset's description (the menu's updateBardsBalladText and
+// showBardsBalladTooltip); never the notification popup, which other mods' menus clear on every selection. The
+// banner's text field is two lines tall: it is grown to the text while a note shows, and given back afterwards. The
+// game names only the option, so the options' ids are the mod's own.
 
 @addField( CR4IngameMenu ) var mwsHelpShown : name;
+@addField( CR4IngameMenu ) var mwsHelpTextHeight : float;
 
 function MwsHelpKey( option : name ) : string
 {
@@ -307,13 +310,57 @@ function MwsHelpKey( option : name ) : string
 	return "";
 }
 
+@addMethod( CR4IngameMenu ) function MwsHelpTextField() : CScriptedFlashObject
+{
+	var list, tooltip : CScriptedFlashSprite;
+
+	list = m_flashModule.GetChildFlashSprite( "mcOptionListModule" );
+	if ( !list )
+	{
+		return NULL;
+	}
+	tooltip = list.GetChildFlashSprite( "tooltip" );
+	if ( !tooltip )
+	{
+		return NULL;
+	}
+	return tooltip.GetMemberFlashObject( "textField" );
+}
+
+@addMethod( CR4IngameMenu ) function MwsShowHelp( text : string )
+{
+	var textField : CScriptedFlashObject;
+
+	m_fxUpdateBardsBalladText.InvokeSelfOneArg( FlashArgString( text ) );
+	textField = MwsHelpTextField();
+	if ( textField )
+	{
+		if ( mwsHelpTextHeight <= 0 )
+		{
+			mwsHelpTextHeight = textField.GetMemberFlashNumber( "height" );
+		}
+		textField.SetMemberFlashNumber( "height", MaxF( mwsHelpTextHeight, textField.GetMemberFlashNumber( "textHeight" ) + 8 ) );
+	}
+	m_flashModule.GetMemberFlashFunction( "showBardsBalladTooltip" ).InvokeSelfOneArg( FlashArgBool( true ) );
+}
+
+// The banner given back as the game has it: its own text, its height, hidden.
 @addMethod( CR4IngameMenu ) function MwsHideHelp()
 {
-	if ( mwsHelpShown != '' )
+	var textField : CScriptedFlashObject;
+
+	if ( mwsHelpShown == '' )
 	{
-		mwsHelpShown = '';
-		theGame.GetGuiManager().ShowNotification( "", 0 );
+		return;
 	}
+	mwsHelpShown = '';
+	textField = MwsHelpTextField();
+	if ( textField && mwsHelpTextHeight > 0 )
+	{
+		textField.SetMemberFlashNumber( "height", mwsHelpTextHeight );
+	}
+	UpdateBardsBalladTooltipText();
+	m_flashModule.GetMemberFlashFunction( "showBardsBalladTooltip" ).InvokeSelfOneArg( FlashArgBool( false ) );
 }
 
 @wrapMethod( CR4IngameMenu ) function OnOptionSelectionChanged( optionName : name, value : bool )
@@ -328,7 +375,7 @@ function MwsHelpKey( option : name ) : string
 		if ( key != "" )
 		{
 			mwsHelpShown = optionName;
-			theGame.GetGuiManager().ShowNotification( GetLocStringByKey( key ), -1 );
+			MwsShowHelp( GetLocStringByKey( key ) );
 		}
 		else
 		{
