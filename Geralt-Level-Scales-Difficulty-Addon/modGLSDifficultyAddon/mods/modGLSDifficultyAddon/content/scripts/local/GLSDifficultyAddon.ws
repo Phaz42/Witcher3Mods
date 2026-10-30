@@ -75,13 +75,19 @@ function GlsDifficultyAddonSetDefaults()
 }
 
 // ---------------------------------------------------------------------------------------------------------
-// The help notes: while one of the add-on's options is selected, its help in the game's notification popup, which
-// stays until it is replaced (-1) and is cleared with an empty message (0), the way sharedutils' menu descriptions
-// use it. The game names only the option when the selection changes, so the options' ids are the add-on's own.
+// The help notes: while one of the add-on's options is selected, its help in the banner under the option list, the
+// one the game's Accessibility page uses for its preset's description (the menu's updateBardsBalladText and
+// showBardsBalladTooltip); never the notification popup, which other mods' menus clear on every selection. The
+// banner's text field is two lines tall: it is grown to the text while a note shows, and given back afterwards. The
+// game names only the option when the selection changes, so the options' ids are the add-on's own.
 
 // The option whose note is shown, or none.
 @addField( CR4IngameMenu )
 var glsdaHelpShown : name;
+
+// The banner's text field's own height, given back when the note goes.
+@addField( CR4IngameMenu )
+var glsdaHelpTextHeight : float;
 
 // The help's string key for an option of the add-on's, or "" for any other.
 function GlsDifficultyAddonHelpKey( option : name ) : string
@@ -97,13 +103,57 @@ function GlsDifficultyAddonHelpKey( option : name ) : string
 	return "";
 }
 
+@addMethod( CR4IngameMenu ) function GlsDifficultyAddonHelpTextField() : CScriptedFlashObject
+{
+	var list, tooltip : CScriptedFlashSprite;
+
+	list = m_flashModule.GetChildFlashSprite( "mcOptionListModule" );
+	if ( !list )
+	{
+		return NULL;
+	}
+	tooltip = list.GetChildFlashSprite( "tooltip" );
+	if ( !tooltip )
+	{
+		return NULL;
+	}
+	return tooltip.GetMemberFlashObject( "textField" );
+}
+
+@addMethod( CR4IngameMenu ) function GlsDifficultyAddonShowHelp( text : string )
+{
+	var textField : CScriptedFlashObject;
+
+	m_fxUpdateBardsBalladText.InvokeSelfOneArg( FlashArgString( text ) );
+	textField = GlsDifficultyAddonHelpTextField();
+	if ( textField )
+	{
+		if ( glsdaHelpTextHeight <= 0 )
+		{
+			glsdaHelpTextHeight = textField.GetMemberFlashNumber( "height" );
+		}
+		textField.SetMemberFlashNumber( "height", MaxF( glsdaHelpTextHeight, textField.GetMemberFlashNumber( "textHeight" ) + 8 ) );
+	}
+	m_flashModule.GetMemberFlashFunction( "showBardsBalladTooltip" ).InvokeSelfOneArg( FlashArgBool( true ) );
+}
+
+// The banner given back as the game has it: its own text, its height, hidden.
 @addMethod( CR4IngameMenu ) function GlsDifficultyAddonHideHelp()
 {
-	if ( glsdaHelpShown != '' )
+	var textField : CScriptedFlashObject;
+
+	if ( glsdaHelpShown == '' )
 	{
-		glsdaHelpShown = '';
-		theGame.GetGuiManager().ShowNotification( "", 0 );
+		return;
 	}
+	glsdaHelpShown = '';
+	textField = GlsDifficultyAddonHelpTextField();
+	if ( textField && glsdaHelpTextHeight > 0 )
+	{
+		textField.SetMemberFlashNumber( "height", glsdaHelpTextHeight );
+	}
+	UpdateBardsBalladTooltipText();
+	m_flashModule.GetMemberFlashFunction( "showBardsBalladTooltip" ).InvokeSelfOneArg( FlashArgBool( false ) );
 }
 
 // Selecting an option of the add-on's shows its note; selecting any other, or leaving the one shown, hides it.
@@ -119,7 +169,7 @@ function GlsDifficultyAddonHelpKey( option : name ) : string
 		if ( key != "" )
 		{
 			glsdaHelpShown = optionName;
-			theGame.GetGuiManager().ShowNotification( GetLocStringByKey( key ), -1 );
+			GlsDifficultyAddonShowHelp( GetLocStringByKey( key ) );
 		}
 		else
 		{
