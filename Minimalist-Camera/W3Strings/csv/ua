@@ -1,0 +1,61 @@
+;meta[language=ua]
+; id|key(hex)|key(str)| text
+;
+2118357001||panel_Mods|Mods
+2118357002||panel_mc_mod_name|Minimalist Camera
+2118357003||preset_Mods_mc_mod_name|<font color="#ffa445">Camera Presets:</font>
+2118357004||preset_value_mc_preset_close|<font color="#45ff47">Close</font>
+2118357005||preset_value_mc_preset_medium|<font color="#a0ff45">Medium</font>
+2118357006||preset_value_mc_preset_far|<font color="#fdff45">Far</font>
+2118357007||preset_value_mc_preset_very_far|<font color="#ffa445">Very Far</font>
+2118357008||option_mc_InitVersion|Init Version (Do not change!)
+;
+2118357010||option_mc_Responsiveness|Camera Responsiveness
+2118357011||option_mc_DynamicZoom|Combat Dynamic Zoom (based on enemy count)
+2118357012||preset_value_mc_DynamicZoom_0|Off
+2118357013||preset_value_mc_DynamicZoom_1|Normal
+2118357014||preset_value_mc_DynamicZoom_2|High
+2118357015||option_mc_DodgeFx|Dodge/Roll Camera Effects
+2118357016||option_mc_SignFx|Sign Casting Camera Effects
+2118357017||option_mc_Zoom|Camera Zoom
+2118357018||option_mc_Height|Camera Height
+2118357019||option_mc_Offset|Camera Offset
+;
+2118357020||option_mc_CombatResponsiveness|Combat: Camera Responsiveness
+2118357021||option_mc_CombatZoom|Combat: Camera Zoom
+2118357022||option_mc_CombatHeight|Combat: Camera Height
+2118357023||option_mc_CombatOffset|Combat: Camera Offset
+;
+2118357030||option_mc_DodgeResponsiveness|Dodge: Camera Responsiveness
+2118357031||option_mc_DodgeZoom|Dodge: Camera Zoom
+2118357032||option_mc_DodgeHeight|Dodge: Camera Height
+2118357033||option_mc_DodgeOffset|Dodge: Camera Offset
+;
+2118357040||option_mc_SignsResponsiveness|Signs: Camera Responsiveness
+2118357041||option_mc_SignsZoom|Signs: Camera Zoom
+2118357042||option_mc_SignsHeight|Signs: Camera Height
+2118357043||option_mc_SignsOffset|Signs: Camera Offset
+;
+2118357090||option_mc_SenseZoom|Witcher Senses: Camera Zoom
+2118357091||option_mc_SenseHeight|Witcher Senses: Camera Height
+2118357092||option_mc_SenseOffset|Witcher Senses: Camera Offset
+;
+2118357100||option_mc_EnemyRange|Enemy Detection Range
+2118357101||option_mc_ZoomPerEnemy|Zoom Modifier per Enemy
+;
+2118357110||mc_Responsiveness_help|How quickly the camera follows Geralt, on foot, indoors and swimming. Low values give a lazy camera that lets Geralt move away from the center of the screen; high values keep Geralt close to it.
+2118357111||mc_DynamicZoom_help|In combat, the camera zooms out as more enemies are close and in view, up to 8. <font color="#9D75BF">Normal</font> and <font color="#9D75BF">High</font> set how far it zooms out for each one; <font color="#9D75BF">Off</font> keeps the zoom as it is.
+2118357112||mc_DodgeFx_help|A short camera move when Geralt dodges or rolls.
+2118357113||mc_SignFx_help|A short camera move when Geralt casts a sign, except Quen.
+;
+2118357120||option_mc_CameraRange|Camera Range
+2118357121||preset_value_mc_CameraRange_0|<font color="#45ff47">Close</font>
+2118357122||preset_value_mc_CameraRange_1|<font color="#a0ff45">Medium</font>
+2118357123||preset_value_mc_CameraRange_2|<font color="#fdff45">Far</font>
+2118357124||preset_value_mc_CameraRange_3|<font color="#ffa445">Very Far</font>
+2118357125||mc_CameraRange_help|How far from Geralt the camera stays, in exploration, in combat, during dodges and in Witcher Senses. Each preset (above) sets a range together with a <font color="#9D75BF">Camera Responsiveness</font> that suits it; choosing a range here keeps your own <font color="#9D75BF">Camera Responsiveness</font>.
+2118357126||option_mc_SectionGame|Same as in Gameplay Settings   
+2118357127||option_mc_AutoCameraCenter|Automatic Camera Centering
+2118357128||option_mc_SoftLockCameraAssist|[Controller Only] Assisted Camera Rotation in Combat
+2118357129||mc_AutoCameraCenter_help|The game's own setting, the same as under <font color="#9D75BF">Gameplay</font>, here for easy reach. Outside combat, on foot and while swimming, the camera turns behind Geralt while Geralt moves. Turning the camera yourself pauses it for a moment.
+2118357130||mc_SoftLockCameraAssist_help|The game's own setting, the same as under <font color="#9D75BF">Gameplay</font>, here for easy reach. In combat, with a controller, the camera turns toward the enemies around Geralt. With keyboard and mouse it does nothing.
