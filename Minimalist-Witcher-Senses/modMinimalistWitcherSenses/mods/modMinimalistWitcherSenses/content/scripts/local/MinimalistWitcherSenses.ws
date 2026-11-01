@@ -579,18 +579,73 @@ function MwsHideFocusEnd( previous : bool )
 	return wrappedMethod( enabled );
 }
 
-// No sound circles on the creatures the engine counts as heard: the effect not started.
+// No sound circles on the creatures the engine counts as heard: the effect not started. Otherwise, with Markers, none
+// on a creature whose hostile marker is in sight (since 5.1.2): the game's state kept, only the effect stopped, and
+// played again when the marker goes (CMwsMarkers.Refresh).
 @wrapMethod( CGameplayEntity ) function OnFocusModeSound( enabled : bool, colorBlind : bool )
 {
+	var result : bool;
+
 	if ( enabled && MwsRemoveSoundCircles() )
 	{
 		return false;
 	}
-	return wrappedMethod( enabled, colorBlind );
+	result = wrappedMethod( enabled, colorBlind );
+	if ( enabled && MwsCircleOff( this ) )
+	{
+		MwsShowFocusSound( false );
+	}
+	return result;
+}
+
+// The game plays the circle again when its color changes (gray to red, say): kept off while the marker is in sight.
+@wrapMethod( CGameplayEntity ) function SetFocusModeSoundEffectType( type : EFocusModeSoundEffectType )
+{
+	wrappedMethod( type );
+	if ( MwsCircleOff( this ) )
+	{
+		MwsShowFocusSound( false );
+	}
+}
+
+// The circle's effect shown or stopped, only while the game has it playing (the engine counts the creature as heard).
+@addMethod( CGameplayEntity ) function MwsShowFocusSound( show : bool )
+{
+	var effect : name;
+
+	if ( !isPlayingFocusSound )
+	{
+		return;
+	}
+	effect = GetFocusModeSoundEffectName( isColorBlindMode );
+	if ( effect == '' )
+	{
+		return;
+	}
+	if ( show )
+	{
+		PlayFocusSoundVisualEffect( effect );
+	}
+	else
+	{
+		StopEffect( effect );
+	}
+}
+
+function MwsCircleOff( e : CGameplayEntity ) : bool
+{
+	var focus : CFocusModeController;
+
+	focus = theGame.GetFocusModeController();
+	if ( !focus || !focus.mwsMarkers )
+	{
+		return false;
+	}
+	return focus.mwsMarkers.CircleOff( e );
 }
 
 // ---------------------------------------------------------------------------------------------------------
-// The markers: with the menu's Highlights at Markers, the game's highlight off and a small glyph of the mod's own over
+// The markers: with the menu's Highlights at Markers, the game's highlight off and a small icon of the mod's own over
 // each object the game would highlight and each hostile creature, on the game's oneliners HUD layer. The layer's
 // Flash functions are called from outside; no game script is overridden for it.
 
@@ -619,6 +674,7 @@ struct SMwsMarker
 	var boxMin : Vector;
 	var boxMax : Vector;
 	var hidden : bool;
+	var circleOff : bool;		// a hostile creature's sound circle stopped while its marker shows
 }
 
 class CMwsMarkers
@@ -645,6 +701,7 @@ class CMwsMarkers
 	private const var RANGE : float;					default RANGE = 30;
 	private const var PLANT_RANGE : float;				default PLANT_RANGE = 65;
 	private const var DOOR_RANGE : float;				default DOOR_RANGE = 50;
+	private const var HOSTILE_RANGE : float;			default HOSTILE_RANGE = 50;
 	private const var REFRESH_INTERVAL : float;			default REFRESH_INTERVAL = 0.2;
 	// The game's looting and stealing signals reach NPCs within 10 m of Geralt (hudModuleLootPopup.ws, LootPopup.ws).
 	private const var SIGNAL_REACH : float;				default SIGNAL_REACH = 10;
@@ -695,6 +752,13 @@ class CMwsMarkers
 				removeFunction.InvokeSelfOneArg( FlashArgInt( markers[ i ].id + 1 ) );
 			}
 		}
+		for ( i = 0; i < markers.Size(); i += 1 )
+		{
+			if ( markers[ i ].circleOff && markers[ i ].entity )
+			{
+				markers[ i ].entity.MwsShowFocusSound( true );
+			}
+		}
 		markers.Clear();
 		markerEntities.Clear();
 		ready = false;
@@ -732,7 +796,7 @@ class CMwsMarkers
 	// The objects in range, every REFRESH_INTERVAL: markers made and dropped, and each one's line of sight.
 	private function Refresh()
 	{
-		var entities : array< CGameplayEntity >;
+		var entities, npcs : array< CGameplayEntity >;
 		var marker : SMwsMarker;
 		var e : CGameplayEntity;
 		var box : Box;
@@ -740,19 +804,32 @@ class CMwsMarkers
 		var kind : EMwsMarkerKind;
 		var camera : Vector;
 
-		// Everything within RANGE, and the plants and doors farther out by the engine's class filter, which applies
-		// before its cap: a search returns at most 1024 objects, an arbitrary part of a busy place, whatever it asks for
-		// (measured 2026-10-26: 1024 within 65 m on Hierarch Square, 380 within 30 m; 325 doors within 500 m filtered).
+		// Everything within RANGE, and the plants, doors and creatures farther out by the engine's class filter, which
+		// applies before its cap: a search returns at most 1024 objects, an arbitrary part of a busy place, whatever it
+		// asks for (measured 2026-10-26: 1024 within 65 m on Hierarch Square, 380 within 30 m; 325 doors within 500 m
+		// filtered). The creatures' search (nearly every creature is a CNewNPC) also serves the guard test.
 		FindGameplayEntitiesInRange( entities, thePlayer, RANGE, 10000 );
 		AddFound( entities, PLANT_RANGE, 'W3Herb' );
 		AddFound( entities, DOOR_RANGE, 'W3NewDoor' );
 		AddFound( entities, DOOR_RANGE, 'W3Door' );
-		CollectSpots( entities );
+		FindGameplayEntitiesInRange( npcs, thePlayer, HOSTILE_RANGE, 1000, '', 0, NULL, 'CNewNPC' );
+		for ( i = 0; i < npcs.Size(); i += 1 )
+		{
+			if ( !entities.Contains( npcs[ i ] ) )
+			{
+				entities.PushBack( npcs[ i ] );
+			}
+		}
+		CollectSpots( entities, npcs );
 		for ( i = markers.Size() - 1; i >= 0; i -= 1 )
 		{
 			e = markers[ i ].entity;
 			if ( !e || !entities.Contains( e ) || Kind( e ) != markers[ i ].kind || !InRange( e, markers[ i ].kind ) )
 			{
+				if ( markers[ i ].circleOff && e )
+				{
+					e.MwsShowFocusSound( true );
+				}
 				removeFunction.InvokeSelfOneArg( FlashArgInt( markers[ i ].id ) );
 				removeFunction.InvokeSelfOneArg( FlashArgInt( markers[ i ].id + 1 ) );
 				markers.Erase( i );
@@ -779,9 +856,10 @@ class CMwsMarkers
 			marker.boxMax = box.Max;
 			marker.offset = Offset( e, kind, marker.hasBox, box );
 			marker.hidden = false;
+			marker.circleOff = false;
 			nextId += 2;
-			createFunction.InvokeSelfTwoArgs( FlashArgInt( marker.id ), FlashArgString( Text( kind ) ) );
-			createFunction.InvokeSelfTwoArgs( FlashArgInt( marker.id + 1 ), FlashArgString( Text( kind ) ) );
+			createFunction.InvokeSelfTwoArgs( FlashArgInt( marker.id ), FlashArgString( Text( kind, marker.id ) ) );
+			createFunction.InvokeSelfTwoArgs( FlashArgInt( marker.id + 1 ), FlashArgString( Text( kind, marker.id ) ) );
 			markers.PushBack( marker );
 			markerEntities.PushBack( e );
 		}
@@ -789,6 +867,12 @@ class CMwsMarkers
 		for ( i = 0; i < markers.Size(); i += 1 )
 		{
 			markers[ i ].hidden = !InSight( markers[ i ], camera );
+			// a hostile creature in sight has its marker and no sound circle; out of sight, the circle where it is heard
+			if ( markers[ i ].entity && markers[ i ].kind == MWS_HOSTILE && markers[ i ].circleOff == markers[ i ].hidden )
+			{
+				markers[ i ].circleOff = !markers[ i ].hidden;
+				markers[ i ].entity.MwsShowFocusSound( markers[ i ].hidden );
+			}
 		}
 	}
 
@@ -811,6 +895,19 @@ class CMwsMarkers
 	private function HasMarker( e : CGameplayEntity ) : bool
 	{
 		return markerEntities.Contains( e );
+	}
+
+	// Whether this creature's sound circle is to stay off: its hostile marker is in sight.
+	public function CircleOff( e : CGameplayEntity ) : bool
+	{
+		var i : int;
+
+		i = markerEntities.FindFirst( e );
+		if ( i < 0 )
+		{
+			return false;
+		}
+		return markers[ i ].circleOff;
 	}
 
 	// Each marker moved to its object's place on screen, with its opacity.
@@ -1028,10 +1125,10 @@ class CMwsMarkers
 
 	// What a container's marker needs from the whole refresh: every container in range, for the copies of one placed
 	// twice; and, for Red Containers: Guard in Reach, where the living guards stand (the game's own NPC type), within
-	// RANGE plus the farthest a guard can count from a container; whether one can see it is ContainerKind's.
-	private function CollectSpots( entities : array< CGameplayEntity > )
+	// RANGE plus the farthest a guard can count from a container, from the creatures' search; whether one can see it is
+	// ContainerKind's.
+	private function CollectSpots( entities : array< CGameplayEntity >, npcs : array< CGameplayEntity > )
 	{
-		var guards : array< CGameplayEntity >;
 		var container : W3Container;
 		var herb : W3Herb;
 		var remains : W3ActorRemains;
@@ -1056,11 +1153,11 @@ class CMwsMarkers
 		{
 			return;
 		}
-		FindGameplayEntitiesInRange( guards, thePlayer, RANGE + 15, 500, '', 0, NULL, 'CNewNPC' );
-		for ( i = 0; i < guards.Size(); i += 1 )
+		for ( i = 0; i < npcs.Size(); i += 1 )
 		{
-			npc = (CNewNPC)guards[ i ];
-			if ( npc && npc.IsAlive() && npc.GetNPCType() == ENGT_Guard )
+			npc = (CNewNPC)npcs[ i ];
+			if ( npc && npc.IsAlive() && npc.GetNPCType() == ENGT_Guard
+				&& VecDistanceSquared( npc.GetWorldPosition(), thePlayer.GetWorldPosition() ) <= ( RANGE + 15 ) * ( RANGE + 15 ) )
 			{
 				guardPositions.PushBack( npc.GetWorldPosition() );
 			}
@@ -1190,17 +1287,19 @@ class CMwsMarkers
 		{
 			range = DOOR_RANGE;
 		}
+		else if ( kind == MWS_HOSTILE )
+		{
+			range = HOSTILE_RANGE;
+		}
 		return VecDistanceSquared( e.GetWorldPosition(), thePlayer.GetWorldPosition() ) <= range * range;
 	}
 
-	// The glyphs, from the few the HUD's font has; the colors as drawn, worked back so that two copies under the layer's
-	// cap show the colors chosen (on screen about 0.845 times the drawn color, plus the outline's 1, 4, 7).
-	private function Text( kind : EMwsMarkerKind ) : string
+	// Every marker an icon of the mod's own, from its texture cache (img:// paths start below gameplay\gui_new\), never a
+	// glyph of the HUD's font: a font without the glyph, as some languages' are, draws a box (MWS-9, since 5.1.2). The
+	// icons' colors are drawn into them (5.1.2/Icons/draw_icons.py). The size is the visible shape's at Normal, in
+	// pixels; a trail piece gets one of three shaky dots, the same for the marker's two copies.
+	private function Text( kind : EMwsMarkerKind, id : int ) : string
 	{
-		var glyph, color : string;
-		var size : float;
-
-		// the mod's own icons, from its texture cache (img:// paths start below gameplay\gui_new\)
 		switch ( kind )
 		{
 			case MWS_CONTAINER:
@@ -1211,31 +1310,33 @@ class CMwsMarkers
 				return Icon( "door", 34.0f );
 			case MWS_DOOR_LOCKED:
 				return Icon( "door_locked", 34.0f );
-		}
-		switch ( kind )
-		{
 			case MWS_PLANT:
-				glyph = "&#176;";	color = "#78ED70";	size = 35.0f;	break;	// a fresh green, #66CC66 on screen
+				return Icon( "plant", 22.0f );
 			case MWS_OTHER:
-				glyph = "&#8226;";	color = "#FFB169";	size = 25.0f;	break;	// toward the game's orange, about #D99A5F on screen
+				return Icon( "other", 16.0f );
 			case MWS_CLUE:
-				glyph = "?";		color = "#FF5A4A";	size = 40.0f;	break;
+				return Icon( "clue", 22.0f );
 			case MWS_TRAIL:
-				glyph = "&#8226;";	color = "#FF5A4A";	size = 20.0f * MwsTrailScale();	break;
+				switch ( ( id / 2 ) % 3 )
+				{
+					case 0:		return Icon( "trail_a", 14.0f * MwsTrailScale() );
+					case 1:		return Icon( "trail_b", 14.0f * MwsTrailScale() );
+					default:	return Icon( "trail_c", 14.0f * MwsTrailScale() );
+				}
 			case MWS_HOSTILE:
-				glyph = "&#176;";	color = "#EE4B3F";	size = 40.0f;	break;
-			case MWS_REMAINS:
-				glyph = "&#215;";	color = "#EE4B3F";	size = 25.0f;	break;
+				return Icon( "hostile", 18.0f );
+			default:
+				return Icon( "remains", 16.0f );
 		}
-		return "<font size='" + RoundF( size * MwsMarkerScale() ) + "' color='" + color + "'>" + glyph + "</font>";
 	}
 
-	// The icons are 64 x 64: drawn at no more than that (Large at 125 % is 43 for the door), they stay sharp.
+	// The icons are 64 x 64, the shape inside a margin of 4 pixels that holds its halo, so the image is drawn 64/56 of the
+	// shape's size; at no more than 64 (the door at Large, 125 %, is 49), they stay sharp.
 	private function Icon( iconName : string, size : float ) : string
 	{
 		var drawn : int;
 
-		drawn = RoundF( size * MwsMarkerScale() );
+		drawn = RoundF( size * MwsMarkerScale() * 64.0f / 56.0f );
 		return "<img src=\"img://icons/mws/" + iconName + ".xbm\" width=\"" + drawn + "\" height=\"" + drawn + "\">";
 	}
 
