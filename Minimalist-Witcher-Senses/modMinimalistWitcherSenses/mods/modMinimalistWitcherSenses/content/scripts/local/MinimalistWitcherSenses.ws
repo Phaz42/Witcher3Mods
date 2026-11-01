@@ -15,6 +15,7 @@
 @addField( CR4Game ) var mwsRemoveRemainsHighlight : bool;
 @addField( CR4Game ) var mwsAllowJumpSprint : bool;
 @addField( CR4Game ) var mwsRemoveSoundCircles : bool;
+@addField( CR4Game ) var mwsHideHerbMarkers : bool;
 @addField( CR4Game ) var mwsRedContainers : EMwsRedContainers;
 @addField( CR4Game ) var mwsMarkerScale : float;
 @addField( CR4Game ) var mwsTrailScale : float;
@@ -50,6 +51,7 @@ function MwsReadToggle( config : CInGameConfigWrapper, id : name, defaultValue :
 	mwsRemoveRemainsHighlight = MwsReadToggle( config, 'mws_RemoveRemainsHighlight', true );
 	mwsAllowJumpSprint = MwsReadToggle( config, 'mws_AllowJumpSprint', true );
 	mwsRemoveSoundCircles = MwsReadToggle( config, 'mws_RemoveSoundCircles', false );
+	mwsHideHerbMarkers = MwsReadToggle( config, 'mws_HideHerbMarkers', false );
 	if ( config.GetVarValue( 'modMinimalistWitcherSenses', 'mws_RedContainers' ) == "1" )
 	{
 		mwsRedContainers = MWS_RED_ALL_OWNED;
@@ -147,6 +149,13 @@ function MwsRemoveSoundCircles() : bool
 	return theGame.mwsRemoveSoundCircles;
 }
 
+// No markers on herbs, for players whose herbs another mod picks up (MWS-13, since 5.1.3).
+function MwsHideHerbMarkers() : bool
+{
+	theGame.MwsEnsureLoaded();
+	return theGame.mwsHideHerbMarkers;
+}
+
 // Which owned containers the markers show in red: only one a guard could notice being looted (the default), or every
 // one.
 enum EMwsRedContainers
@@ -201,6 +210,7 @@ function MwsFadeSpeed() : float
 // The menu: the defaults, written when the options menu opens (so it shows them before a save is loaded), the Mod
 // Default preset's; versioned, so a later version adds its own and keeps the player's choices. Version 1 existed only
 // in test builds, which numbered Highlight Style and Red Containers the other way round: version 2 sets those two again.
+// Version 3 (5.1.3) adds Hide Herb Markers.
 
 function MwsSetDefaults()
 {
@@ -209,10 +219,23 @@ function MwsSetDefaults()
 
 	config = theGame.GetInGameConfigWrapper();
 	version = StringToInt( config.GetVarValue( 'modMinimalistWitcherSenses', 'mws_InitVersion' ) );
-	if ( version >= 2 )
+	if ( version >= 3 )
 	{
 		return;
 	}
+	if ( version < 2 )
+	{
+		MwsSetDefaultsBefore3( config, version );
+	}
+	config.SetVarValue( 'modMinimalistWitcherSenses', 'mws_HideHerbMarkers', "false" );
+	config.SetVarValue( 'modMinimalistWitcherSenses', 'mws_InitVersion', "3" );
+	theGame.SaveUserSettings();
+	theGame.MwsReload();
+}
+
+// Versions 1 and 2's defaults, for a player who has none of them yet.
+function MwsSetDefaultsBefore3( config : CInGameConfigWrapper, version : int )
+{
 	if ( version < 1 )
 	{
 		config.SetVarValue( 'modMinimalistWitcherSenses', 'mws_KeepCameraStill', "true" );
@@ -228,9 +251,6 @@ function MwsSetDefaults()
 	config.SetVarValue( 'modMinimalistWitcherSenses', 'mws_RedContainers', "0" );
 	config.SetVarValue( 'modMinimalistWitcherSenses', 'mws_MarkerSize', "2" );
 	config.SetVarValue( 'modMinimalistWitcherSenses', 'mws_TrailDotSize', "0" );
-	config.SetVarValue( 'modMinimalistWitcherSenses', 'mws_InitVersion', "2" );
-	theGame.SaveUserSettings();
-	theGame.MwsReload();
 }
 
 // Toggle Witcher Senses (Instead of Hold) is the game's own accessibility setting, shown in this menu too: copied in
@@ -306,6 +326,8 @@ function MwsHelpKey( option : name ) : string
 			return "mws_MarkerSize_help";
 		case 'mws_TrailDotSize':
 			return "mws_TrailDotSize_help";
+		case 'mws_HideHerbMarkers':
+			return "mws_HideHerbMarkers_help";
 	}
 	return "";
 }
@@ -809,7 +831,10 @@ class CMwsMarkers
 		// asks for (measured 2026-10-26: 1024 within 65 m on Hierarch Square, 380 within 30 m; 325 doors within 500 m
 		// filtered). The creatures' search (nearly every creature is a CNewNPC) also serves the guard test.
 		FindGameplayEntitiesInRange( entities, thePlayer, RANGE, 10000 );
-		AddFound( entities, PLANT_RANGE, 'W3Herb' );
+		if ( !MwsHideHerbMarkers() )
+		{
+			AddFound( entities, PLANT_RANGE, 'W3Herb' );
+		}
 		AddFound( entities, DOOR_RANGE, 'W3NewDoor' );
 		AddFound( entities, DOOR_RANGE, 'W3Door' );
 		FindGameplayEntitiesInRange( npcs, thePlayer, HOSTILE_RANGE, 1000, '', 0, NULL, 'CNewNPC' );
@@ -1027,6 +1052,10 @@ class CMwsMarkers
 		herb = (W3Herb)e;
 		if ( herb )
 		{
+			if ( MwsHideHerbMarkers() )
+			{
+				return MWS_NO_MARKER;
+			}
 			return MWS_PLANT;
 		}
 		remains = (W3ActorRemains)e;

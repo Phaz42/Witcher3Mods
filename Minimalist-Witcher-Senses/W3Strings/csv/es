@@ -47,3 +47,5 @@
 2118358051||mws_TrailDotSize_help|The size of the red dots along trails, on top of <font color="#9D75BF">Marker Size</font>. <font color="#9D75BF">Normal</font> keeps them small, so following a trail takes some looking.
 2118358052||option_mws_SectionMarkers|Only for Highlight Style: Markers   
 2118358053||option_mws_SectionGlow|Only for Highlight Style: Glow   
+2118358054||option_mws_HideHerbMarkers|Hide Herb Markers
+2118358055||mws_HideHerbMarkers_help|No markers on herbs, for example when another mod picks them up for you. Every other marker stays.
